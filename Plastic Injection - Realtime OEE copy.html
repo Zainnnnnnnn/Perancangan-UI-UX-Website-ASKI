@@ -1,0 +1,1487 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+
+  <title>Plastic Injection - Realtime OEE</title>
+
+  <link rel="stylesheet" href="/static/vendor/datatables/buttons.dataTables.min.css">
+  <link rel="stylesheet" href="/static/vendor/datatables/buttonsStyle.css">
+
+  <link rel="stylesheet" href="/static/vendor/timetable/css/timetablejs.css">
+  <link rel="stylesheet" href="/static/vendor/timetable/css/demo.css">
+
+  <!-- Font Awesome Icons -->
+  <!-- https://fontawesome.com/ -->
+  <link rel="stylesheet" href="/static/vendor/fontawesome-free/css/all.min.css">
+  <!-- overlayScrollbars -->
+  <link rel="stylesheet" href="/static/vendor/overlayScrollbars/css/OverlayScrollbars.min.css">
+  <!-- Theme style -->
+  <link rel="stylesheet" href="/static/vendor/AdminLTE/css/adminlte.min.css">
+  <!-- Google Font: Source Sans Pro -->
+  <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+
+  
+  <!-- DataTables CSS -->
+  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.css">
+  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/1.7.0/css/buttons.dataTables.min.css">
+  <link rel="stylesheet" type="text/css" href="/static/vendor/daterangepicker/daterangepicker.css">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+  
+  
+
+  <!-- jam -->
+  <!-- <script>
+    function startTime() {
+      var today = new Date();
+      var h = today.getHours();
+      var m = today.getMinutes();
+      var s = today.getSeconds();
+      const options = { year: 'numeric', month: 'long', day: 'numeric' };
+      h = checkTime(h);
+      m = checkTime(m);
+      s = checkTime(s);
+      document.getElementById('jam').innerHTML = h + " : " + m + " : " + s;
+      document.getElementById("datetime").innerHTML = today.toLocaleDateString("id-ID", options);
+      var t = setTimeout(startTime, 500);
+    }
+    function checkTime(i) {
+      if (i < 10) { i = "0" + i };  // add zero in front of numbers < 10
+      return i;
+    }
+  </script> -->
+
+
+  <!-- TEMPLATE BARU -->
+
+      <!--     Fonts and icons     -->
+      <link rel="stylesheet" type="text/css"
+      href="https://fonts.googleapis.com/css?family=Inter:300,400,500,600,700,900" />
+  <!-- Nucleo Icons -->
+  <link rel="stylesheet" href="./node_modules/material-dashboard/assets/">
+  <link href="./node_modules/material-dashboard/assets/css/nucleo-icons.css" rel="stylesheet" />
+  <link href="./node_modules/material-dashboard/assets/css/nucleo-svg.css" rel="stylesheet" />
+  <!-- Font Awesome Icons -->
+  <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
+  <!-- Material Icons -->
+  <link rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,0,0" />
+  <!-- CSS Files -->
+  <link id="pagestyle" href="./node_modules/material-dashboard/assets/css/material-dashboard.css?v=3.2.0" rel="stylesheet" />
+
+
+  <!-- TEMPLATE BARU -->
+
+
+</head>
+
+<body class="hold-transition sidebar-collapse  layout-fixed layout-navbar-fixed layout-footer-fixed">
+  <div class="wrapper">
+    <!-- Navbar -->
+    <nav class="main-header navbar navbar-expand navbar-white navbar-light">
+
+      <!-- Left navbar links -->
+
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link" data-widget="pushmenu" href="#"><i class="fas fa-bars"></i></a>
+        </li>
+        
+        
+        <!--
+      <li class="nav-item d-none d-sm-inline-block">
+        <a href="" class="nav-link">Home</a>
+      </li>
+      <li class="nav-item d-none d-sm-inline-block">
+        <a href="#" class="nav-link">Contact</a>
+      </li>-->
+      </ul>
+
+      <!-- SEARCH FORM -->
+      <!--  <form class="form-inline ml-3">
+      <div class="input-group input-group-sm">
+        <input class="form-control form-control-navbar" type="search" placeholder="Search" aria-label="Search">
+        <div class="input-group-append">
+          <button class="btn btn-navbar" type="submit">
+            <i class="fas fa-search"></i>
+          </button>
+        </div>
+      </div>
+    </form>
+-->
+
+      <!-- <li class="nav-item d-none d-sm-inline-block" style = "color: blue;margin-bottom: 0px;font-size: 16px;" id="datetime"></li>
+    <li class="nav-item d-none d-sm-inline-block" style = "color: red;margin-bottom: 10px;font-size: 16px;" id="jam"></li> -->
+      <!-- Right navbar links -->
+      
+      <ul class="navbar-nav ml-auto">
+
+
+      </ul>
+      
+
+      <ul class="navbar-nav ml-auto">
+        <div class="row">
+          
+
+<body onload="startTime()">
+  <div class="row" style="margin-top: 10px;">
+    <div id="load" class="spinner-border text-primary spinner-border-sm" style="float: right;margin-right: 10px;"
+      role="status">
+      <span class="sr-only">Loading...</span>
+    </div>
+    <h6 id="datetime" style="margin-left: auto;">24 Februari 2020 </h6>
+    <h6 id="jam" style="margin-left: 10px;margin-right: 20px;"> 00:00:00</h6>
+  </div>
+</body>
+
+
+<script>
+  function startTime() {
+    var today = new Date();
+    var h = today.getHours();
+    var m = today.getMinutes();
+    var s = today.getSeconds();
+    var shift;
+    const options = { year: 'numeric', month: 'long', day: 'numeric' };
+    h = checkTime(h);
+    m = checkTime(m);
+    s = checkTime(s);
+    document.getElementById('jam').innerHTML = h + " : " + m + " : " + s;
+    document.getElementById("datetime").innerHTML = today.toLocaleDateString("id-ID", options);
+    var t = setTimeout(startTime, 1000);
+    if ((h > 6) && (h < 16)) shift = 2;
+    else shift = 3;
+    if (s == 0 || s == 30 || s == 15 || s == 45) create_post();
+  }
+  function checkTime(i) {
+    if (i < 10) { i = "0" + i };  // add zero in front of numbers < 10
+    return i;
+  }
+</script>
+
+
+          <!-- Messages Dropdown Menu -->
+          <!--  <li class="nav-item dropdown">
+        <a class="nav-link" data-toggle="dropdown" href="#">
+          <i class="far fa-comments"></i>
+          <span class="badge badge-danger navbar-badge">3</span>
+        </a>
+        <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+          <a href="#" class="dropdown-item">
+           
+            <div class="media">
+              <img src="dist/img/user1-128x128.jpg" alt="User Avatar" class="img-size-50 mr-3 img-circle">
+              <div class="media-body">
+                <h3 class="dropdown-item-title">
+                  Brad Diesel
+                  <span class="float-right text-sm text-danger"><i class="fas fa-star"></i></span>
+                </h3>
+                <p class="text-sm">Call me whenever you can...</p>
+                <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> 4 Hours Ago</p>
+              </div>
+            </div>
+           
+          </a>
+          <div class="dropdown-divider"></div>
+          <a href="#" class="dropdown-item">
+           
+            <div class="media">
+              <img src="dist/img/user8-128x128.jpg" alt="User Avatar" class="img-size-50 img-circle mr-3">
+              <div class="media-body">
+                <h3 class="dropdown-item-title">
+                  John Pierce
+                  <span class="float-right text-sm text-muted"><i class="fas fa-star"></i></span>
+                </h3>
+                <p class="text-sm">I got your message bro</p>
+                <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> 4 Hours Ago</p>
+              </div>
+            </div>
+           
+          </a>
+          <div class="dropdown-divider"></div>
+          <a href="#" class="dropdown-item">
+           
+            <div class="media">
+              <img src="dist/img/user3-128x128.jpg" alt="User Avatar" class="img-size-50 img-circle mr-3">
+              <div class="media-body">
+                <h3 class="dropdown-item-title">
+                  Nora Silvester
+                  <span class="float-right text-sm text-warning"><i class="fas fa-star"></i></span>
+                </h3>
+                <p class="text-sm">The subject goes here</p>
+                <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> 4 Hours Ago</p>
+              </div>
+            </div>
+           
+          </a>
+          <div class="dropdown-divider"></div>
+          <a href="#" class="dropdown-item dropdown-footer">See All Messages</a>
+        </div>
+      </li> -->
+          <!-- Notifications Dropdown Menu -->
+          <!--  <li class="nav-item dropdown">
+        <a class="nav-link" data-toggle="dropdown" href="#">
+          <i class="far fa-bell"></i>
+          <span class="badge badge-warning navbar-badge">15</span>
+        </a>
+        <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+          <span class="dropdown-item dropdown-header">15 Notifications</span>
+          <div class="dropdown-divider"></div>
+          <a href="#" class="dropdown-item">
+            <i class="fas fa-envelope mr-2"></i> 4 new messages
+            <span class="float-right text-muted text-sm">3 mins</span>
+          </a>
+          <div class="dropdown-divider"></div>
+          <a href="#" class="dropdown-item">
+            <i class="fas fa-users mr-2"></i> 8 friend requests
+            <span class="float-right text-muted text-sm">12 hours</span>
+          </a>
+          <div class="dropdown-divider"></div>
+          <a href="#" class="dropdown-item">
+            <i class="fas fa-file mr-2"></i> 3 new reports
+            <span class="float-right text-muted text-sm">2 days</span>
+          </a>
+          <div class="dropdown-divider"></div>
+          <a href="#" class="dropdown-item dropdown-footer">See All Notifications</a>
+        </div>
+      </li>-->
+
+          
+
+          <li class="nav-item">
+            <a class="nav-link" data-widget="fullscreen" href="#" role="button">
+              <i class="fas fa-expand-arrows-alt"></i>
+            </a>
+          </li>
+
+          <li class="nav-item">
+
+            <a class="nav-link" data-widget="control-sidebar" data-slide="true" href="#"><i
+                class="fas fa-th-large"></i></a>
+
+          </li>
+          
+        </div>
+      </ul>
+    </nav>
+    <!-- /.navbar -->
+
+    <!-- Main Sidebar Container -->
+    <aside class="main-sidebar sidebar-light-primary elevation-4">
+      <!-- Brand Logo -->
+      <a href="/" class="brand-link">
+        <!-- <img src="/static/img/logoASKI.png"  
+           style="margin-left: 10px; opacity: 1; width: 50px;height: 50px;">  -->
+        <span class="brand-text font-weight-bold" style="font-size: 16px;">PT Astra Komponen Indonesia</span>
+      </a>
+
+      <!-- Sidebar -->
+      <div class="sidebar">
+        <!-- Sidebar user panel (optional) -->
+
+
+        
+        <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+          <div class="image">
+            <img src="/static/vendor/AdminLTE/img/laptop-user.png" class="img-circle elevation-2"
+              alt="User Image">
+            <!-- <i class="fa fa-user" aria-hidden="true"></i> -->
+          </div>
+          <div class="info">
+            <a href="#" class="d-block">hi viewer !</a>
+            <span style="display:none;" id="user">viewer</span>
+          </div>
+          <div><a
+              style="height:fit-content;width: fit-content;font-size: small;padding: 10%;margin-left: 20px;margin-top: 2px;margin-right: 0px;"
+              type="button" class="btn btn-outline-warning" href="/accounts/logout/?next=/PlasticInjection/OEE/Realtime/">Log Out</a>
+          </div>
+        </div>
+
+        
+
+        <!-- Sidebar Menu -->
+        <nav class="mt-2">
+          <ul class="nav nav-pills nav-sidebar flex-column nav-child-indent" data-widget="treeview" role="menu"
+            data-accordion="true">
+            <!-- Add icons to the links using the .nav-icon class
+               with font-awesome or any other icon font library -->
+            
+
+
+            <li class="nav-item has-treeview menu-open">
+              <a href="#" class="nav-link" style="background-color: rgba(33, 255, 33, 0.3) !important;">
+                <p>Health Care / Medical Devices</p>
+              </a>
+            </li>
+
+            <li class="nav-item has-treeview menu-closed">
+              <a href="#" class="nav-link">
+                <i class="nav-icon fas fa-tachometer-alt"></i>
+                <p>
+                  Delivery
+                  <i class="right fas fa-angle-left"></i>
+                </p>
+              </a>
+              <ul class="nav nav-treeview ">
+                <!-- <li class="nav-item">
+                    <a href="/HealthCare/PO/" class="nav-link">
+                      <i class="fa fa-file  nav-icon"></i>
+                      <p>Input PO</p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="/HealthCare/packing/" class="nav-link">
+                      <i class="fa fa-tag  nav-icon"></i>
+                      <p>Packing List</p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="/HealthCare/history/" class="nav-link">
+                      <i class="fa fa-clock  nav-icon"></i>
+                      <p>Packing History</p>
+                    </a>
+                  </li> -->
+                <li class="nav-item has-treeview">
+                  <a href="#" class="nav-link">
+                    <i class="nav-icon fas fa-stamp"></i>
+                    <p>
+                      Packing Individual
+                      <i class="right fas fa-angle-left"></i>
+                    </p>
+                  </a>
+
+                  <ul class="nav nav-treeview ">
+                    <li class="nav-item">
+                      <a href="/HealthCare/packingsatuan/" class="nav-link">
+                        <i class="fa fa-tag  nav-icon"></i>
+                        <p>Preparation</p>
+                      </a>
+                    </li>
+                    <li class="nav-item">
+                      <a href="/HealthCare/packinglistsatuan/" class="nav-link">
+                        <i class="fa fa-clock  nav-icon"></i>
+                        <p>Packing List</p>
+                      </a>
+                    </li>
+                  </ul>
+                </li>
+                <li class="nav-item has-treeview">
+                  <a href="#" class="nav-link">
+                    <i class="nav-icon fas fa-box"></i>
+                    <p>
+                      Packing in Set
+                      <i class="right fas fa-angle-left"></i>
+                    </p>
+                  </a>
+
+                  <ul class="nav nav-treeview ">
+                    <li class="nav-item">
+                      <a href="/HealthCare/packingset/" class="nav-link">
+                        <i class="fa fa-tag  nav-icon"></i>
+                        <p>Preparation</p>
+                      </a>
+                    </li>
+                    <li class="nav-item">
+                      <a href="/HealthCare/packinglist/" class="nav-link">
+                        <i class="fa fa-clock  nav-icon"></i>
+                        <p>Packing List</p>
+                      </a>
+                    </li>
+                  </ul>
+                </li>
+
+
+
+                <!-- <li class="nav-item">
+                    <a href="/assymirror/weekly/" class="nav-link">
+                      <i class="far fa-calendar-alt  nav-icon"></i>
+                      <p>Range Resume</p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="/assymirror/achievement/" class="nav-link">
+                      <i class="fas fa-fw fa-chart-line nav-icon"></i>
+                      <p>Achievement</p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="/assymirror/rejection/" class="nav-link">
+                      <i class="fas fa-fw fa-chart-pie nav-icon"></i>
+                      <p>Rejection</p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="/assymirror/linestop/" class="nav-link">
+                      <i class="fas fa-fw fa-chart-area nav-icon"></i>
+                      <p>Line Stop</p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="/assymirror/henkaten/" class="nav-link">
+                      <i class="fa fa-user-circle  nav-icon"></i>
+                      <p>Henkaten</p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="/assymirror/matrix-skill/" class="nav-link">
+                      <i class="fa fa-address-book  nav-icon"></i>
+                      <p>Matrix Skill</p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="/assymirror/startstop/" class="nav-link">
+                      <i class="fa fa-clock  nav-icon"></i>
+                      <p>StartStop</p>
+                    </a>
+                  </li> -->
+              </ul>
+            </li>
+
+
+            <li class="nav-item has-treeview ">
+              <a href="#" class="nav-link">
+                <i class="nav-icon fas fa-tachometer-alt"></i>
+                <p>
+                  HCU Production
+                  <i class="right fas fa-angle-left"></i>
+                </p>
+              </a>
+              <ul class="nav nav-treeview ">
+                <li class="nav-item">
+                  <a href="/HealthCare/inspection/" class="nav-link">
+                    <i class="far fa-registered  nav-icon"></i>
+                    <p>Inspection Result Data</p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="/HealthCare/planning/" class="nav-link">
+                    <i class="far fa-calendar-check  nav-icon"></i>
+                    <p>Production Planning</p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="/HealthCare/realtimeall/" class="nav-link">
+                    <i class="fa fa-cog fa-spin fa-fw nav-icon"></i>
+                    <p>Realtime Dashboard</p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="/HealthCare/realtime/" class="nav-link">
+                    <i class="fas fa-fw fa-chart-pie  nav-icon"></i>
+                    <p>Realtime OEE</p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="/HealthCare/achievement/" class="nav-link">
+                    <i class="fas fa-fw fa-chart-line nav-icon"></i>
+                    <p>Achievement</p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="/HealthCare/rejection/" class="nav-link">
+                    <i class="fas fa-fw fa-chart-pie nav-icon"></i>
+                    <p>Rejection</p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="/HealthCare/production/checksheet/" class="nav-link">
+                    <i class="fas fa-fw fa-file nav-icon"></i>
+                    <p>Prod Checksheet</p>
+                  </a>
+                </li>
+
+
+                <!-- <li class="nav-item">
+                    <a href="/assymirror/weekly/" class="nav-link">
+                      <i class="far fa-calendar-alt  nav-icon"></i>
+                      <p>Range Resume</p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="/assymirror/achievement/" class="nav-link">
+                      <i class="fas fa-fw fa-chart-line nav-icon"></i>
+                      <p>Achievement</p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="/assymirror/rejection/" class="nav-link">
+                      <i class="fas fa-fw fa-chart-pie nav-icon"></i>
+                      <p>Rejection</p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="/assymirror/linestop/" class="nav-link">
+                      <i class="fas fa-fw fa-chart-area nav-icon"></i>
+                      <p>Line Stop</p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="/assymirror/henkaten/" class="nav-link">
+                      <i class="fa fa-user-circle  nav-icon"></i>
+                      <p>Henkaten</p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="/assymirror/matrix-skill/" class="nav-link">
+                      <i class="fa fa-address-book  nav-icon"></i>
+                      <p>Matrix Skill</p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="/assymirror/startstop/" class="nav-link">
+                      <i class="fa fa-clock  nav-icon"></i>
+                      <p>StartStop</p>
+                    </a>
+                  </li> -->
+              </ul>
+            </li>
+
+            <li class="nav-item has-treeview menu-open">
+              <a href="#" class="nav-link" style="background-color: rgba(33, 33, 255, 0.3) !important;">
+                <p>Plastic Injection</p>
+              </a>
+            </li>
+            <li class="nav-item has-treeview menu-closed">
+              <a href="#" class="nav-link">
+                <i class="nav-icon fas fa-truck"></i>
+                <p>
+                  Delivery
+                  <i class="right fas fa-angle-left"></i>
+                </p>
+              </a>
+              <ul class="nav nav-treeview ">
+                <li class="nav-item ">
+                  <a href="/PlasticInjection/Delivery/" class="nav-link">
+                    <i class="fas fa-truck-loading fa-fw"></i>
+                    <p>Monitoring Delivery</p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="/PlasticInjection/OrdervsDN/" class="nav-link">
+                    <i class="fas fa-laptop fa-fw"></i>
+                    <p>Order AHM vs OD SAP</p>
+                  </a>
+                </li>
+              </ul>
+            </li>
+            <li class="nav-item has-treeview menu-closed">
+              <a href="#" class="nav-link">
+                <i class="nav-icon fas fa-thumbs-up"></i>
+                <p>
+                  Warehouse Finish Good
+                  <i class="right fas fa-angle-left"></i>
+                </p>
+              </a>
+              <ul class="nav nav-treeview ">
+                <li class="nav-item">
+                  <a href="/PlasticInjection/GRFG/" class="nav-link">
+                    <i class="fa fa-cog fa-spin fa-fw"></i>
+                    <p>GR On Progress</p>
+                  </a>
+                </li>
+                <li class="nav-item">
+              </ul>
+              <ul class="nav nav-treeview ">
+                <li class="nav-item">
+                  <a href="/PlasticInjection/Stock/FG/" class="nav-link">
+                    <i class="fa fa-cog fa-spin fa-fw"></i>
+                    <p>Realtime Stock FG</p>
+                  </a>
+                </li>
+                <li class="nav-item">
+              </ul>
+              <!-- <ul class="nav nav-treeview ">
+                <li class="nav-item">
+                  <a href="/assyseat/goodreceipt/" class="nav-link">
+                    <i class="fa fa-cog fa-spin fa-fw"></i>
+                    <p>GR FG Seat 2W</p>
+                  </a>
+                </li>
+                <li class="nav-item">
+              </ul> -->
+            </li>
+
+            <li class="nav-item has-treeview menu-closed">
+              <a href="#" class="nav-link">
+                <i class="nav-icon fas fa-tachometer-alt"></i>
+                <p>
+                  PI Production
+                  <i class="right fas fa-angle-left"></i>
+                </p>
+              </a>
+              <ul class="nav nav-treeview ">
+                <li class="nav-item ">
+                  <a href="/PlasticInjection/OEE/Realtime/" class="nav-link">
+                    <i class="fas fa-calendar-week  nav-icon"></i>
+                    <p>Realtime OEE</p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="/PlasticInjection/OEE/" class="nav-link">
+                    <i class="fas fa-calendar-check  nav-icon"></i>
+                    <p>History OEE</p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="/PlasticInjection/Planning/" class="nav-link">
+                    <i class="fas fa-fw fa-calendar-alt nav-icon"></i>
+                    <p>Production Plan</p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="/PlasticInjection/HistoryHenkaten/" class="nav-link">
+                    <i class="fas fa-fw fa-user-lock nav-icon"></i>
+                    <p>Henkaten History</p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="/PlasticInjection/Achievement/" class="nav-link">
+                    <i class="fas fa-fw fa-snowflake nav-icon"></i>
+                    <p>Achievement</p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="/PlasticInjection/Linestop/Andon/" class="nav-link">
+                    <i class="fas fa-fw fa-chart-bar nav-icon"></i>
+                    <p>Linestop by Andon</p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="/PlasticInjection/Linestop/Machine/" class="nav-link">
+                    <i class="fas fa-fw fa-chart-area nav-icon"></i>
+                    <p>Linestop by Inject</p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="/PlasticInjection/Rejection/Range/" class="nav-link">
+                    <i class="fas fa-fw fa-chart-line nav-icon"></i>
+                    <p>Rejection Range</p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="/PlasticInjection/Rejection/Monthly/" class="nav-link">
+                    <i class="fas fa-fw fa-chart-line nav-icon"></i>
+                    <p>Rejection Monthly</p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="/PlasticInjection/Traceability/" class="nav-link">
+                    <i class="fas fa-fw fa-qrcode nav-icon"></i>
+                    <p>Traceability</p> 
+                  </a>
+                </li>
+
+
+
+
+              </ul>
+            </li>
+
+            <li class="nav-item has-treeview menu-closed">
+              <a href="#" class="nav-link">
+                <i class="nav-icon fas fa-puzzle-piece"></i>
+                <p>
+                  Assy Production
+                  <i class="right fas fa-angle-left"></i>
+                </p>
+              </a>
+              <ul class="nav nav-treeview ">
+                <li class="nav-item ">
+                  <a href="/PlasticInjection/Assy/CCH/" class="nav-link">
+                    <i class="fas fa-snowflake  nav-icon"></i>
+                    <p>Assy CCH</p>
+                  </a>
+                </li>
+              </ul>
+            </li>
+
+            <li class="nav-item has-treeview menu-closed">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-exchange-alt"></i>
+              <p>
+                Warehouse Mat&Comp
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview ">
+              <li class="nav-item ">
+                <a href="/Supply/Material/" class="nav-link">
+                  <i class="fas fa-haykal nav-icon"></i>
+                  <p>Material Supply</p>
+                </a>
+              </li>
+              <li class="nav-item ">
+                <a href="/Supply/Komponen/" class="nav-link">
+                  <i class="fas fa-flask  nav-icon"></i>
+                  <p>Component Supply</p>
+                </a>
+              </li>
+              <li class="nav-item ">
+                <a href="/Supply/Report/" class="nav-link">
+                  <i class="fas fa-file-powerpoint  nav-icon"></i>
+                  <p>Supply Report</p>
+                </a>
+              </li>
+              <li class="nav-item ">
+                <a href="/PlasticInjection/Stock/Material/" class="nav-link">
+                  <i class="fas fa-file-excel  nav-icon"></i>
+                  <p>Stock Material</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+            <li class="nav-item has-treeview menu-closed">
+              <a href="#" class="nav-link">
+                <i class="nav-icon fas fa-boxes"></i>
+                <p>
+                  Incoming
+                  <i class="right fas fa-angle-left"></i>
+                </p>
+              </a>
+              <ul class="nav nav-treeview ">
+                <li class="nav-item ">
+                  <a href="/PlasticInjection/QC/Incoming/" class="nav-link">
+                    <i class="fas fa-theater-masks nav-icon"></i>
+                    <p>QC Incoming</p>
+                  </a>
+                </li>
+                <li class="nav-item ">
+                  <a href="/Incoming/OrderSheet" class="nav-link">
+                    <i class="fas fa-passport nav-icon"></i>
+                    <p>Order Sheet</p>
+                  </a>
+                </li>
+                <li class="nav-item ">
+                  <a href="/Incoming/OrderSheet/Range/" class="nav-link">
+                    <i class="fas fa-file-excel nav-icon"></i>
+                    <p>Resume Scan OS</p>
+                  </a>
+                </li>
+              </ul>
+            </li>
+            <li class="nav-item has-treeview menu-closed">
+              <a href="#" class="nav-link">
+                <i class="nav-icon fas fa-recycle"></i>
+                <p>
+                  Recycle Material
+                  <i class="right fas fa-angle-left"></i>
+                </p>
+              </a>
+              <ul class="nav nav-treeview ">
+                <li class="nav-item ">
+                  <a href="/PlasticInjection/collection-ng/" class="nav-link">
+                    <i class="fas fa-box-open nav-icon"></i>
+                    <p>Collection NG</p>
+                  </a>
+                </li>
+              </ul>
+              <ul class="nav nav-treeview ">
+                <li class="nav-item ">
+                  <a href="/PlasticInjection/collection-ng/confirmation/" class="nav-link">
+                    <i class="fas fa-check-circle nav-icon"></i>
+                    <p>Collection NG Confirm</p>
+                  </a>
+                </li>
+              </ul>
+              <ul class="nav nav-treeview ">
+                <li class="nav-item ">
+                  <a href="/PlasticInjection/collection-ng/report/" class="nav-link">
+                    <i class="fas fa-file-excel nav-icon"></i>
+                    <p>Collection NG Report</p>
+                  </a>
+                </li>
+              </ul>
+            </li>
+            <li class="nav-item has-treeview menu-open">
+              <a href="#" class="nav-link" style="background-color: rgba(255, 181, 33, 0.3) !important;">
+                <p>PRO SAP</p>
+              </a>
+            </li>
+
+            <!-- <li class="nav-item">
+              <a href="/PRO/Print/" class="nav-link">
+                <i class="fa fa-print"></i>
+                <p>Print PRO</p>
+              </a>
+            </li> -->
+            <li class="nav-item">
+              <a href="/PRO/Upload/" class="nav-link">
+                <i class="fa fa-file-excel"></i>
+                <p>Upload PRO</p>
+              </a>
+            </li>
+
+        </nav>
+        <!-- /.sidebar-menu -->
+      </div>
+      <!-- /.sidebar -->
+    </aside>
+
+
+
+
+
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+      <!-- Content Header (Page header) -->
+
+
+
+
+
+
+
+
+
+
+      <!-- 
+    <div class="content-header" style="margin-top: 0px;">
+      <div class="container-fluid">
+         <div class="row mb-2">
+         <div class="col-sm-6">
+            <h1 class="m-0 text-dark">Dashboard v2</h1>
+          </div>
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a href="#">Home</a></li>
+              <li class="breadcrumb-item active">Dashboard v2</li>
+            </ol>
+          </div>
+        </div> 
+      </div> 
+    </div> -->
+
+      <!-- <br style=" line-height: 150%;"> -->
+      <hr style="margin-top: 10px;">
+      <div class="container-fluid">
+        <!-- /.content-header -->
+        
+
+<div class="row">
+  <div class="col-sm-7">
+    <table id="Machine" style="font-size: xx-small;">
+
+    </table>
+  </div>
+  <div class="col-sm-5">
+    <div class="row">
+      <div class="col-sm-9">
+      </div>
+      <div class="col-sm-1">
+        <h5>OEE</h5>
+      </div>
+      <div class="col-sm-1">
+        <div class="custom-control custom-switch">
+          <input type="checkbox" class="custom-control-input" id="customSwitch1" onchange="changeMode();">
+          <label class="custom-control-label" for="customSwitch1"></label>
+        </div>
+      </div>
+      <div class="col-sm-1">
+        <h5>SPH</h5>
+      </div>
+
+
+
+    </div>
+
+    <div id="LinestopCard">
+      <h6>Realtime Linestop</h6>
+      <table id="Andon" style="font-size: small;text-align: center;">
+        <thead>
+          <tr>
+            <th style="width: 1%;">No</th>
+            <th>Machine</th>
+            <th>Part/Mold</th>
+            <th>Problem</th>
+            <th>Dept PIC</th>
+            <th>Issued By</th>
+            <th>Repair By</th>
+            <!-- <th>Leader</th> -->
+            <th>Duration</th>
+          </tr>
+        </thead>
+        <tbody>
+
+        </tbody>
+      </table>
+
+
+      <br>
+      <h5>Current Shift Count</h5>
+      <table style="text-align: center;width: 100%;">
+    
+        <tr>
+          <td><button class="btn btn-outline-warning" style="height: 50px;width: 150px;" id="plan"></button></td>
+
+
+          <td><button class="btn btn-outline-success" style="height: 50px;width: 150px;" id="run"></button></td>
+
+
+          <td><button class="btn btn-outline-danger" style="height: 50px;width: 150px;" id="norun"></button></td>
+
+
+          <td><button class="btn btn-outline-secondary" style="height: 50px;width: 150px;" id="noplan"></button></td>
+
+
+        </tr>
+        <tr>
+          <td>Planned Machine</td>
+          <td>Running Machine</td>
+          <td>Not Running Yet</td>
+          <td>Running w/o Plan</td>
+        </tr>
+        </table>
+        <h5>Realtime Count</h5>
+        <table style="text-align: center;width: 100%;">
+        <tr>
+          <td><button class="btn btn-success" style="height: 50px;width: 120px;" id="hijau"></button></td>
+
+
+          <td><button class="btn btn-warning" style="height: 50px;width: 120px;" id="kuning"></button></td>
+
+
+          <td><button class="btn btn-secondary" style="height: 50px;width: 120px;" id="abu"></button></td>
+
+
+          <td><button class="btn btn-danger" style="height: 50px;width: 120px;" id="merah"></button></td>
+          <td><button class="btn btn-light" style="height: 50px;width: 120px;background-color: #e36414;" id="maintenance"></button></td>
+          <td><button class="btn btn-primary" style="height: 50px;width: 120px;background-color: #00b4d8;" id="trial"></button></td>
+
+
+        </tr>
+
+        <tr>
+          <td>Running Auto</td>
+          <td>Standby</td>
+          <td>OFF</td>
+          <td>Linestop</td>
+          <td>Maintenance</td>
+          <td>Trial</td>
+        </tr>
+      </table>
+      <br>
+      <h6>Planning Note</h6>
+      <p id="plan_status"></p>
+
+    </div>
+
+
+    <div id="SPHCard">
+      <h5>SPH Drop</h5>
+      <table id="SPH" class="table table-bordered" style="font-size: small;">
+        <thead>
+          <tr>
+            <td>No</td>
+            <th>Machine</th>
+            <th>Part/Mold</th>
+            <th>SPH Std</th>
+            <th>SPH Act</th>
+            <th>Deviation</th>
+          </tr>
+        </thead>
+        <tbody id="itemSPH">
+
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+
+
+<!-- Button trigger modal -->
+<button type="button" id="modalShow" class="btn btn-primary" data-toggle="modal" data-target="#modalDetail" hidden>
+  Launch demo modal
+</button>
+
+<style>
+  .modal-dialog {
+    width: 90%;
+    max-width: none;
+    height: 100%;
+    margin: auto;
+    margin-top: 20px;
+  }
+
+  .modal-content {
+    height: 100%;
+    border: 0;
+    border-radius: 0;
+  }
+</style>
+
+<!-- Modal -->
+<div class="modal fade" id="modalDetail" tabindex="-1" role="dialog" aria-labelledby="modalDetailTitle"
+  aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modalDetailTitle">Detail Machine</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <iframe id="frameModal" src="/PlasticInjection/OEE/Detail/2024-05-13/A01/" frameborder="0"
+          style="width: 100%;height: 100%;"></iframe>
+
+
+
+
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+<style>
+  table {
+    border-collapse: collapse;
+  }
+</style>
+
+
+
+
+
+
+
+
+<link rel="stylesheet" type="text/css" href="/static/jquery.dataTables.css">
+<link rel="stylesheet" href="/static/vendor/datepicker/bootstrap-datepicker3.min.css">
+<link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>
+<link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
+
+<script src="/static/vendor/jquery/jquery.min.js"></script>
+<script src="/static/vendor/jquery-knob/jquery.knob.min.js"></script>
+<script src="/static/js/jquery.cookie.js"></script>
+<script type="text/javascript" charset="utf8" src="/static/jquery.dataTables.js"></script>
+<script type="text/javascript" charset="utf8" src="/static/moment-with-locales.min.js"></script>
+<script src="/static/vendor/datepicker/bootstrap-datepicker.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
+
+<script src="/static/amcharts4/core.js"></script>
+<script src="/static/amcharts4/charts.js"></script>
+<script src="/static/amcharts4/plugins/forceDirected.js"></script>
+<script src="/static/amcharts4/themes/animated.js"></script>
+
+<script src="/static/vendor/timetable/js/timetable.min.js"></script>
+
+
+
+<script>
+
+
+  var charts1;
+  let Mode = 'OEE';
+  document.getElementById("SPHCard").style.display = "none";
+  function changeMode() {
+    if (Mode == 'OEE') {
+      Mode = 'SPH';
+      document.getElementById("SPHCard").style.display = "block";
+      document.getElementById("LinestopCard").style.display = "none";
+    } else {
+      Mode = 'OEE';
+      document.getElementById("SPHCard").style.display = "none";
+      document.getElementById("LinestopCard").style.display = "block";
+    }
+    create_post();
+  }
+
+  // today.setDate(date.getDate());
+
+  $(document).ready(function () {
+    $.noConflict();
+    // $('#myTab li:last-child button').tab('show')
+    create_post();
+  });
+
+
+  function create_post() {
+
+    $('#load').show();
+
+    var csrftoken = $.cookie('csrftoken');
+
+    function csrfSafeMethod(method) {
+      // these HTTP methods do not require CSRF protection
+      return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
+    }
+
+
+    function Detail(mesin) {
+      var now = new Date();
+      var y = now.getFullYear();
+      var m = checkTime(now.getMonth() + 1);
+      var d = checkTime(now.getDate());
+      // alert(y +"-"+m+"-"+d);
+      document.getElementById("frameModal").src = "/PlasticInjection/OEE/Detail/" + y + "-" + m + "-" + d + "/" + mesin + "/";
+      console.log(document.getElementById("frameModal").src);
+
+      document.getElementById("modalShow").click();
+    }
+
+
+    $.ajaxSetup({
+      beforeSend: function (xhr, settings) {
+        if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
+          xhr.setRequestHeader("X-CSRFToken", csrftoken);
+        }
+      }
+    });
+
+    $.ajax({
+      url: 'chartdata/',
+      type: "POST",
+      data: {
+
+        //dateinput: document.getElementById("dateinput").value,
+      },
+
+      success: function (datatable) {
+        console.clear();
+        console.log(datatable);
+        var now = new Date();
+
+        let counterhijau = 0
+        let countermerah = 0
+        let counterkuning = 0
+        let counterabu = 0
+        let counterplan = 0
+        let counteract = 0
+        let countermtc = 0
+        let countertrial = 0
+
+
+
+
+        if (datatable.plan == false) {
+          document.getElementById("plan_status").innerHTML = "<h4>Planning produksi hari ini belum di upload!</h4>"
+        } else {
+          let datanotrun = '';
+          for (i = 0; i < datatable.Notrun.length; i++)
+              datanotrun = datanotrun + datatable.Notrun[i]  +" , ";
+          if (datanotrun.length > 0)
+              datanotrun = datanotrun.substring(0, datanotrun.length - 2);
+
+          let unplanned = '';
+          for (i = 0; i < datatable.Unplan.length; i++)
+              unplanned = unplanned+ datatable.Unplan[i]  +" , ";
+          if (unplanned.length > 0)
+              unplanned = unplanned.substring(0, unplanned.length - 2);
+
+          document.getElementById("plan_status").innerHTML = "<ul><li><h6>Planned no Output 	&nbsp;: " + (datanotrun) + "</h6></li><li><h6>Running without Plan 	&nbsp;	&nbsp;	&nbsp;	&nbsp;: " + unplanned + "</h6></li></ul>"
+        }
+
+        let tabelsph = document.getElementById("itemSPH");
+        tabelsph.innerHTML = "";
+        let countersph = 1
+
+        let table = document.getElementById("Machine");
+        table.innerHTML = "";
+        table.style.width = "50%";
+        let Area = "A";
+        var row = document.createElement("tr");
+        var cell = document.createElement("td");
+        cell.innerHTML = "<H6 style='width: 60px;'>Area " + Area + " </H6>";
+        row.appendChild(cell);
+        //table.appendChild(row);
+        //var row = document.createElement("tr");
+        //row.style.padding = "50px";
+        let counter = 0;
+        for (var i = 0; i < datatable.ListMachine.length; i++) {
+          if (Area != datatable.ListMachine[i][8]) {
+
+            table.appendChild(row);
+            var row = document.createElement("tr");
+            var cell = document.createElement("td");
+            cell.innerHTML = "<H6  style='width: 60px;'>Area " + datatable.ListMachine[i][8] + " </H6>";
+            row.appendChild(cell);
+            //table.appendChild(row);
+            //var row = document.createElement("tr");
+            counter = 0;
+            // row.style.maxwidth = "50%";
+
+          }
+          if (counter == 10) {
+            table.appendChild(row);
+            var row = document.createElement("tr");
+            var cell = document.createElement("td");
+            row.appendChild(cell);
+            counter = 0;
+          }
+          var cell = document.createElement("td");
+          const button = document.createElement('button');
+          // if (datatable.ListMachine[i][3]== null){
+          //   button.innerHTML = "<h4>"+datatable.ListMachine[i][0] +"</h4>";
+          // }
+          // else{
+          //   button.innerHTML = "<h4>"+datatable.ListMachine[i][0] +"</h4><h6 style = 'font-size: xx-small;'>"+ datatable.ListMachine[i][3].split(" | ")[0] + "</h6>";
+          // }
+
+          if (Mode == 'OEE') {
+            if (datatable.ListMachine[i][18] == null || datatable.ListMachine[i][18] == 0) {
+              button.innerHTML = "<h6 style='padding-left:5px;background-color:rgba(255, 255, 255, 0.4);'>" + datatable.ListMachine[i][0] + "</h6> <h6 style='text-align:center;width:100%;'>0</h6>"
+            }
+            else {
+              // if (parseFloat(datatable.ListMachine[i][17]) < 80) {
+              //   button.innerHTML = "<h6 style='padding-left:5px;background-color:rgba(255, 255, 255, 0.4);'>" + datatable.ListMachine[i][0] + "</h6> <h6 style='text-align:center;width:100%;color: red;'>" + datatable.ListMachine[i][17] + "</h6>"
+              // } else if (parseFloat(datatable.ListMachine[i][17]) < 90) {
+              //   button.innerHTML = "<h6 style='padding-left:5px;background-color:rgba(255, 255, 255, 0.4);'>" + datatable.ListMachine[i][0] + "</h6> <h6 style='text-align:center;width:100%;color: orange;'>" + datatable.ListMachine[i][17] + "</h6>"
+              // }
+              // else {
+              button.innerHTML = "<h6 style='padding-left:5px;background-color:rgba(255, 255, 255, 0.4);'>" + datatable.ListMachine[i][0] + "</h6> <h6 style='text-align:center;width:100%;'>" + datatable.ListMachine[i][18] + "</h6>"
+              //  }
+            }
+          } else {
+            if (datatable.ListMachine[i][20] == null || datatable.ListMachine[i][20] == 0) {
+              button.innerHTML = "<h6 style='padding-left:5px;background-color:rgba(255, 255, 255, 0.4);'>" + datatable.ListMachine[i][0] + "</h6> <h6 style='text-align:center;width:100%;'>0</h6>"
+            }
+            else {
+              if (datatable.ListMachine[i][20] / datatable.ListMachine[i][19] < 0.9) {
+                button.innerHTML = "<h6 style='padding-left:5px;background-color:rgba(255, 255, 255, 0.4);'>" + datatable.ListMachine[i][0] + "</h6> <h6 style='text-align:center;width:100%;background-color: red;'>" + datatable.ListMachine[i][20] + "/" + datatable.ListMachine[i][19] + "</h6>";
+                var rowsph = document.createElement("tr");
+                  var cellsph = document.createElement("td");
+                  cellsph.innerText = countersph;
+                  rowsph.appendChild(cellsph);
+                  countersph = countersph + 1;
+                  var cellsph = document.createElement("td");
+                  cellsph.innerText = datatable.ListMachine[i][0];
+                  rowsph.appendChild(cellsph);
+                  var cellsph = document.createElement("td");
+                  cellsph.innerText = datatable.ListMachine[i][3];
+                  rowsph.appendChild(cellsph);
+                  var cellsph = document.createElement("td");
+                  cellsph.innerText = datatable.ListMachine[i][19];
+                  rowsph.appendChild(cellsph);
+                  var cellsph = document.createElement("td");
+                  cellsph.innerText = datatable.ListMachine[i][20];
+                  rowsph.appendChild(cellsph);
+                  var cellsph = document.createElement("td");
+                  cellsph.innerText = ((datatable.ListMachine[i][19]-datatable.ListMachine[i][20]) *100/ datatable.ListMachine[i][19]).toFixed(2) +'%';
+                  rowsph.appendChild(cellsph);
+                  tabelsph.appendChild(rowsph);
+              
+              } else if (datatable.ListMachine[i][20] / datatable.ListMachine[i][19] < 1) {
+                button.innerHTML = "<h6 style='padding-left:5px;background-color:rgba(255, 255, 255, 0.4);'>" + datatable.ListMachine[i][0] + "</h6> <h6 style='text-align:center;width:100%;background-color: orange;'>" + datatable.ListMachine[i][20] + "/" + datatable.ListMachine[i][19] + "</h6>";
+              }
+              else {
+                button.innerHTML = "<h6 style='padding-left:5px;background-color:rgba(255, 255, 255, 0.4);'>" + datatable.ListMachine[i][0] + "</h6> <h6 style='text-align:center;width:100%;'>" + datatable.ListMachine[i][20] + "/" + datatable.ListMachine[i][19] + "</h6>"
+              }
+            }
+          }
+
+
+
+
+          button.style.textAlign = "center";
+          button.style.alignItems = "top";
+          if (datatable.ListMachine[i][21] == 'MTNC'){
+            button.className = "btn btn-light text-white";
+            button.style.background = "#e36414";
+            countermtc = countermtc + 1;
+          }
+          else if (datatable.ListMachine[i][21] == 'TRIAL'){
+            button.className = "btn btn-primary text-white";
+            button.style.background = "#00b4d8";
+            countertrial = countertrial + 1;
+          }
+          else if (datatable.ListMachine[i][9] != null) {
+            button.className = "btn btn-danger";
+            countermerah = countermerah + 1;
+          }
+          else if (datatable.ListMachine[i][2] == 1 && datatable.ListMachine[i][12] != null) {
+            button.className = "btn btn-success";
+            counterhijau = counterhijau + 1;
+          }
+          else if (datatable.ListMachine[i][1] == 1) {
+            button.className = "btn btn-warning text-white";
+            if (datatable.ListMachine[i][2] == 1 && datatable.ListMachine[i][12]== null){
+              button.className = "btn btn-warning text-black";
+            }
+            
+            //button.style.background = "#F9CB43";
+             
+            
+            counterkuning = counterkuning + 1;
+            //button.style.color = "white";
+          }
+          else {
+            button.className = "btn btn-secondary";
+            counterabu = counterabu + 1;
+          }
+          button.style.width = "80px";
+          button.style.height = "55px";
+          button.style.padding = "0px";
+          
+
+          // button.addEventListener('click', function() { alert(now+" "+datatable.ListMachine[i][0] ); }, false);
+          //   if (datatable.ListMachine[i][0]== 'A02'){
+          //  button.addEventListener("click", Detail('A02'), false);}
+          // button.onclick = "Detail('test');";
+          // button.style.marginBottom = "16px";
+          let machine = datatable.ListMachine[i][0].toString();
+          // console.log(machine);
+
+          button.addEventListener("click", function (e) {
+
+            Detail(machine);
+          }, false);
+
+
+          cell.appendChild(button);
+          row.appendChild(cell);
+          Area = datatable.ListMachine[i][8];
+          counter = counter + 1;
+        }
+
+
+
+        //row added to end of table body
+        table.appendChild(row);
+
+        document.getElementById("hijau").innerText = counterhijau;
+        document.getElementById("kuning").innerText = counterkuning;
+        document.getElementById("abu").innerText = counterabu;
+        document.getElementById("merah").innerText = countermerah;
+        document.getElementById("maintenance").innerText = countermtc;
+        document.getElementById("trial").innerText = countertrial;
+
+        document.getElementById("plan").innerText = datatable.Planned.length;
+        document.getElementById("run").innerText = datatable.Act.length;
+        document.getElementById("norun").innerText = datatable.Notrun.length;
+        document.getElementById("noplan").innerText = datatable.Unplan.length;
+
+
+
+        var table1 = $('#Andon').DataTable({
+          //dom: 'Bfrtip',
+          destroy: true,
+          // responsive: true,
+          searching: false,
+          paging: false,
+          info: false,
+          ordering: false,
+          data: datatable.ListAndon,
+          columns: [
+            {
+              data: 0,
+              render: function (data, type, row, meta) {
+                return meta.row + meta.settings._iDisplayStart + 1;
+              }
+            },
+            { data: 5 },
+            { data: 26 },
+            { data: 8 },
+            { data: 4 },
+            { data: 11 },
+            { data: 12 },
+            // { data: 23 },
+            {
+              data: 1,
+              render: function (data, type, row, meta) {
+                var diffMs = (now - data);
+                return Math.round(diffMs / 60000) + " min";
+              }
+            },
+
+
+          ],
+
+          columnDefs: [{
+            "targets": '_all',
+            "createdCell": function (td, cellData, rowData, row, col) {
+              $(td).css('padding', '4px')
+            }
+          }]
+
+        });
+
+
+        // Loading stop
+        $('#load').hide();
+        // am4core.disposeAllCharts();
+
+      },
+
+      error: function (errordata) {
+        console.log("error")
+        console.log(errordata)
+      },
+    });
+  };
+</script>
+
+
+
+      </div>
+    </div>
+    <!-- /.content-wrapper -->
+
+    <!-- Control Sidebar -->
+    <aside class="control-sidebar control-sidebar-dark">
+      <!-- Control sidebar content goes here -->
+    </aside>
+    <!-- /.control-sidebar -->
+
+    <!-- Main Footer -->
+    <!-- <footer class="main-footer">
+    <strong>Copyright &copy; 2019-2020 <a href="">PT Astra Komponen Indonesia</a>.</strong>
+    All rights reserved.
+    <div class="float-right d-none d-sm-inline-block">
+      <b>Version</b> 3.0.3-pre
+    </div>
+  </footer> -->
+  </div>
+
+  <!-- ./wrapper -->
+
+  <!-- EXCEL BUTTONS DATATABLES SCRIPTS -->
+  <script src="/static/vendor/datatables/dataTables.buttons.min.js"></script>
+  <script src="/static/vendor/datatables/jszip.min.js"></script>
+  <script src="/static/vendor/datatables/buttons.html5.min.js"></script>
+
+  <!-- REQUIRED SCRIPTS -->
+  <!-- jQuery -->
+  <script src="/static/vendor/jquery/jquery.min.js"></script>
+  <!-- Bootstrap -->
+  <script src="/static/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <!-- overlayScrollbars -->
+  <script src="/static/vendor/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
+  <!-- AdminLTE App -->
+  <script src="/static/vendor/AdminLTE/js/adminlte.js?v=3.2"></script>
+
+  <!-- OPTIONAL SCRIPTS -->
+  <script src="/static/vendor/AdminLTE/js/demo.js"></script>
+
+  <!-- PAGE PLUGINS -->
+  <!-- jQuery Mapael -->
+  <script src="/static/vendor/jquery-mousewheel/jquery.mousewheel.js"></script>
+  <script src="/static/vendor/raphael/raphael.min.js"></script>
+  <script src="/static/vendor/jquery-mapael/jquery.mapael.min.js"></script>
+  <script src="/static/vendor/jquery-mapael/maps/usa_states.min.js"></script>
+  <!-- ChartJS -->
+  <!-- <script src="/static/vendor/chart.js/Chart.min.js"></script> -->
+
+  <!-- PAGE SCRIPTS -->
+  <!-- <script src="/static/vendor/AdminLTE/js/pages/dashboard2.js"></script> -->
+
+  <!-- DataTables JS -->
+  <script type="text/javascript" src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
+  <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.7.0/js/dataTables.buttons.min.js"></script>
+  <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.7.0/js/buttons.html5.min.js"></script>
+  
+  
+</body>
+
+</html>
