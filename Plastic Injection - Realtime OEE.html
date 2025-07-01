@@ -9,17 +9,6 @@
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
   <title>Plastic Injection - Realtime OEE</title>
 
-  <link rel="stylesheet" href="/static/vendor/datatables/buttons.dataTables.min.css">
-  <link rel="stylesheet" href="/static/vendor/datatables/buttonsStyle.css">
-
-  <link rel="stylesheet" href="/static/vendor/timetable/css/timetablejs.css">
-  <link rel="stylesheet" href="/static/vendor/timetable/css/demo.css">
-  
-  <!-- DataTables CSS -->
-  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.css">
-  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/1.7.0/css/buttons.dataTables.min.css">
-  <link rel="stylesheet" type="text/css" href="/static/vendor/daterangepicker/daterangepicker.css">
-  
   <!-- TEMPLATE BARU -->
 
       <!--     Fonts and icons     -->
@@ -49,8 +38,8 @@
             <i class="fas fa-times p-3 cursor-pointer text-dark opacity-5 position-absolute end-0 top-0 d-none d-xl-none"
                 aria-hidden="true" id="iconSidenav"></i>
             <a class=" px-4 m-0"
-                href=" https://demos.creative-tim.com/material-dashboard/pages/dashboard " target="_blank">
-                <span class="ms-1 text-sm text-dark">PT Astra Komponen Indonesia</span>
+                href="#" target="_blank">
+                <span class="ms-1 mx-auto text-md-10 text-dark"><strong>PT Astra Komponen Indonesia</strong></span>
             </a>
         </div>
         <hr class="horizontal dark my-0">
@@ -63,123 +52,137 @@
         <div class="collapse navbar-collapse  w-auto " id="sidenav-collapse-main">
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <li class="nav-item mt-3">
-                        <!-- Healthcare Category -->
-                        <h6 class="ps-4 ms-2 text-dark font-weight-bolder opacity-5">Healthcare & Medical Devices</h6>
-                    </li>
-                    <!-- Delivery -->
-                    <a class="nav-link text-dark" data-bs-toggle="collapse" href="#MenuDeliverycare" role="button" aria-expanded="false" aria-controls="MenuDeliverycare">
-                        <i class="material-symbols-rounded opacity-5">Delivery_Truck_Speed</i>
-                        <span class="nav-link-text ms-1">Delivery</span>
-                    </a>
-                    <div class="collapse" id="MenuDeliverycare">
-                        <ul class="nav ms-4 ps-3">
-                  
-                          <!-- Packing Individual -->
-                          <li class="nav-item">
-                            <a class="nav-link text-dark" data-bs-toggle="collapse" href="#MenupackingIndividual" role="button" aria-expanded="false" aria-controls="MenupackingIndividual">
-                              <i class="material-symbols-rounded opacity-10">Approval</i>
-                              Packing Individual
-                            </a>
-                            <div class="collapse" id="MenupackingIndividual">
-                              <ul class="nav ms-4 ps-3">
-                                <!-- Preparation -->
-                                <li class="nav-item">
-                                  <a class="nav-link text-dark" href="#">
-                                    <i class="material-symbols-rounded opacity-10">label</i>
-                                    Preparation
-                                  </a>
-                                </li>
-                                <!-- Packing List -->
-                                <li class="nav-item">
-                                  <a class="nav-link text-dark" href="#">
-                                    <i class="material-symbols-rounded opacity-10">schedule</i>
-                                    Packing List
-                                  </a>
-                                </li>
-                              </ul>
-                            </div>
-                          </li>
-                          <!-- Packing In Set -->
-                          <li class="nav-item">
-                            <a class="nav-link text-dark" data-bs-toggle="collapse" href="#Menupackinginset" role="button" aria-expanded="false" aria-controls="Menupackinginset">
-                              <i class="material-symbols-rounded opacity-10">box</i>
-                              Packing in set
-                            </a>
-                            <div class="collapse" id="Menupackinginset">
-                              <ul class="nav ms-4 ps-3">
-                                <!-- Preparation -->
-                                <li class="nav-item">
-                                  <a class="nav-link text-dark" href="#">
-                                    <i class="material-symbols-rounded opacity-10">label</i>
-                                    Preparation
-                                  </a>
-                                </li>
-                                <!-- Packing List -->
-                                <li class="nav-item">
-                                  <a class="nav-link text-dark" href="#">
-                                    <i class="material-symbols-rounded opacity-10">schedule</i>
-                                    Packing List
-                                  </a>
-                                </li>
-                              </ul>
-                            </div>
-                          </li>
-                        </ul>
-                      </div>
+                    <!-- Healthcare Category -->
+                  <li class="nav-item mt-3">
+                    <h6 class="ps-4 ms-2 text-dark font-weight-bolder opacity-5">Healthcare & Medical Devices</h6>
+                  </li>
+
+                  <!-- Delivery Dropdown -->
+<li class="nav-item dropdown px-3">
+  <a href="#" class="btn bg-gradient-dark dropdown-toggle w-100 text-start" data-bs-toggle="dropdown" id="dropdownMenuDelivery">
+    <i class="material-symbols-rounded opacity-5">delivery_truck_speed</i>
+    <span class="ms-2">Delivery</span>
+  </a>
+
+  <ul class="dropdown-menu w-100 px-3" aria-labelledby="dropdownMenuDelivery">
+    
+    <li class="dropdown px-3">
+      <a href="#" class="dropdown-toggle w-100 text-start fs-6 d-flex align-items-center gap-2" data-bs-toggle="dropdown" id="dropdownPackingIndividual">
+        <i class="material-symbols-rounded opacity-10">speed</i>
+        Packing Individual
+      </a>
+    
+      <ul class="dropdown-menu w-100 px-3" aria-labelledby="dropdownPackingIndividual">
+          <li class="dropdown-submenu dropend">
+            <a class="dropdown-item fs-6" href="/HealthCare/packingsatuan/">
+              <span>Preparation</span>
+            </a>
+          </li>
+          <li class="dropdown-submenu dropend">
+            <a class="dropdown-item fs-6" href="/HealthCare/packingsatuan/">
+              <span>Packing List</span>
+            </a>
+          </li>
+      </ul>  
+    </li>    
+
+
+    <li class="dropdown-submenu dropend">
+      <a class="dropdown-item dropdown-toggle" href="#">
+        Packing in Set
+      </a>
+    </li>
+    
+  </ul>
+</li>
+
+<li class="nav-item dropdown px-3">
+  <a href="#" class="btn bg-gradient-dark dropdown-toggle w-100 text-start d-flex align-items-center gap-2" data-bs-toggle="dropdown" id="HCU">
+    <i class="material-symbols-rounded opacity-5">speed</i>
+    <span class="ms-2" style="font-size: 10px;">HCU Production</span>
+  </a>
+
+  <ul class="dropdown-menu w-100 px-3 ms-4 ps-3" aria-labelledby="HCU">
+    <li>
+      <a class="dropdown-item fs-6 d-flex align-items-center gap-2" href="/HealthCare/packingsatuan/">
+        <i class="material-symbols-rounded opacity-10">Document_Search</i>
+        Inspection Result Data
+      </a>
+    </li>
+    <li>
+      <a class="dropdown-item fs-6 d-flex align-items-center gap-2" href="/HealthCare/packinglistsatuan/">
+        <i class="material-symbols-rounded opacity-10">Date_Range</i>
+        Production Planning
+      </a>
+    </li>
+    <li>
+      <a class="dropdown-item fs-6 d-flex align-items-center gap-2" href="/HealthCare/packingsatuan/">
+        <i class="material-symbols-rounded opacity-10 spin-continuous">Settings</i>
+        Realtime Dashboard
+      </a>
+    </li>
+    <li>
+      <a class="dropdown-item fs-6 d-flex align-items-center gap-2" href="/HealthCare/packinglistsatuan/">
+        <i class="material-symbols-rounded opacity-10">Pie_Chart</i>
+        Realtime OEE
+      </a>
+    </li>
+  </ul>
+</li>
+
                       <!-- HCU Production -->
-                <a class="nav-link text-dark" data-bs-toggle="collapse" href="#MenuHCUProduction" role="button" aria-expanded="false" aria-controls="MenuHCUProduction">
+                <!-- <a class="nav-link text-dark" data-bs-toggle="collapse" href="#MenHCUProduction" role="button" aria-expanded="false" aria-controls="MenHCUProduction">
                         <i class="material-symbols-rounded opacity-5">speed</i>
                         <span class="nav-link-text ms-1">HCU Production</span>
                     </a>
-                    <div class="collapse" id="MenuHCUProduction">
-                        <ul class="nav ms-4 ps-3">
+                    <div class="collapse" id="MenHCUProduction">
+                        <ul class="nav ms-4 ps-3"> -->
                   
                           <!-- Inspection Result Data -->
-                          <li class="nav-item">
-                            <a class="nav-link text-dark" data-bs-toggle="collapse" href="#" role="button" aria-expanded="false">
-                              <i class="material-symbols-rounded opacity-10">Document_Search</i>
-                              Inspection Result Data
+                          <!-- <li class="nav-item">
+                            <a class="nav-link text-dark" href="/HealthCare/inspection/">
+                                <i class="material-symbols-rounded opacity-10">Document_Search</i>
+                                    Inspection Resul Data
                             </a>
-                          </li>
+                          </li> -->
                           <!-- Production Planning -->
-                          <li class="nav-item">
-                            <a class="nav-link text-dark" data-bs-toggle="collapse" href="#" role="button" aria-expanded="false">
+                          <!-- <li class="nav-item">
+                            <a class="nav-link text-dark" href="/HealthCare/planning/">
                               <i class="material-symbols-rounded opacity-10">Date_Range</i>
                               Production Planning
                             </a>
-                          </li>
+                          </li> -->
                           <!-- Realtime Dashboard -->
-                          <li class="nav-item">
-                            <a class="nav-link text-dark" data-bs-toggle="collapse" href="#" role="button" aria-expanded="false">
+                          <!-- <li class="nav-item">
+                            <a class="nav-link text-dark" href="/HealthCare/realtimeall/">
                               <i class="material-symbols-rounded opacity-10 spin-continuous">Settings</i>
                               Realtime Dashboard
                             </a>
-                          </li>
+                          </li> -->
                           <!-- Realtime OEE -->
-                          <li class="nav-item">
-                             <a class="nav-link text-dark" data-bs-toggle="collapse" role="button" aria-expanded="false" href="../UI.UX/Plastic Injection - Realtime OEE.html">
+                          <!-- <li class="nav-item">
+                             <a class="nav-link text-dark" href="/HealthCare/realtime/">
                               <i class="material-symbols-rounded opacity-10">Pie_Chart</i>
                               Realtime OEE
                             </a>
-                          </li>
+                          </li> -->
                           <!-- Achievment -->
-                          <li class="nav-item">
-                             <a class="nav-link text-dark" data-bs-toggle="collapse" href="#" role="button" aria-expanded="false">
+                          <!-- <li class="nav-item">
+                             <a class="nav-link text-dark" href="/HealthCare/achievement/">
                               <i class="material-symbols-rounded opacity-10">Chart_Data</i>
                               Achievement
                             </a>
-                          </li>
+                          </li> -->
                           <!-- Rejection -->
-                          <li class="nav-item">
-                            <a class="nav-link text-dark" data-bs-toggle="collapse" href="#" role="button" aria-expanded="false">
+                          <!-- <li class="nav-item">
+                            <a class="nav-link text-dark" href="/HealthCare/rejection/">
                               <i class="material-symbols-rounded opacity-10">Contract_Delete</i>
                               Rejection
                             </a>
-                          </li>
+                          </li> -->
                           <!-- Prod Cheecksheet -->
-                          <li class="nav-item">
-                            <a class="nav-link text-dark" data-bs-toggle="collapse" href="#" role="button" aria-expanded="false">
+                          <!-- <li class="nav-item">
+                            <a class="nav-link text-dark" href="/HealthCare/production/checksheet/">
                               <i class="material-symbols-rounded opacity-10">Docs</i>
                               Prod Checksheet
                             </a>
@@ -187,7 +190,8 @@
                           
                         </ul>
                     </div>
-                </li>
+                </li> -->
+
                 <!-- Plastic Injection Category -->
                 <li class="nav-item">
                     <li class="nav-item mt-3">
@@ -203,14 +207,14 @@
                   
                           <!-- Monitoring Delivery -->
                           <li class="nav-item">
-                            <a class="nav-link text-dark" data-bs-toggle="collapse" href="#" role="button" aria-expanded="false">
+                            <a class="nav-link text-dark" href="/PlasticInjection/Delivery/">
                               <i class="material-symbols-rounded opacity-10">Trolley</i>
                               Monitoring Delivery
                             </a>
                           </li>
                           <!-- Order AHM -->
                           <li class="nav-item">
-                            <a class="nav-link text-dark" data-bs-toggle="collapse" href="#" role="button" aria-expanded="false">
+                            <a class="nav-link text-dark" href="/PlasticInjection/OrdervsDN/">
                               <i class="material-symbols-rounded opacity-10">Computer</i>
                               Order AHM vs OD SAP
                             </a>
@@ -227,14 +231,14 @@
                   
                           <!-- GR on Progress -->
                           <li class="nav-item">
-                            <a class="nav-link text-dark" data-bs-toggle="collapse" href="#" role="button" aria-expanded="false">
+                            <a class="nav-link text-dark" href="/PlasticInjection/GRFG/">
                               <i class="material-symbols-rounded opacity-10 spin-continuous">Settings</i>
                               GR on Progress
                             </a>
                           </li>
                           <!-- Realtime Stock FG -->
                           <li class="nav-item">
-                            <a class="nav-link text-dark" data-bs-toggle="collapse" href="#" role="button" aria-expanded="false">
+                            <a class="nav-link text-dark" href="/PlasticInjection/Stock/FG/">
                               <i class="material-symbols-rounded opacity-10 spin-continuous">Settings</i>
                               Realtime Stock FG
                             </a>
@@ -251,70 +255,70 @@
                             
                           <!-- Realtime OEE -->
                           <li class="nav-item">
-                             <a class="nav-link text-dark" data-bs-toggle="collapse" href="" role="button" aria-expanded="false">
+                             <a class="nav-link text-dark" href="/PlasticInjection/OEE/Realtime/">
                               <i class="material-symbols-rounded opacity-10">Pie_Chart</i>
                               Realtime OEE
                             </a>
                           </li>
                           <!-- History OEE -->
                           <li class="nav-item">
-                            <a class="nav-link text-dark" data-bs-toggle="collapse" href="#" role="button" aria-expanded="false">
+                            <a class="nav-link text-dark" href="/PlasticInjection/OEE/">
                               <i class="material-symbols-rounded opacity-10">History</i>
                               History OEE
                             </a>
                           </li>
                           <!-- Production Plan -->
                           <li class="nav-item">
-                            <a class="nav-link text-dark" data-bs-toggle="collapse" href="#" role="button" aria-expanded="false">
+                            <a class="nav-link text-dark" href="/PlasticInjection/Planning/">
                               <i class="material-symbols-rounded opacity-10">Date_Range</i>
                               Production Plan
                             </a>
                           </li>
                           <!-- Henkaten History -->
                           <li class="nav-item">
-                            <a class="nav-link text-dark" data-bs-toggle="collapse" href="#" role="button" aria-expanded="false">
+                            <a class="nav-link text-dark" href="/PlasticInjection/HistoryHenkaten/">
                               <i class="material-symbols-rounded opacity-10">Overview</i>
                               Henkaten History
                             </a>
                           </li>
                           <!-- Achievment -->
                           <li class="nav-item">
-                             <a class="nav-link text-dark" data-bs-toggle="collapse" href="#" role="button" aria-expanded="false">
+                             <a class="nav-link text-dark" href="/PlasticInjection/Achievement/">
                               <i class="material-symbols-rounded opacity-10">Chart_Data</i>
                               Achievement
                             </a>
                           </li>
                           <!-- Linestop by Andon -->
                           <li class="nav-item">
-                            <a class="nav-link text-dark" data-bs-toggle="collapse" href="#" role="button" aria-expanded="false">
+                            <a class="nav-link text-dark" href="/PlasticInjection/Linestop/Andon/">
                               <i class="material-symbols-rounded opacity-10">Conversion_Path_Off</i>
                               Linestop by Andon
                             </a>
                           </li>
                           <!-- Linestop by Inject -->
                           <li class="nav-item">
-                            <a class="nav-link text-dark" data-bs-toggle="collapse" href="#" role="button" aria-expanded="false">
+                            <a class="nav-link text-dark" href="/PlasticInjection/Linestop/Machine/">
                               <i class="material-symbols-rounded opacity-10">Conversion_Path_Off</i>
                               Linestop by Inject
                             </a>
                           </li>
                           <!-- Rejection Range -->
                           <li class="nav-item">
-                            <a class="nav-link text-dark" data-bs-toggle="collapse" href="#" role="button" aria-expanded="false">
+                            <a class="nav-link text-dark" href="/PlasticInjection/Rejection/Range/">
                               <i class="material-symbols-rounded opacity-10">Table_Chart_View</i>
                               Rejection Range
                             </a>
                           </li>
                           <!-- Rejection Monthly -->
                           <li class="nav-item">
-                            <a class="nav-link text-dark" data-bs-toggle="collapse" href="#" role="button" aria-expanded="false">
+                            <a class="nav-link text-dark" href="/PlasticInjection/Rejection/Monthly/">
                               <i class="material-symbols-rounded opacity-10">Table_Chart_View</i>
                               Rejection Monthly
                             </a>
                           </li>
                           <!-- Traceability-->
                           <li class="nav-item">
-                            <a class="nav-link text-dark" data-bs-toggle="collapse" href="#" role="button" aria-expanded="false">
+                            <a class="nav-link text-dark" href="/PlasticInjection/Traceability/">
                               <i class="material-symbols-rounded opacity-10">News</i>
                               Traceability
                             </a>
@@ -331,7 +335,7 @@
                   
                           <!-- Assy CCH -->
                           <li class="nav-item">
-                            <a class="nav-link text-dark" data-bs-toggle="collapse" href="#" role="button" aria-expanded="false">
+                            <a class="nav-link text-dark" href="/PlasticInjection/Assy/CCH/">
                               <i class="material-symbols-rounded opacity-10">AC_Unit</i>
                               Assy CCH
                             </a>
@@ -347,28 +351,28 @@
                   
                           <!-- Material Supply -->
                           <li class="nav-item">
-                            <a class="nav-link text-dark" data-bs-toggle="collapse" href="#" role="button" aria-expanded="false">
+                            <a class="nav-link text-dark" href="/Supply/Material/">
                               <i class="material-symbols-rounded opacity-10">Polymer</i>
                               Material Supply
                             </a>
                           </li>
                           <!-- Component Supply -->
                           <li class="nav-item">
-                            <a class="nav-link text-dark" data-bs-toggle="collapse" href="#" role="button" aria-expanded="false">
+                            <a class="nav-link text-dark" href="/Supply/Komponen/">
                               <i class="material-symbols-rounded opacity-10">Experiment</i>
                               Component Supply
                             </a>
                           </li>
                           <!-- Supply Report -->
                           <li class="nav-item">
-                            <a class="nav-link text-dark" data-bs-toggle="collapse" href="#" role="button" aria-expanded="false">
+                            <a class="nav-link text-dark" href="/Supply/Report/">
                               <i class="material-symbols-rounded opacity-10">Clinical_Notes</i>
                               Supply Report
                             </a>
                           </li>
                           <!-- Stock Material -->
                           <li class="nav-item">
-                            <a class="nav-link text-dark" data-bs-toggle="collapse" href="#" role="button" aria-expanded="false">
+                            <a class="nav-link text-dark" href="/PlasticInjection/Stock/Material/">
                               <i class="material-symbols-rounded opacity-10">Pallet</i>
                               Stock Material
                             </a>
@@ -385,21 +389,21 @@
                   
                           <!-- QC Incoming -->
                           <li class="nav-item">
-                            <a class="nav-link text-dark" data-bs-toggle="collapse" href="#" role="button" aria-expanded="false">
+                            <a class="nav-link text-dark" href="/PlasticInjection/QC/Incoming/">
                               <i class="material-symbols-rounded opacity-10">Checkbook</i>
                               QC Incoming
                             </a>
                           </li>
                           <!-- Order Sheet -->
                           <li class="nav-item">
-                            <a class="nav-link text-dark" data-bs-toggle="collapse" href="#" role="button" aria-expanded="false">
+                            <a class="nav-link text-dark" href="/Incoming/OrderSheet">
                               <i class="material-symbols-rounded opacity-10">data_Table</i>
                               Order Sheet
                             </a>
                           </li>
                           <!-- Resume Scan OS -->
                           <li class="nav-item">
-                            <a class="nav-link text-dark" data-bs-toggle="collapse" href="#" role="button" aria-expanded="false">
+                            <a class="nav-link text-dark" href="/Incoming/OrderSheet/Range/">
                               <i class="material-symbols-rounded opacity-10">Scan</i>
                               Resume Scan OS
                             </a>
@@ -416,21 +420,21 @@
                   
                           <!-- Collection NG -->
                           <li class="nav-item">
-                            <a class="nav-link text-dark" data-bs-toggle="collapse" href="#" role="button" aria-expanded="false">
+                            <a class="nav-link text-dark" href="/PlasticInjection/collection-ng/">
                               <i class="material-symbols-rounded opacity-10">Note_stack</i>
                               Collection NG
                             </a>
                           </li>
                           <!-- Collection NG Confirm -->
                           <li class="nav-item">
-                            <a class="nav-link text-dark" data-bs-toggle="collapse" href="#" role="button" aria-expanded="false">
+                            <a class="nav-link text-dark" href="/PlasticInjection/collection-ng/confirmation/">
                               <i class="material-symbols-rounded opacity-10">Library_add_check</i>
                               Collection NG Confirm
                             </a>
                           </li>
                           <!-- Collection NG Report -->
                           <li class="nav-item">
-                            <a class="nav-link text-dark" data-bs-toggle="collapse" href="#" role="button" aria-expanded="false">
+                            <a class="nav-link text-dark" href="/PlasticInjection/collection-ng/report/">
                               <i class="material-symbols-rounded opacity-10">Library_Books</i>
                               Collection NG Report
                             </a>
@@ -444,12 +448,12 @@
                         <h6 class="ps-4 ms-2 text-dark font-weight-bolder opacity-5">PRO SAP</h6>
                     </li>
                     <!-- Delivery -->
-                    <a class="nav-link text-dark" data-bs-toggle="collapse" href="#Deliverycare" role="button" aria-expanded="false">
+                    <a class="nav-link text-dark" href="/PRO/Upload/">
                         <i class="material-symbols-rounded opacity-5">Upload_File</i>
                         <span class="nav-link-text ms-1">Upload PRO</span>
                     </a>
                 </li>
-            </ul>
+            </ul>   
         </div>
     </aside>
   <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg">
@@ -481,11 +485,11 @@
                               </svg>
                           </a>
                       </li>
-                      <li class="breadcrumb-item text-sm"><a class="opacity-5 text-dark" href="javascript:;">Pages</a>
+                      <li class="breadcrumb-item text-sm"><a class="opacity-5 text-dark" href="javascript:;">PI Production</a>
                       </li>
-                      <li class="breadcrumb-item text-sm text-dark active" aria-current="page">New User</li>
+                      <li class="breadcrumb-item text-sm text-dark active" aria-current="page">Realtime OEE</li>
                   </ol>
-                  <h6 class="font-weight-bolder mb-0">New User</h6>
+                  <h6 class="font-weight-bolder mb-0">PT Astra Komponen Indonesia</h6>
               </nav>
               <div class="sidenav-toggler sidenav-toggler-inner d-xl-block">
                   <a href="javascript:;" class="nav-link text-body p-0" id="iconNavbarSidenav">
@@ -502,13 +506,20 @@
                   </div>
                   
                   <ul class="navbar-nav  justify-content-end">
-                      <li class="nav-item px-3">
-                          <a href="javascript:;" class="nav-link text-body p-0">
-                              <i class="material-symbols-rounded fixed-plugin-button-nav cursor-pointer">
-                                  settings
-                              </i>
+                    <li class="nav-item px-3">
+                          <a class="nav-link text-body p-0" data-widget="fullscreen" href="#" role="button">
+                            <i class="material-symbols-rounded cursor-pointer">
+                                fullscreen
+                            </i>
                           </a>
-                      </li>
+                    </li>
+                    <li class="nav-item px-3">
+                          <a href="javascript:;" class="nav-link text-body p-0">
+                            <i class="material-symbols-rounded fixed-plugin-button-nav cursor-pointer">
+                                settings
+                            </i>
+                          </a>
+                    </li>
                   </ul>
               </div>
           </div>
@@ -588,38 +599,95 @@
       </div>
   </div>
   </div>
-</body>
-    <script>
-  function updateDateTime() {
-    const now = new Date();
+  
+              <script>
+                document.addEventListener('DOMContentLoaded', function () {
+                  const fullscreenBtn = document.querySelector('[data-widget="fullscreen"]');
+                  fullscreenBtn?.addEventListener('click', function (e) {
+                    e.preventDefault();
 
-    const options = {
-      weekday: 'long',
-      year: 'numeric',
-      month: 'long',
-      day: 'numeric',
-      hour: '2-digit',
-      minute: '2-digit',
-      second: '2-digit'
-    };
+                    if (!document.fullscreenElement) {
+                      document.documentElement.requestFullscreen().catch((err) => {
+                        console.error(`Error attempting to enable full-screen mode: ${err.message}`);
+                      });
+                    } else {
+                      document.exitFullscreen();
+                    }
+                  });
+                });
+              </script>
 
-    const formattedDate = now.toLocaleDateString('id-ID', options);
-    const display = document.getElementById('datetime-display');
-    display.textContent = formattedDate + " WIB";
+              <script>
+                document.querySelectorAll('.dropdown-menu .dropdown-toggle').forEach(function (element) {
+                  element.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    e.stopPropagation();
 
-    // Ambil warna teks dari main-content
-    const mainContent = document.querySelector('.main-content');
-    if (mainContent) {
-      const computedStyle = window.getComputedStyle(mainContent);
-      const textColor = computedStyle.color;
-      display.style.color = textColor;
-    }
-  }
+                    let submenu = this.nextElementSibling;
+                    if (submenu && submenu.classList.contains('dropdown-menu')) {
+                      submenu.classList.toggle('show');
 
-  setInterval(updateDateTime, 1000);
-  updateDateTime();
+                      // Close other submenus
+                      this.closest('.dropdown-menu').querySelectorAll('.dropdown-menu.show').forEach(function (otherSubmenu) {
+                        if (otherSubmenu !== submenu) {
+                          otherSubmenu.classList.remove('show');
+                        }
+                      });
+                    }
+                  });
+                });
+              </script>
+
+              <script>
+  document.querySelectorAll('.dropdown-submenu').forEach(function (element) {
+    element.addEventListener('mouseenter', function () {
+      let submenu = this.querySelector('.dropdown-menu');
+      if (submenu) {
+        submenu.classList.add('show');
+      }
+    });
+    element.addEventListener('mouseleave', function () {
+      let submenu = this.querySelector('.dropdown-menu');
+      if (submenu) {
+        submenu.classList.remove('show');
+      }
+    });
+  });
 </script>
 
+
+</body>
+
+                <script>
+              function updateDateTime() {
+                const now = new Date();
+
+                const options = {
+                  weekday: 'long',
+                  year: 'numeric',
+                  month: 'long',
+                  day: 'numeric',
+                  hour: '2-digit',
+                  minute: '2-digit',
+                  second: '2-digit'
+                };
+
+                const formattedDate = now.toLocaleDateString('id-ID', options);
+                const display = document.getElementById('datetime-display');
+                display.textContent = formattedDate + " WIB";
+
+                // Ambil warna teks dari main-content
+                const mainContent = document.querySelector('.main-content');
+                if (mainContent) {
+                  const computedStyle = window.getComputedStyle(mainContent);
+                  const textColor = computedStyle.color;
+                  display.style.color = textColor;
+                }
+              }
+
+              setInterval(updateDateTime, 1000);
+              updateDateTime();
+            </script>
 
     <script src="./node_modules/material-dashboard/assets/js/core/popper.min.js"></script>
     <script src="./node_modules/material-dashboard/assets/js/core/bootstrap.min.js"></script>
@@ -627,6 +695,7 @@
     <script src="./node_modules/material-dashboard/assets/js/plugins/smooth-scrollbar.min.js"></script>
     <script src="./node_modules/material-dashboard/assets/js/plugins/chartjs.min.js"></script>
     <script src="./node_modules/material-dashboard/assets/js/material-dashboard.min.js"></script>
+
 
     <script>
   document.addEventListener("DOMContentLoaded", function () {
@@ -648,3 +717,8 @@
     </script>
 
 </html>
+
+
+
+
+
