@@ -64,14 +64,20 @@
                           <span>Delivery</span>
                         </a>
                             <ul class="dropdown-menu mx-3 w-auto" aria-labelledby="navbarDropdownMenuLink2">
-                              <li class="dropdown-submenu">
+                              <li class="dropdown-submenu drop-left">
                                 <a href="#" class="dropdown-item dropdown-toggle d-flex align-items-center gap-2 text-start" data-bs-toggle="dropdown" id="packingIndividual">
                                   <i class="material-symbols-rounded opacity-8">speed</i>
                                   <span>Packing Individual</span>
                                 </a>    
-                                <ul class="dropdown-menu w-100 px-3 ms-4 ps-3" aria-labelledby="packingIndividual">
+                                <ul class="sub-dropdown-menu px-3 mx-0" aria-labelledby="packingIndividual">
                                   <li>
-                                    <a class="dropdown-item fs-6 d-flex align-items-center gap-2" href="/HealthCare/packingsatuan/">
+                                    <a class="dropdown-item d-flex align-items-center gap-2" href="/HealthCare/packingsatuan/">
+                                      <i class="material-symbols-rounded opacity-10">Document_Search</i>
+                                      Inspection Result Data
+                                    </a>
+                                  </li>
+                                  <li>
+                                    <a class="dropdown-item d-flex align-items-center gap-2" href="/HealthCare/packingsatuan/">
                                       <i class="material-symbols-rounded opacity-10">Document_Search</i>
                                       Inspection Result Data
                                     </a>
@@ -668,19 +674,25 @@
                 });
               </script>
 
-              <script>
-  document.querySelectorAll('.dropdown-submenu').forEach(function (element) {
-    element.addEventListener('mouseenter', function () {
-      let submenu = this.querySelector('.dropdown-menu');
-      if (submenu) {
-        submenu.classList.add('show');
-      }
-    });
-    element.addEventListener('mouseleave', function () {
-      let submenu = this.querySelector('.dropdown-menu');
-      if (submenu) {
-        submenu.classList.remove('show');
-      }
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    // Untuk nested dropdown (klik, bukan hover)
+    document.querySelectorAll('.dropdown-submenu > a').forEach(function (el) {
+      el.addEventListener('click', function (e) {
+        e.preventDefault();
+
+        const submenu = this.nextElementSibling;
+
+        // Toggle submenu tampil/sembunyi
+        submenu.classList.toggle('show');
+
+        // Tutup submenu lain (opsional)
+        document.querySelectorAll('.dropdown-submenu .dropdown-menu').forEach(function (other) {
+          if (other !== submenu) {
+            other.classList.remove('show');
+          }
+        });
+      });
     });
   });
 </script>
