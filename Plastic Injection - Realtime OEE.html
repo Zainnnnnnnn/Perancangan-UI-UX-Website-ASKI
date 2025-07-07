@@ -51,101 +51,123 @@
         <hr class="horizontal dark mt-0 mb-2">
         <div class="collapse navbar-collapse  w-auto " id="sidenav-collapse-main">
             <ul class="navbar-nav">
-                <li class="nav-item">
-                    <!-- Healthcare Category -->
-                  <li class="nav-item mt-3">
-                    <h6 class="ps-4 ms-2 text-dark font-weight-bolder opacity-5">Healthcare & Medical Devices</h6>
-                  </li>
-
-                  <!-- Delivery Dropdown -->
-                      <li class="nav-item dropdown my-2">
-                        <a href="#" class="nav-link dropdown-toggle d-flex align-items-center gap-2 text-start py-3 mx-3" data-bs-toggle="dropdown" id="dropdownMenuDelivery">
-                          <i class="material-symbols-rounded opacity-8">delivery_truck_speed</i>
-                          <span>Delivery</span>
-                        </a>
-
-                        <!-- SUB MENU DROPDOWN -->
-                            <ul class="dropdown-menu mx-3 w-90 p-0 mt-2" aria-labelledby="navbarDropdownMenuLink2">
-                              <li class="dropdown-submenu drop-left">
-                                <a href="#" class="dropdown-item dropdown-toggle d-flex align-items-center gap-2 text-start p-3" data-bs-toggle="dropdown" id="packingIndividual">
-                                  <i class="material-symbols-rounded opacity-8">speed</i>
-                                  <span>Packing Individual</span>
-                                </a>    
-                                <!-- SUBMENU DROPDOWN ITEM -->
-                                <ul class="sub-dropdown-menu drop-left p-0 mx-0 w-100" aria-labelledby="packingIndividual">
-                                  <li>
-                                    <a class="dropdown-item d-flex align-items-center gap-2 p-3" href="/HealthCare/packingsatuan/">
-                                      <i class="material-symbols-rounded opacity-10">Document_Search</i>
-                                      Inspection Result Data
-                                    </a>
-                                  </li>
-                                  <li>
-                                    <a class="dropdown-item d-flex align-items-center gap-2 p-3" href="/HealthCare/packingsatuan/">
-                                      <i class="material-symbols-rounded opacity-10">Document_Search</i>
-                                      Inspection Result Data
-                                    </a>
-                                  </li>
-                                </ul>
-                              </li>
-                            </ul>
-                        
-
-
-
-
+                <li class="nav-item mt-3">
+                        <!-- Healthcare Category -->
+                        <h6 class="ps-4 ms-2 text-dark font-weight-bolder opacity-5">Healthcare & Medical Devices</h6>
+                    </li>
+                    <!-- Delivery -->
+                    <a class="nav-link text-dark" data-bs-toggle="collapse" href="#MenuDeliverycare" role="button" aria-expanded="false" aria-controls="MenuDeliverycare">
+                        <i class="material-symbols-rounded opacity-5">Delivery_Truck_Speed</i>
+                        <span class="nav-link-text ms-1">Delivery</span>
+                    </a>
+                    <div class="collapse" id="MenuDeliverycare">
+                        <ul class="nav ms-4 ps-3">
+                  
+                          <!-- Packing Individual -->
+                          <li class="nav-item">
+                            <a class="nav-link text-dark" data-bs-toggle="collapse" href="#MenupackingIndividual" role="button" aria-expanded="false" aria-controls="MenupackingIndividual">
+                              <i class="material-symbols-rounded opacity-10">Approval</i>
+                              Packing Individual
+                            </a>
+                            <div class="collapse" id="MenupackingIndividual">
+                              <ul class="nav ms-4 ps-3">
+                                <!-- Preparation -->
+                                <li class="nav-item">
+                                  <a class="nav-link text-dark" href="/HealthCare/packingsatuan/">
+                                    <i class="material-symbols-rounded opacity-10">label</i>
+                                    Preparation
+                                  </a>
+                                </li>
+                                <!-- Packing List -->
+                                <li class="nav-item">
+                                  <a class="nav-link text-dark" href="/HealthCare/packinglistsatuan/">
+                                    <i class="material-symbols-rounded opacity-10">schedule</i>
+                                    Packing List
+                                  </a>
+                                </li>
+                              </ul>
+                            </div>
+                          </li>
+                          <!-- Packing In Set -->
+                          <li class="nav-item">
+                            <a class="nav-link text-dark" data-bs-toggle="collapse" href="#Menupackinginset" role="button" aria-expanded="false" aria-controls="Menupackinginset">
+                              <i class="material-symbols-rounded opacity-10">box</i>
+                              Packing in set
+                            </a>
+                            <div class="collapse" id="Menupackinginset">
+                              <ul class="nav ms-4 ps-3">
+                                <!-- Preparation -->
+                                <li class="nav-item">
+                                  <a class="nav-link text-dark" href="/HealthCare/packingset/">
+                                    <i class="material-symbols-rounded opacity-10">label</i>
+                                    Preparation
+                                  </a>
+                                </li>
+                                <!-- Packing List -->
+                                <li class="nav-item">
+                                  <a class="nav-link text-dark" href="/HealthCare/packinglist/">
+                                    <i class="material-symbols-rounded opacity-10">schedule</i>
+                                    Packing List
+                                  </a>
+                                </li>
+                              </ul>
+                            </div>
+                          </li>
+                        </ul>
+                      </div>
                       <!-- HCU Production -->
-                <!-- <a class="nav-link text-dark" data-bs-toggle="collapse" href="#MenHCUProduction" role="button" aria-expanded="false" aria-controls="MenHCUProduction">
+                <a class="nav-link text-dark" data-bs-toggle="collapse" href="#MenuHCUProduction" role="button" aria-expanded="false" aria-controls="MenuHCUProduction">
                         <i class="material-symbols-rounded opacity-5">speed</i>
                         <span class="nav-link-text ms-1">HCU Production</span>
                     </a>
-                    <div class="collapse" id="MenHCUProduction">
-                        <ul class="nav ms-4 ps-3"> -->
+                    <div class="collapse" id="MenuHCUProduction">
+                        <ul class="nav ms-4 ps-3">
                   
                           <!-- Inspection Result Data -->
-                          <!-- <li class="nav-item">
-                            <a class="nav-link text-dark" href="/HealthCare/inspection/">
-                                <i class="material-symbols-rounded opacity-10">Document_Search</i>
-                                    Inspection Resul Data
+                          <li class="nav-item">
+                            <a class="nav-link text-dark" href="/HealthCare/inspection/" aria-expanded="false">
+                              <i class="material-symbols-rounded opacity-10">Document_Search</i>
+                              Inspection Result Data
                             </a>
-                          </li> -->
+                          </li>
                           <!-- Production Planning -->
-                          <!-- <li class="nav-item">
-                            <a class="nav-link text-dark" href="/HealthCare/planning/">
+                          <li class="nav-item">
+                            <a class="nav-link text-dark" href="/HealthCare/planning/" aria-expanded="false">
                               <i class="material-symbols-rounded opacity-10">Date_Range</i>
                               Production Planning
                             </a>
-                          </li> -->
+                          </li>
                           <!-- Realtime Dashboard -->
-                          <!-- <li class="nav-item">
-                            <a class="nav-link text-dark" href="/HealthCare/realtimeall/">
+                          <li class="nav-item">
+                            <a class="nav-link text-dark" href="/HealthCare/realtimeall/" aria-expanded="false">
                               <i class="material-symbols-rounded opacity-10 spin-continuous">Settings</i>
                               Realtime Dashboard
                             </a>
-                          </li> -->
+                          </li>
                           <!-- Realtime OEE -->
-                          <!-- <li class="nav-item">
-                             <a class="nav-link text-dark" href="/HealthCare/realtime/">
+                          <li class="nav-item">
+                             <a class="nav-link text-dark" aria-expanded="false" href="/HealthCare/realtime/">
                               <i class="material-symbols-rounded opacity-10">Pie_Chart</i>
                               Realtime OEE
                             </a>
-                          </li> -->
+                          </li>
                           <!-- Achievment -->
-                          <!-- <li class="nav-item">
-                             <a class="nav-link text-dark" href="/HealthCare/achievement/">
+                          <li class="nav-item">
+                             <a class="nav-link text-dark" href="/HealthCare/achievement/" aria-expanded="false">
                               <i class="material-symbols-rounded opacity-10">Chart_Data</i>
                               Achievement
                             </a>
-                          </li> -->
+                          </li>
                           <!-- Rejection -->
-                          <!-- <li class="nav-item">
-                            <a class="nav-link text-dark" href="/HealthCare/rejection/">
+                          <li class="nav-item">
+                            <a class="nav-link text-dark" href="/HealthCare/rejection/" aria-expanded="false">
                               <i class="material-symbols-rounded opacity-10">Contract_Delete</i>
                               Rejection
                             </a>
-                          </li> -->
+                          </li>
                           <!-- Prod Cheecksheet -->
-                          <!-- <li class="nav-item">
-                            <a class="nav-link text-dark" href="/HealthCare/production/checksheet/">
+                          <li class="nav-item">
+                            <a class="nav-link text-dark" href="/HealthCare/production/checksheet/" aria-expanded="false">
                               <i class="material-symbols-rounded opacity-10">Docs</i>
                               Prod Checksheet
                             </a>
@@ -153,8 +175,7 @@
                           
                         </ul>
                     </div>
-                </li> -->
-
+                </li>
                 <!-- Plastic Injection Category -->
                 <li class="nav-item">
                     <li class="nav-item mt-3">
@@ -170,14 +191,14 @@
                   
                           <!-- Monitoring Delivery -->
                           <li class="nav-item">
-                            <a class="nav-link text-dark" href="/PlasticInjection/Delivery/">
+                            <a class="nav-link text-dark" href="/PlasticInjection/Delivery/" aria-expanded="false">
                               <i class="material-symbols-rounded opacity-10">Trolley</i>
                               Monitoring Delivery
                             </a>
                           </li>
                           <!-- Order AHM -->
                           <li class="nav-item">
-                            <a class="nav-link text-dark" href="/PlasticInjection/OrdervsDN/">
+                            <a class="nav-link text-dark" href="/PlasticInjection/OrdervsDN/" aria-expanded="false">
                               <i class="material-symbols-rounded opacity-10">Computer</i>
                               Order AHM vs OD SAP
                             </a>
@@ -194,14 +215,14 @@
                   
                           <!-- GR on Progress -->
                           <li class="nav-item">
-                            <a class="nav-link text-dark" href="/PlasticInjection/GRFG/">
+                            <a class="nav-link text-dark" href="/PlasticInjection/GRFG/" aria-expanded="false">
                               <i class="material-symbols-rounded opacity-10 spin-continuous">Settings</i>
                               GR on Progress
                             </a>
                           </li>
                           <!-- Realtime Stock FG -->
                           <li class="nav-item">
-                            <a class="nav-link text-dark" href="/PlasticInjection/Stock/FG/">
+                            <a class="nav-link text-dark" href="/PlasticInjection/Stock/FG/" aria-expanded="false">
                               <i class="material-symbols-rounded opacity-10 spin-continuous">Settings</i>
                               Realtime Stock FG
                             </a>
@@ -218,70 +239,92 @@
                             
                           <!-- Realtime OEE -->
                           <li class="nav-item">
-                             <a class="nav-link text-dark" href="/PlasticInjection/OEE/Realtime/">
+                             <a class="nav-link text-dark" href="/PlasticInjection/OEE/Realtime/"  aria-expanded="false">
                               <i class="material-symbols-rounded opacity-10">Pie_Chart</i>
                               Realtime OEE
                             </a>
                           </li>
                           <!-- History OEE -->
                           <li class="nav-item">
-                            <a class="nav-link text-dark" href="/PlasticInjection/OEE/">
+                            <a class="nav-link text-dark" href="/PlasticInjection/OEE/" aria-expanded="false">
                               <i class="material-symbols-rounded opacity-10">History</i>
                               History OEE
                             </a>
                           </li>
                           <!-- Production Plan -->
                           <li class="nav-item">
-                            <a class="nav-link text-dark" href="/PlasticInjection/Planning/">
+                            <a class="nav-link text-dark" href="/PlasticInjection/Planning/" aria-expanded="false">
                               <i class="material-symbols-rounded opacity-10">Date_Range</i>
                               Production Plan
                             </a>
                           </li>
                           <!-- Henkaten History -->
                           <li class="nav-item">
-                            <a class="nav-link text-dark" href="/PlasticInjection/HistoryHenkaten/">
+                            <a class="nav-link text-dark" href="/PlasticInjection/HistoryHenkaten/" aria-expanded="false">
                               <i class="material-symbols-rounded opacity-10">Overview</i>
                               Henkaten History
                             </a>
                           </li>
                           <!-- Achievment -->
                           <li class="nav-item">
-                             <a class="nav-link text-dark" href="/PlasticInjection/Achievement/">
+                             <a class="nav-link text-dark" href="/PlasticInjection/Achievement/" aria-expanded="false">
                               <i class="material-symbols-rounded opacity-10">Chart_Data</i>
                               Achievement
                             </a>
                           </li>
-                          <!-- Linestop by Andon -->
+                          <!-- Linestop -->
                           <li class="nav-item">
-                            <a class="nav-link text-dark" href="/PlasticInjection/Linestop/Andon/">
+                            <a class="nav-link text-dark" data-bs-toggle="collapse" href="#MenuLinestop" role="button" aria-expanded="false" aria-controls="MenuLinestop">
                               <i class="material-symbols-rounded opacity-10">Conversion_Path_Off</i>
-                              Linestop by Andon
+                              Linestop
                             </a>
+                            <div class="collapse" id="MenuLinestop">
+                              <ul class="nav ms-4 ps-3">
+                                <!-- Linestop by Andon -->
+                                <li class="nav-item">
+                                  <a class="nav-link text-dark" href="/PlasticInjection/Linestop/Andon/" aria-expanded="false">
+                                    <i class="material-symbols-rounded opacity-10">Conversion_Path_Off</i>
+                                    Linestop by Andon
+                                  </a>
+                                </li>
+                                <!-- Linestop by Inject -->
+                                <li class="nav-item">
+                                  <a class="nav-link text-dark" href="/PlasticInjection/Linestop/Machine/" aria-expanded="false">
+                                    <i class="material-symbols-rounded opacity-10">Conversion_Path_Off</i>
+                                    Linestop by Inject
+                                  </a>
+                                </li>
+                              </ul>
+                            </div>
                           </li>
-                          <!-- Linestop by Inject -->
+                          <!-- Rejection -->
                           <li class="nav-item">
-                            <a class="nav-link text-dark" href="/PlasticInjection/Linestop/Machine/">
-                              <i class="material-symbols-rounded opacity-10">Conversion_Path_Off</i>
-                              Linestop by Inject
+                            <a class="nav-link text-dark" data-bs-toggle="collapse" href="#MenuRejection" role="button" aria-expanded="false" aria-controls="MenuRejection">
+                              <i class="material-symbols-rounded opacity-10">Computer_cancel</i>
+                              Rejection
                             </a>
-                          </li>
-                          <!-- Rejection Range -->
-                          <li class="nav-item">
-                            <a class="nav-link text-dark" href="/PlasticInjection/Rejection/Range/">
-                              <i class="material-symbols-rounded opacity-10">Table_Chart_View</i>
-                              Rejection Range
-                            </a>
-                          </li>
-                          <!-- Rejection Monthly -->
-                          <li class="nav-item">
-                            <a class="nav-link text-dark" href="/PlasticInjection/Rejection/Monthly/">
-                              <i class="material-symbols-rounded opacity-10">Table_Chart_View</i>
-                              Rejection Monthly
-                            </a>
+                            <div class="collapse" id="MenuRejection">
+                              <ul class="nav ms-4 ps-3">
+                                <!-- Rejection Range -->
+                                <li class="nav-item">
+                                  <a class="nav-link text-dark" href="/PlasticInjection/Rejection/Range/" aria-expanded="false">
+                                    <i class="material-symbols-rounded opacity-10">Table_Chart_View</i>
+                                    Rejection Range
+                                  </a>
+                                </li>
+                                <!-- Rejection Monthly -->
+                                <li class="nav-item">
+                                  <a class="nav-link text-dark" href="/PlasticInjection/Rejection/Monthly/" aria-expanded="false">
+                                    <i class="material-symbols-rounded opacity-10">Table_Chart_View</i>
+                                    Rejection Monthly
+                                  </a>
+                                </li>
+                              </ul>
+                            </div>
                           </li>
                           <!-- Traceability-->
                           <li class="nav-item">
-                            <a class="nav-link text-dark" href="/PlasticInjection/Traceability/">
+                            <a class="nav-link text-dark" href="/PlasticInjection/Traceability/" aria-expanded="false">
                               <i class="material-symbols-rounded opacity-10">News</i>
                               Traceability
                             </a>
@@ -298,7 +341,7 @@
                   
                           <!-- Assy CCH -->
                           <li class="nav-item">
-                            <a class="nav-link text-dark" href="/PlasticInjection/Assy/CCH/">
+                            <a class="nav-link text-dark" href="/PlasticInjection/Assy/CCH/" aria-expanded="false">
                               <i class="material-symbols-rounded opacity-10">AC_Unit</i>
                               Assy CCH
                             </a>
@@ -314,28 +357,28 @@
                   
                           <!-- Material Supply -->
                           <li class="nav-item">
-                            <a class="nav-link text-dark" href="/Supply/Material/">
+                            <a class="nav-link text-dark" href="/Supply/Material/" aria-expanded="false">
                               <i class="material-symbols-rounded opacity-10">Polymer</i>
                               Material Supply
                             </a>
                           </li>
                           <!-- Component Supply -->
                           <li class="nav-item">
-                            <a class="nav-link text-dark" href="/Supply/Komponen/">
+                            <a class="nav-link text-dark" href="/Supply/Komponen/" aria-expanded="false">
                               <i class="material-symbols-rounded opacity-10">Experiment</i>
                               Component Supply
                             </a>
                           </li>
                           <!-- Supply Report -->
                           <li class="nav-item">
-                            <a class="nav-link text-dark" href="/Supply/Report/">
+                            <a class="nav-link text-dark" href="/Supply/Report/" aria-expanded="false">
                               <i class="material-symbols-rounded opacity-10">Clinical_Notes</i>
                               Supply Report
                             </a>
                           </li>
                           <!-- Stock Material -->
                           <li class="nav-item">
-                            <a class="nav-link text-dark" href="/PlasticInjection/Stock/Material/">
+                            <a class="nav-link text-dark" href="/PlasticInjection/Stock/Material/" aria-expanded="false">
                               <i class="material-symbols-rounded opacity-10">Pallet</i>
                               Stock Material
                             </a>
@@ -352,21 +395,21 @@
                   
                           <!-- QC Incoming -->
                           <li class="nav-item">
-                            <a class="nav-link text-dark" href="/PlasticInjection/QC/Incoming/">
+                            <a class="nav-link text-dark" href="/PlasticInjection/QC/Incoming/" aria-expanded="false">
                               <i class="material-symbols-rounded opacity-10">Checkbook</i>
                               QC Incoming
                             </a>
                           </li>
                           <!-- Order Sheet -->
                           <li class="nav-item">
-                            <a class="nav-link text-dark" href="/Incoming/OrderSheet">
+                            <a class="nav-link text-dark" href="/Incoming/OrderSheet" aria-expanded="false">
                               <i class="material-symbols-rounded opacity-10">data_Table</i>
                               Order Sheet
                             </a>
                           </li>
                           <!-- Resume Scan OS -->
                           <li class="nav-item">
-                            <a class="nav-link text-dark" href="/Incoming/OrderSheet/Range/">
+                            <a class="nav-link text-dark" href="/Incoming/OrderSheet/Range/" aria-expanded="false">
                               <i class="material-symbols-rounded opacity-10">Scan</i>
                               Resume Scan OS
                             </a>
@@ -383,21 +426,21 @@
                   
                           <!-- Collection NG -->
                           <li class="nav-item">
-                            <a class="nav-link text-dark" href="/PlasticInjection/collection-ng/">
+                            <a class="nav-link text-dark" href="/PlasticInjection/collection-ng/" aria-expanded="false">
                               <i class="material-symbols-rounded opacity-10">Note_stack</i>
                               Collection NG
                             </a>
                           </li>
                           <!-- Collection NG Confirm -->
                           <li class="nav-item">
-                            <a class="nav-link text-dark" href="/PlasticInjection/collection-ng/confirmation/">
+                            <a class="nav-link text-dark" href="/PlasticInjection/collection-ng/confirmation/" aria-expanded="false">
                               <i class="material-symbols-rounded opacity-10">Library_add_check</i>
                               Collection NG Confirm
                             </a>
                           </li>
                           <!-- Collection NG Report -->
                           <li class="nav-item">
-                            <a class="nav-link text-dark" href="/PlasticInjection/collection-ng/report/">
+                            <a class="nav-link text-dark" href="/PlasticInjection/collection-ng/report/" aria-expanded="false">
                               <i class="material-symbols-rounded opacity-10">Library_Books</i>
                               Collection NG Report
                             </a>
@@ -411,7 +454,7 @@
                         <h6 class="ps-4 ms-2 text-dark font-weight-bolder opacity-5">PRO SAP</h6>
                     </li>
                     <!-- Delivery -->
-                    <a class="nav-link text-dark" href="/PRO/Upload/">
+                    <a class="nav-link text-dark" href="/PRO/Upload/" aria-expanded="false">
                         <i class="material-symbols-rounded opacity-5">Upload_File</i>
                         <span class="nav-link-text ms-1">Upload PRO</span>
                     </a>
@@ -427,9 +470,9 @@
                   <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
                       <li class="breadcrumb-item text-sm">
                           <a class="opacity-3 text-dark" href="javascript:;">
-                              <svg width="12px" height="12px" class="mb-1" viewBox="0 0 45 40" version="1.1"
+                              <!-- <svg width="12px" height="12px" class="mb-1" viewBox="0 0 45 40" version="1.1"
                                   xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-                                  <title>shop </title>
+                                  <title>shop </title> -->
                                   <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
                                       <g transform="translate(-1716.000000, -439.000000)" fill="#252f40"
                                           fill-rule="nonzero">
@@ -445,14 +488,14 @@
                                           </g>
                                       </g>
                                   </g>
-                              </svg>
+                              <!-- </svg> -->
                           </a>
                       </li>
-                      <li class="breadcrumb-item text-sm"><a class="opacity-5 text-dark" href="javascript:;">PI Production</a>
+                      <!-- <li class="breadcrumb-item text-sm"><a class="opacity-5 text-dark" href="javascript:;">PI Production</a>
                       </li>
-                      <li class="breadcrumb-item text-sm text-dark active" aria-current="page">Realtime OEE</li>
+                      <li class="breadcrumb-item text-sm text-dark active" aria-current="page">Realtime OEE</li> -->
                   </ol>
-                  <h6 class="font-weight-bolder mb-0">PT Astra Komponen Indonesia</h6>
+                  <!-- <h6 class="font-weight-bolder mb-0">PT Astra Komponen Indonesia</h6> -->
               </nav>
               <div class="sidenav-toggler sidenav-toggler-inner d-xl-block">
                   <a href="javascript:;" class="nav-link text-body p-0" id="iconNavbarSidenav">
