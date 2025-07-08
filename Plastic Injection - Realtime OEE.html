@@ -32,27 +32,28 @@
 
 
 </head>
-    <body class="g-sidenav-show bg-gray-100">
-    <aside class="sidenav navbar navbar-vertical navbar-expand-xs border-radius-lg fixed-start ms-2  bg-white my-2"
+    <body class="bg-gray-100">
+    <div class="d-flex">
+    <aside class="sidenav navbar navbar-vertical navbar-expand-xs min-vh-100 border-radius-lg fixed-start  bg-white"
         id="sidenav-main">
-        <div class="text-center py-2">
+        <div class="text-center sidenav-header">
             <i class="fas fa-times p-3 cursor-pointer text-dark opacity-5 position-absolute end-0 top-0 d-none d-xl-none"
                 aria-hidden="true" id="iconSidenav"></i>
-            <a class=" px-4 m-0"
+            <a class="px-4"
                 href="#" target="_blank">
                 <span class="ms-1 mx-auto text-md-10 text-dark"><strong>PT Astra Komponen Indonesia</strong></span>
             </a>
         </div>
         <hr class="horizontal dark my-0">
-        <div class="d-flex align-items-center justify-content-center mt-0">
+        <div class="d-flex align-items-center justify-content-center mt-0 navbar-profile">
             <img src="./node_modules/material-dashboard/assets/img/profile.png" class="navbar-brand-img mx-2"  alt="main_logo">
-                <span class="ms-1 text-sm text-dark">Hi, Viewer!</span>
-            <a class="pt-4 ml" href="/accounts/logout/?next=/PlasticInjection/OEE/Realtime/"><button type="button" class="btn btn-outline-danger btn-sm mt-n2">Log out</button></a>
+                <span class="ms-1 text-sm text-dark nav-link-text">Hi, Viewer!</span>
+            <a class="pt-4 ml nav-link-text" href="/accounts/logout/?next=/PlasticInjection/OEE/Realtime/"><button type="button" class="btn btn-outline-danger btn-sm mt-n2">Log out</button></a>
         </div>
         <hr class="horizontal dark mt-0 mb-2">
-        <div class="collapse navbar-collapse  w-auto " id="sidenav-collapse-main">
+        <div class="collapse navbar-collapse  w-auto h-100" id="sidenav-collapse-main">
             <ul class="navbar-nav">
-                <li class="nav-item mt-3">
+                <li class="nav-item mt-3 sidenav-category">
                         <!-- Healthcare Category -->
                         <h6 class="ps-4 ms-2 text-dark font-weight-bolder">Healthcare & Medical Devices</h6>
                     </li>
@@ -61,7 +62,7 @@
                         <i class="material-symbols-rounded sidenav-icon">Delivery_Truck_Speed</i>
                         <span class="nav-link-text ms-1">Delivery</span>
                     </a>
-                    <div class="collapse" id="MenuDeliverycare">
+                    <div class="collapse sidenav-submenu" id="MenuDeliverycare">
                         <ul class="nav ms-4 ps-3">
                   
                           <!-- Packing Individual -->
@@ -121,7 +122,7 @@
                         <i class="material-symbols-rounded sidenav-icon">speed</i>
                         <span class="nav-link-text ms-1">HCU Production</span>
                     </a>
-                    <div class="collapse" id="MenuHCUProduction">
+                    <div class="collapse sidenav-submenu" id="MenuHCUProduction">
                         <ul class="nav ms-4 ps-3">
                   
                           <!-- Inspection Result Data -->
@@ -179,15 +180,17 @@
                 </li>
                 <!-- Plastic Injection Category -->
                 <li class="nav-item">
-                    <li class="nav-item mt-3">
-                        <h6 class="ps-4 ms-2 text-dark font-weight-bolder nav-category">Plastic Injection</h6>
+                    <li class="nav-item mt-3 sidenav-category">
+                        <h6 class="ps-4 ms-2 text-dark font-weight-bolder">Plastic Injection</h6>
                     </li>
+                    <hr class="horizontal dark mt-3 d-none my-0" id="category-line">
+                    <hr class="horizontal dark mb-3 d-none my-0" id="category-line">
                     <!-- Delivery -->
                     <a class="nav-link text-dark" data-bs-toggle="collapse" href="#MenuDeliveryplastic" role="button" aria-expanded="false" aria-controls="MenuDeliveryplastic">
                         <i class="material-symbols-rounded sidenav-icon">Delivery_Truck_Speed</i>
                         <span class="nav-link-text ms-1">Delivery</span>
                     </a>
-                    <div class="collapse" id="MenuDeliveryplastic">
+                    <div class="collapse sidenav-submenu" id="MenuDeliveryplastic">
                         <ul class="nav ms-4 ps-3">
                   
                           <!-- Monitoring Delivery -->
@@ -211,7 +214,7 @@
                         <i class="material-symbols-rounded sidenav-icon">Thumb_up</i>
                         <span class="nav-link-text ms-1">Warehouse Finish Good</span>
                     </a>
-                    <div class="collapse" id="MenuWarehousefinish">
+                    <div class="collapse sidenav-submenu" id="MenuWarehousefinish">
                         <ul class="nav ms-4 ps-3">
                   
                           <!-- GR on Progress -->
@@ -235,7 +238,7 @@
                         <i class="material-symbols-rounded sidenav-icon">speed</i>
                         <span class="nav-link-text ms-1">PI Production</span>
                     </a>
-                    <div class="collapse" id="menuPIProduction">
+                    <div class="collapse sidenav-submenu" id="menuPIProduction">
                         <ul class="nav ms-4 ps-3">
                             
                           <!-- Realtime OEE -->
@@ -337,7 +340,7 @@
                         <i class="material-symbols-rounded sidenav-icon">Extension</i>
                         <span class="nav-link-text ms-1">Assy Production</span>
                     </a>
-                    <div class="collapse" id="MenuAssyproduction">
+                    <div class="collapse sidenav-submenu" id="MenuAssyproduction">
                         <ul class="nav ms-4 ps-3">
                   
                           <!-- Assy CCH -->
@@ -353,7 +356,7 @@
                         <i class="material-symbols-rounded sidenav-icon">Swap_Horiz</i>
                         <span class="nav-link-text ms-1">Warehouse Mat & Comp</span>
                     </a>
-                    <div class="collapse" id="MenuWarehousemat">
+                    <div class="collapse sidenav-submenu" id="MenuWarehousemat">
                         <ul class="nav ms-4 ps-3">
                   
                           <!-- Material Supply -->
@@ -391,7 +394,7 @@
                         <i class="material-symbols-rounded sidenav-icon">Shelves</i>
                         <span class="nav-link-text ms-1">Incoming</span>
                     </a>
-                    <div class="collapse" id="MenuIncoming">
+                    <div class="collapse sidenav-submenu" id="MenuIncoming">
                         <ul class="nav ms-4 ps-3">
                   
                           <!-- QC Incoming -->
@@ -422,7 +425,7 @@
                         <i class="material-symbols-rounded sidenav-icon">Recycling</i>
                         <span class="nav-link-text ms-1">Recycle Material</span>
                     </a>
-                    <div class="collapse" id="MenuRecycleMaterial">
+                    <div class="collapse sidenav-submenu" id="MenuRecycleMaterial">
                         <ul class="nav ms-4 ps-3">
                   
                           <!-- Collection NG -->
@@ -450,10 +453,12 @@
                       </div>
                 </li>
                 <li class="nav-item">
-                    <li class="nav-item mt-3">
+                    <li class="nav-item mt-3 sidenav-category">
                         <!-- PRO SAP Category -->
                         <h6 class="ps-4 ms-2 text-dark font-weight-bolder">PRO SAP</h6>
                     </li>
+                    <hr class="horizontal dark mt-3 d-none my-0" id="category-line">
+                    <hr class="horizontal dark mb-3 d-none my-0" id="category-line">
                     <!-- Delivery -->
                     <a class="nav-link text-dark" href="/PRO/Upload/" aria-expanded="false">
                         <i class="material-symbols-rounded sidenav-icon">Upload_File</i>
@@ -463,43 +468,13 @@
             </ul>   
         </div>
     </aside>
-  <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg">
-      <nav class="navbar navbar-main navbar-expand-lg position-sticky mt-4 top-1 px-0 mx-0 shadow-none border-radius-xl z-index-sticky"
+
+  <main class="main-content border-radius-lg flex-grow-1">
+      <nav class="navbar navbar-main navbar-expand-lg position-sticky mt-4 top-1 py-4 mx-3 shadow-none border-radius-xl z-index-sticky"
           id="navbarBlur" data-scroll="true" >
           <div class="container-fluid py-1 px-3">
-              <nav aria-label="breadcrumb">
-                  <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
-                      <li class="breadcrumb-item text-sm">
-                          <a class="opacity-3 text-dark" href="javascript:;">
-                              <!-- <svg width="12px" height="12px" class="mb-1" viewBox="0 0 45 40" version="1.1"
-                                  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-                                  <title>shop </title> -->
-                                  <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                                      <g transform="translate(-1716.000000, -439.000000)" fill="#252f40"
-                                          fill-rule="nonzero">
-                                          <g transform="translate(1716.000000, 291.000000)">
-                                              <g transform="translate(0.000000, 148.000000)">
-                                                  <path
-                                                      d="M46.7199583,10.7414583 L40.8449583,0.949791667 C40.4909749,0.360605034 39.8540131,0 39.1666667,0 L7.83333333,0 C7.1459869,0 6.50902508,0.360605034 6.15504167,0.949791667 L0.280041667,10.7414583 C0.0969176761,11.0460037 -1.23209662e-05,11.3946378 -1.23209662e-05,11.75 C-0.00758042603,16.0663731 3.48367543,19.5725301 7.80004167,19.5833333 L7.81570833,19.5833333 C9.75003686,19.5882688 11.6168794,18.8726691 13.0522917,17.5760417 C16.0171492,20.2556967 20.5292675,20.2556967 23.494125,17.5760417 C26.4604562,20.2616016 30.9794188,20.2616016 33.94575,17.5760417 C36.2421905,19.6477597 39.5441143,20.1708521 42.3684437,18.9103691 C45.1927731,17.649886 47.0084685,14.8428276 47.0000295,11.75 C47.0000295,11.3946378 46.9030823,11.0460037 46.7199583,10.7414583 Z">
-                                                  </path>
-                                                  <path
-                                                      d="M39.198,22.4912623 C37.3776246,22.4928106 35.5817531,22.0149171 33.951625,21.0951667 L33.92225,21.1107282 C31.1430221,22.6838032 27.9255001,22.9318916 24.9844167,21.7998837 C24.4750389,21.605469 23.9777983,21.3722567 23.4960833,21.1018359 L23.4745417,21.1129513 C20.6961809,22.6871153 17.4786145,22.9344611 14.5386667,21.7998837 C14.029926,21.6054643 13.533337,21.3722507 13.0522917,21.1018359 C11.4250962,22.0190609 9.63246555,22.4947009 7.81570833,22.4912623 C7.16510551,22.4842162 6.51607673,22.4173045 5.875,22.2911849 L5.875,44.7220845 C5.875,45.9498589 6.7517757,46.9451667 7.83333333,46.9451667 L19.5833333,46.9451667 L19.5833333,33.6066734 L27.4166667,33.6066734 L27.4166667,46.9451667 L39.1666667,46.9451667 C40.2482243,46.9451667 41.125,45.9498589 41.125,44.7220845 L41.125,22.2822926 C40.4887822,22.4116582 39.8442868,22.4815492 39.198,22.4912623 Z">
-                                                  </path>
-                                              </g>
-                                          </g>
-                                      </g>
-                                  </g>
-                              <!-- </svg> -->
-                          </a>
-                      </li>
-                      <!-- <li class="breadcrumb-item text-sm"><a class="opacity-5 text-dark" href="javascript:;">PI Production</a>
-                      </li>
-                      <li class="breadcrumb-item text-sm text-dark active" aria-current="page">Realtime OEE</li> -->
-                  </ol>
-                  <!-- <h6 class="font-weight-bolder mb-0">PT Astra Komponen Indonesia</h6> -->
-              </nav>
-              <div class="sidenav-toggler sidenav-toggler-inner d-xl-block">
-                  <a href="javascript:;" class="nav-link text-body p-0 m-0" id="iconNavbarSidenav">
+              <div>
+                  <a href="javascript:;" id="hamburgerToggle">
                       <div class="sidenav-toggler-inner">
                           <i class="sidenav-toggler-line"></i>
                           <i class="sidenav-toggler-line"></i>
@@ -531,7 +506,13 @@
               </div>
           </div>
       </nav>
+
+      <div class="my-3">
+              <!-- KONTEN KONTEN AKAN DI ISI DI DIV INI -->
+          <h1 class="display-1 text-center">PT ASTRA KOMPONEN INDONESIA</h1>
+      </div>
   </main>
+  </div>
   <div class="fixed-plugin">
       <a class="fixed-plugin-button text-dark position-fixed px-3 py-2">
           <i class="material-symbols-rounded py-2">settings</i>
@@ -607,6 +588,7 @@
   </div>
   </div>
   
+    <!-- FUNGSI FULLSCREEN -->
               <script>
                 document.addEventListener('DOMContentLoaded', function () {
                   const fullscreenBtn = document.querySelector('[data-widget="fullscreen"]');
@@ -623,52 +605,7 @@
                   });
                 });
               </script>
-
-              <script>
-                document.querySelectorAll('.dropdown-menu .dropdown-toggle').forEach(function (element) {
-                  element.addEventListener('click', function (e) {
-                    e.preventDefault();
-                    e.stopPropagation();
-
-                    let submenu = this.nextElementSibling;
-                    if (submenu && submenu.classList.contains('dropdown-menu')) {
-                      submenu.classList.toggle('show');
-
-                      // Close other submenus
-                      this.closest('.dropdown-menu').querySelectorAll('.dropdown-menu.show').forEach(function (otherSubmenu) {
-                        if (otherSubmenu !== submenu) {
-                          otherSubmenu.classList.remove('show');
-                        }
-                      });
-                    }
-                  });
-                });
-              </script>
-
-<script>
-  document.addEventListener('DOMContentLoaded', function () {
-    // Untuk nested dropdown (klik, bukan hover)
-    document.querySelectorAll('.dropdown-submenu > a').forEach(function (el) {
-      el.addEventListener('click', function (e) {
-        e.preventDefault();
-
-        const submenu = this.nextElementSibling;
-
-        // Toggle submenu tampil/sembunyi
-        submenu.classList.toggle('show');
-
-        // Tutup submenu lain (opsional)
-        document.querySelectorAll('.dropdown-submenu .dropdown-menu').forEach(function (other) {
-          if (other !== submenu) {
-            other.classList.remove('show');
-          }
-        });
-      });
-    });
-  });
-</script>
-
-
+    <!-- FUNGSI FULLSCREEN -->
 </body>
 
             <script>
@@ -712,22 +649,65 @@
 
     <script>
         document.addEventListener("DOMContentLoaded", function () {
-          const toggleBtn = document.getElementById("iconNavbarSidenav");
-          toggleBtn?.addEventListener("click", function () {
-            document.body.classList.toggle("g-sidenav-show");
+          const hamburgerToggle= document.getElementById("hamburgerToggle");
+          const sidenav = document.getElementById("sidenav-main");
+          const body = document.body;
+
+          
+          hamburgerToggle?.addEventListener("click", function () {
+            sidenav.classList.toggle("sidenav-collapsed");
+            // Toggle visibility of nav-link-text
+            document.querySelectorAll('.nav-link-text').forEach(function (el) {
+              el.classList.toggle('hidden-text');
+            });
+
+            // Toggle .sidenav-header
+              document.querySelectorAll('.sidenav-header').forEach(el => {
+                el.classList.toggle('hidden-sidenav-header');
+              });
+
+            // Toggle .sidenav-category
+              document.querySelectorAll('.sidenav-category').forEach(el => {
+                el.classList.toggle('hidden-sidenav-category');
+              });
+
+            // Toggle .sidenav-category
+              document.querySelectorAll('.sidenav-submenu').forEach(el => {
+                el.classList.toggle('hidden-sidenav-submenu');
+              });
+
+            // Toggle .sidenav-brand-img
+              document.querySelectorAll('.navbar-brand-img').forEach(el => {
+                el.classList.toggle('navbar-brand-img-collapsed');
+              });
+
+            // Toggle .sidenav-profile
+              document.querySelectorAll('.navbar-profile').forEach(el => {
+                el.classList.toggle('navbar-profile-collapsed');
+              });
+
+            // Toggle .sidenav-profile
+              document.querySelectorAll('.nav-link').forEach(el => {
+                el.classList.toggle('nav-link-collapsed');
+              });
+
+            // Toggle .sidenav-profile
+              document.querySelectorAll('.sidenav-icon').forEach(el => {
+                el.classList.toggle('sidenav-icon-collapsed');
+              });
+
+              document.querySelectorAll('.material-symbols-rounded').forEach(el => {
+                el.classList.toggle('material-symbols-rounded-collapsed');
+              });
+
+              document.querySelectorAll('#category-line').forEach(el => {
+                el.classList.toggle('d-none');
+              });
           });
         });
     </script>
+    
 
-    <script>
-        var win = navigator.platform.indexOf('Win') > -1;
-        if (win && document.querySelector('#sidenav-scrollbar')) {
-            var options = {
-                damping: '0.5'
-            }
-            Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
-        }
-    </script>
 
 </html>
 
