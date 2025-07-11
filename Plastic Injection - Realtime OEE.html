@@ -28,22 +28,27 @@
   <link id="pagestyle" href="./node_modules/material-dashboard/assets/css/material-dashboard.css?v=3.2.0" rel="stylesheet" />
 
 
-  <!-- TEMPLATE BARU -->
-
-
 </head>
     <body class="bg-gray-100">
     <div class="d-flex">
     <aside class="sidenav navbar navbar-vertical navbar-expand-xs min-vh-100 border-radius-lg fixed-start  bg-white"
         id="sidenav-main">
-        <div class="text-center sidenav-header">
-            <i class="fas fa-times p-3 cursor-pointer text-dark opacity-5 position-absolute end-0 top-0 d-none d-xl-none"
-                aria-hidden="true" id="iconSidenav"></i>
-            <a class="px-4"
-                href="#" target="_blank">
-                <span class="ms-1 mx-auto text-md-10 text-dark"><strong>PT Astra Komponen Indonesia</strong></span>
-            </a>
-        </div>
+    <!-- Tombol hamburger dan teks header ditempatkan berdampingan sebagai elemen sibling di dalam satu elemen pembungkus (wrapper)-->
+    <div class="sidenav-header-wrapper">
+      <button id="hamburgerToggle" class="hamburger-toggle" aria-label="Toggle sidenav">
+         <span class="sidenav sidenav-toggler-inner justify-content-center">
+            <!-- Hamburger icon -->
+           <i class="material-symbols-rounded text-dark fs-3">menu</i>
+         </span>
+      </button>
+      <div class="text-center sidenav-header position-relative" style="margin-bottom:0;">
+          <i class="fas fa-times p-3 cursor-pointer text-dark opacity-5 position-absolute end-0 top-0 d-none d-xl-none"
+              aria-hidden="true" id="iconSidenav"></i>
+          <span class="me-3 text-md-10 text-dark sidenav-header-text" style="width:100%;text-align:center;">
+              <strong>PT Astra Komponen Indonesia</strong>
+          </span>
+      </div>
+    </div>
         <hr class="horizontal dark my-0">
         <div class="d-flex align-items-center justify-content-center mt-0 navbar-profile">
             <img src="./node_modules/material-dashboard/assets/img/profile.png" class="navbar-brand-img mx-2"  alt="main_logo">
@@ -474,13 +479,7 @@
           id="navbarBlur" data-scroll="true" >
           <div class="container-fluid py-1 px-3">
               <div>
-                  <a href="javascript:;" id="hamburgerToggle">
-                      <div class="sidenav-toggler-inner">
-                          <i class="sidenav-toggler-line"></i>
-                          <i class="sidenav-toggler-line"></i>
-                          <i class="sidenav-toggler-line"></i>
-                      </div>
-                  </a>
+                  
               </div>
               <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
                   <div class="ms-md-auto pe-md-3 d-flex align-items-center">
@@ -605,9 +604,8 @@
                   });
                 });
               </script>
-    <!-- FUNGSI FULLSCREEN -->
 </body>
-
+        <!-- Fungsi Waktu  -->
             <script>
               function updateDateTime() {
                 const now = new Date();
@@ -646,7 +644,7 @@
     <script src="./node_modules/material-dashboard/assets/js/plugins/chartjs.min.js"></script>
     <script src="./node_modules/material-dashboard/assets/js/material-dashboard.min.js"></script>
 
-
+            <!-- Fungsi Minimize  -->
     <script>
         document.addEventListener("DOMContentLoaded", function () {
           const hamburgerToggle= document.getElementById("hamburgerToggle");
