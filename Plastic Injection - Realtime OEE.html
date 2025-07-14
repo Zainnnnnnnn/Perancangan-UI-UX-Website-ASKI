@@ -27,6 +27,7 @@
   <!-- CSS Files -->
   <link id="pagestyle" href="./node_modules/material-dashboard/assets/css/material-dashboard.css?v=3.2.0" rel="stylesheet" />
 
+
 </head>
     <body class="bg-gray-100">
     <div class="d-flex">
@@ -56,8 +57,8 @@
                         <h6 class="ps-4 ms-2 text-dark font-weight-bolder">Healthcare & Medical Devices</h6>
                     </li>
                     <!-- Delivery -->
-                     <li class="nav-item">
-                    <a class="nav-link sidenav-submenu-title text-dark" data-bs-toggle="collapse" href="#MenuDeliverycare" role="button" aria-expanded="false" aria-controls="MenuDeliverycare">
+                    <li class="nav-item">
+                    <a class="nav-link text-dark" data-bs-toggle="collapse" href="#MenuDeliverycare" role="button" aria-expanded="false" aria-controls="MenuDeliverycare">
                         <i class="material-symbols-rounded sidenav-icon">Delivery_Truck_Speed</i>
                         <span class="nav-link-text ms-1">Delivery</span>
                     </a>
@@ -74,7 +75,7 @@
                               <ul class="nav ms-4 ps-3">
                                 <!-- Preparation -->
                                 <li class="nav-item">
-                                  <a class="nav-link text-dark" href="/HealthCare/packingsatuan/">
+                                  <a class="nav-link text-dark" href="https://aspaki.or.id/membership/pt-astra-komponen-indonesia">
                                     <i class="material-symbols-rounded">label</i>
                                     Preparation
                                   </a>
@@ -119,7 +120,7 @@
                       </div>
                       <!-- HCU Production -->
                   <li class="nav-item">
-                      <a class="nav-link sidenav-submenu-title text-dark" data-bs-toggle="collapse" href="#MenuHCUProduction" role="button" aria-expanded="false" aria-controls="MenuHCUProduction">
+                      <a class="nav-link text-dark" data-bs-toggle="collapse" href="#MenuHCUProduction" role="button" aria-expanded="false" aria-controls="MenuHCUProduction">
                         <i class="material-symbols-rounded sidenav-icon">speed</i>
                         <span class="nav-link-text ms-1">HCU Production</span>
                       </a>
@@ -672,68 +673,108 @@
             <!-- Fungsi waktu -->
 
             <!-- SIDENAV COLLAPSED -->
-              <script>
-                  document.addEventListener("DOMContentLoaded", function () {
-                    const hamburgerToggle= document.getElementById("hamburgerToggle");
-                    const sidenav = document.getElementById("sidenav-main");
-                    const mainContent = document.querySelectorAll('.main-content')[0];
+                  <script>
+                    document.addEventListener("DOMContentLoaded", () => {
+                      const hamburgerToggle = document.getElementById("hamburgerToggle");
+                      const sidenav = document.getElementById("sidenav-main");
+                      const mainContent = document.querySelector(".main-content");
 
-                    
-                    hamburgerToggle?.addEventListener("click", function () {
-                      sidenav.classList.toggle("sidenav-collapsed");
-                      mainContent.classList.toggle("main-content-collapsed");
-                      // Toggle visibility of nav-link-text
-                      document.querySelectorAll('.nav-link-text').forEach(function (el) {
-                        el.classList.toggle('hidden-text');
+                      const toggleClasses = [
+                        { selector: ".nav-link-text", className: "hidden-text" },
+                        { selector: ".sidenav-header", className: "hidden-sidenav-header" },
+                        { selector: ".sidenav-category", className: "hidden-sidenav-category" },
+                        { selector: ".sidenav-submenu", className: "hidden-sidenav-submenu" },
+                        { selector: ".navbar-brand-img", className: "navbar-brand-img-collapsed" },
+                        { selector: ".navbar-profile", className: "navbar-profile-collapsed" },
+                        { selector: ".nav-link", className: "nav-link-collapsed" },
+                        { selector: ".sidenav-icon", className: "sidenav-icon-collapsed" },
+                        { selector: ".material-symbols-rounded", className: "material-symbols-rounded-collapsed" },
+                        { selector: "#category-line", className: "d-none" }
+                      ];
+
+                      hamburgerToggle?.addEventListener("click", () => {
+                        sidenav.classList.toggle("sidenav-collapsed");
+                        mainContent?.classList.toggle("main-content-collapsed");
+
+                        toggleClasses.forEach(({ selector, className }) => {
+                          document.querySelectorAll(selector).forEach(el => el.classList.toggle(className));
+                        });
+                      });
+                    });
+                  </script>
+              <!-- SIDENAV COLLAPSED -->
+
+
+              <!-- FLOATING SUBMENU KLIK STAY -->
+                <script>
+                  document.addEventListener('DOMContentLoaded', function () {
+                    const sidenav = document.getElementById('sidenav-main');
+
+                    function initFloatingSubmenuClickHandler() {
+                      const navItems = document.querySelectorAll('#sidenav-main .nav-item');
+
+                      navItems.forEach(function (item) {
+                        const link = item.querySelector('.nav-link');
+
+                        if (link) {
+                          link.addEventListener('click', function (e) {
+                            // Jalankan logika ini HANYA jika collapsed
+                            if (!sidenav.classList.contains('sidenav-collapsed')) return;
+
+                            // Cegah Bootstrap collapse bekerja
+                            e.preventDefault();
+
+                            // Cegah bubbling kalau klik submenu
+                            if (e.target.closest('.floating-submenu')) return;
+
+                            // Toggle submenu
+                            const alreadyOpen = item.classList.contains('submenu-open');
+
+                            // Tutup semua
+                            document.querySelectorAll('#sidenav-main .nav-item').forEach(i => i.classList.remove('submenu-open'));
+
+                            // Kalau belum terbuka, buka yang ini
+                            if (!alreadyOpen) item.classList.add('submenu-open');
+                          });
+                        }
                       });
 
-                      // Toggle .sidenav-header
-                        document.querySelectorAll('.sidenav-header').forEach(el => {
-                          el.classList.toggle('hidden-sidenav-header');
-                        });
+                      // Klik di luar sidenav = tutup semua submenu
+                      document.addEventListener('click', function (e) {
+                        const isInside = e.target.closest('#sidenav-main');
+                        if (!isInside) {
+                          document.querySelectorAll('#sidenav-main .nav-item').forEach(item => item.classList.remove('submenu-open'));
+                        }
+                      });
+                    }
 
-                      // Toggle .sidenav-category
-                        document.querySelectorAll('.sidenav-category').forEach(el => {
-                          el.classList.toggle('hidden-sidenav-category');
-                        });
+                    initFloatingSubmenuClickHandler();
+                  });
+                </script>
+              <!-- FLOATING SUBMENU KLIK STAY -->
+              <!-- SIDENAV COLLAPSED -->
 
-                      // Toggle .sidenav-category
-                        document.querySelectorAll('.sidenav-submenu').forEach(el => {
-                          el.classList.toggle('hidden-sidenav-submenu');
-                        });
 
-                      // Toggle .sidenav-brand-img
-                        document.querySelectorAll('.navbar-brand-img').forEach(el => {
-                          el.classList.toggle('navbar-brand-img-collapsed');
-                        });
+              <!-- SKRIP UNTUK MENGATASI ERROR LINK FLOATING SUBMENU KETIKA DI KLIK -->
+              <script>
+                  document.querySelectorAll('.floating-submenu a.nav-link[href]').forEach(link => {
+                    link.addEventListener('click', function (e) {
+                      const href = this.getAttribute('href');
+                      console.log('Link diklik:', href);
 
-                      // Toggle .sidenav-profile
-                        document.querySelectorAll('.navbar-profile').forEach(el => {
-                          el.classList.toggle('navbar-profile-collapsed');
-                        });
+                      e.preventDefault();
+                      e.stopPropagation();
 
-                      // Toggle .sidenav-profile
-                        document.querySelectorAll('.nav-link').forEach(el => {
-                          el.classList.toggle('nav-link-collapsed');
-                        });
-
-                      // Toggle .sidenav-profile
-                        document.querySelectorAll('.sidenav-icon').forEach(el => {
-                          el.classList.toggle('sidenav-icon-collapsed');
-                        });
-
-                        document.querySelectorAll('.material-symbols-rounded').forEach(el => {
-                          el.classList.toggle('material-symbols-rounded-collapsed');
-                        });
-
-                        document.querySelectorAll('#category-line').forEach(el => {
-                          el.classList.toggle('d-none');
-                        });
+                      setTimeout(() => {
+                        console.log('Redirect ke:', href);
+                        window.location.href = href;
+                      }, 100);
                     });
-
                   });
               </script>
-              <!-- SIDENAV COLLAPSED -->
+              <!-- SKRIP UNTUK MENGATASI ERROR LINK FLOATING SUBMENU KETIKA DI KLIK -->
+
+
 
             <script src="./node_modules/material-dashboard/assets/js/core/popper.min.js"></script>
             <script src="./node_modules/material-dashboard/assets/js/core/bootstrap.min.js"></script>
