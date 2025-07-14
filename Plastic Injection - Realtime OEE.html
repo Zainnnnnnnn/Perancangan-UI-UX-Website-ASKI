@@ -35,24 +35,14 @@
         id="sidenav-main">
     <!-- Tombol hamburger dan teks header ditempatkan berdampingan sebagai elemen sibling di dalam satu elemen pembungkus (wrapper)-->
     <div class="sidenav-header-wrapper">
-      <div class="text-center sidenav-header position-relative" style="margin-bottom:0;">
-          <i class="fas fa-times p-3 cursor-pointer text-dark opacity-5 position-absolute end-0 top-0 d-none d-xl-none"
-              aria-hidden="true" id="iconSidenav"></i>
-          <span class="me-3 text-md-10 text-dark sidenav-header-text" style="width:100%;text-align:center;">
-              <strong>PT Astra Komponen Indonesia</strong>
-          </span>
+      <div class="text-center">
+              <img src="./node_modules/material-dashboard/assets/img/logos/aski.png" alt="aski" class="w-50 mt-4 logo">
       </div>
     </div>
-        <hr class="horizontal dark my-0">
-        <div class="d-flex align-items-center justify-content-center mt-0 navbar-profile">
-            <img src="./node_modules/material-dashboard/assets/img/profile.png" class="navbar-brand-img mx-2"  alt="main_logo">
-                <span class="ms-1 text-sm text-dark nav-link-text">Hi, Viewer!</span>
-            <a class="logout-button pt-4 ml nav-link-text" href="/accounts/logout/?next=/PlasticInjection/OEE/Realtime/"><button type="button" class="btn btn-outline-danger btn-sm mt-n2">Log out</button></a>
-        </div>
-        <hr class="horizontal dark mt-0 mb-2">
+        <hr class="horizontal dark mt-4 mb-2">
         <div class="collapse navbar-collapse  w-auto" id="sidenav-collapse-main" style="height: 80vh;">
             <ul class="navbar-nav">
-                <li class="nav-item mt-3 sidenav-category">
+                <li class="nav-item mt-1 sidenav-category">
                         <!-- Healthcare Category -->
                         <h6 class="ps-4 ms-2 text-dark font-weight-bolder">Healthcare & Medical Devices</h6>
                     </li>
@@ -490,7 +480,7 @@
           <div class="container-fluid py-1 px-3">
               <div>
                   <button id="hamburgerToggle" class="hamburger-toggle" aria-label="Toggle sidenav">
-                    <span class="sidenav sidenav-toggler-inner justify-content-center">
+                    <span class="sidenav-toggler-inner justify-content-center">
                     <!-- Hamburger icon -->
                     <i class="material-symbols-rounded text-dark fs-3">menu</i>
                     </span>
@@ -500,9 +490,8 @@
                   <div class="ms-md-auto pe-md-3 d-flex align-items-center">
                     <div class="fw-bold fs-6" id="datetime-display" style="white-space: nowrap; color: inherit;"></div>
                   </div>
-                  
                   <ul class="navbar-nav  justify-content-end">
-                    <li class="nav-item px-3">
+                    <li class="nav-item px-3 mt-3">
                           <a class="nav-link text-body p-0" data-widget="fullscreen" href="#" role="button">
                             <i class="material-symbols-rounded cursor-pointer">
                                 fullscreen
@@ -510,11 +499,19 @@
                           </a>
                     </li>
                     <li class="nav-item px-3">
-                          <a href="javascript:;" class="nav-link text-body p-0">
-                            <i class="material-symbols-rounded fixed-plugin-button-nav cursor-pointer">
-                                settings
+                      <div class="dropdown">
+                          <a class="nav-link text-body p-0 d-flex gap-2 dropdown-toggle p-3 rounded-3" data-bs-toggle="dropdown" id="dropdownLogout">
+                            <i class="material-symbols-rounded cursor-pointer">
+                                account_circle
                             </i>
+                            <span>Hi, <strong>Viewer!</strong></span>
                           </a>
+                          <ul class="dropdown-menu p-3" aria-labelledby="navbarDropdownMenuLink2" style="height: 70px;">
+                            <li>
+                                <button type="button" class="btn btn-danger w-100">Log out</button>                            
+                            </li>
+                        </ul>
+                      </div>
                     </li>
                   </ul>
               </div>
