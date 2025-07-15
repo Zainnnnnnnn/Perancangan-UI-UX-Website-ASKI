@@ -1,6 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <style>
+    .category-line-thick {
+      border-top: 3px solid #343a40 !important;
+      margin-top: 16px;
+      margin-bottom: 16px;
+    }
+  </style>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
@@ -47,9 +54,9 @@
                         <h6 class="ps-4 ms-2 text-dark font-weight-bolder">Healthcare & Medical Devices</h6>
                     </li>
                     <!-- Delivery -->
-                    <li class="nav-item">
-                    <a class="nav-link text-dark" data-bs-toggle="collapse" href="#MenuDeliverycare" role="button" aria-expanded="false" aria-controls="MenuDeliverycare">
-                        <i class="material-symbols-rounded sidenav-icon">Delivery_Truck_Speed</i>
+                     <li class="nav-item">
+                    <a class="nav-link sidenav-submenu-title text-dark" data-bs-toggle="collapse" href="#MenuDeliverycare" role="button" aria-expanded="false" aria-controls="MenuDeliverycare">
+                        <i class="fas fa-truck-fast fs-5 font-icon sidenav-icon"></i>
                         <span class="nav-link-text ms-1">Delivery</span>
                     </a>
                     <div class=" floating-submenu collapse sidenav-submenu" id="MenuDeliverycare">
@@ -58,22 +65,22 @@
                           <!-- Packing Individual -->
                           <li class="nav-item">
                             <a class="nav-link text-dark" data-bs-toggle="collapse" href="#MenupackingIndividual" role="button" aria-expanded="false" aria-controls="MenupackingIndividual">
-                              <i class="material-symbols-rounded">Approval</i>
+                              <i class="fas fa-stamp fs-5 font-icon"></i>
                               Packing Individual
                             </a>
                             <div class="collapse" id="MenupackingIndividual">
                               <ul class="nav ms-4 ps-3">
                                 <!-- Preparation -->
                                 <li class="nav-item">
-                                  <a class="nav-link text-dark" href="https://aspaki.or.id/membership/pt-astra-komponen-indonesia">
-                                    <i class="material-symbols-rounded">label</i>
+                                  <a class="nav-link text-dark" href="/HealthCare/packingsatuan/">
+                                    <i class="fa fa-tag fs-5 font-icon"></i>
                                     Preparation
                                   </a>
                                 </li>
                                 <!-- Packing List -->
                                 <li class="nav-item">
                                   <a class="nav-link text-dark" href="/HealthCare/packinglistsatuan/">
-                                    <i class="material-symbols-rounded">schedule</i>
+                                    <i class="fa fa-clock fs-5 font-icon"></i>
                                     Packing List
                                   </a>
                                 </li>
@@ -84,7 +91,7 @@
                           <!-- Packing In Set -->
                           <li class="nav-item">
                             <a class="nav-link text-dark" data-bs-toggle="collapse" href="#Menupackinginset" role="button" aria-expanded="false" aria-controls="Menupackinginset">
-                              <i class="material-symbols-rounded">box</i>
+                              <i class="fas fa-box fs-5 font-icon"></i>
                               Packing in set
                             </a>
                             <div class="collapse" id="Menupackinginset">
@@ -92,14 +99,14 @@
                                 <!-- Preparation -->
                                 <li class="nav-item">
                                   <a class="nav-link text-dark" href="/HealthCare/packingset/">
-                                    <i class="material-symbols-rounded">label</i>
+                                    <i class="fa fa-tag fs-5 font-icon"></i>
                                     Preparation
                                   </a>
                                 </li>
                                 <!-- Packing List -->
                                 <li class="nav-item">
                                   <a class="nav-link text-dark" href="/HealthCare/packinglist/">
-                                    <i class="material-symbols-rounded">schedule</i>
+                                    <i class="fa fa-clock fs-5 font-icon"></i>
                                     Packing List
                                   </a>
                                 </li>
@@ -110,8 +117,8 @@
                       </div>
                       <!-- HCU Production -->
                   <li class="nav-item">
-                      <a class="nav-link text-dark" data-bs-toggle="collapse" href="#MenuHCUProduction" role="button" aria-expanded="false" aria-controls="MenuHCUProduction">
-                        <i class="material-symbols-rounded sidenav-icon">speed</i>
+                      <a class="nav-link sidenav-submenu-title text-dark" data-bs-toggle="collapse" href="#MenuHCUProduction" role="button" aria-expanded="false" aria-controls="MenuHCUProduction">
+                        <i class="fas fa-tachometer-alt font-icon sidenav-icon" style="font-size: 27px;"></i>
                         <span class="nav-link-text ms-1">HCU Production</span>
                       </a>
                       <div class="floating-submenu collapse sidenav-submenu" id="MenuHCUProduction">
@@ -120,49 +127,49 @@
                           <!-- Inspection Result Data -->
                           <li class="nav-item">
                             <a class="nav-link text-dark" href="/HealthCare/inspection/" aria-expanded="false">
-                              <i class="material-symbols-rounded">Document_Search</i>
+                              <i class="fa-solid fa-magnifying-glass fs-5 font-icon"></i>
                               Inspection Result Data
                             </a>
                           </li>
                           <!-- Production Planning -->
                           <li class="nav-item">
                             <a class="nav-link text-dark" href="/HealthCare/planning/" aria-expanded="false">
-                              <i class="material-symbols-rounded">Date_Range</i>
+                              <i class="far fa-calendar-check fs-5 font-icon"></i>
                               Production Planning
                             </a>
                           </li>
                           <!-- Realtime Dashboard -->
                           <li class="nav-item">
                             <a class="nav-link text-dark" href="/HealthCare/realtimeall/" aria-expanded="false">
-                              <i class="material-symbols-rounded spin-continuous">Settings</i>
-                              <span>Realtime Dashboard</span>
+                              <i class="fa fa-cog fs-5 font-icon spin-continuous"></i>
+                              Realtime Dashboard
                             </a>
                           </li>
                           <!-- Realtime OEE -->
                           <li class="nav-item">
                              <a class="nav-link text-dark" aria-expanded="false" href="/HealthCare/realtime/">
-                              <i class="material-symbols-rounded">Pie_Chart</i>
+                              <i class="fas fa-chart-pie fs-5 font-icon"></i>
                               Realtime OEE
                             </a>
                           </li>
                           <!-- Achievment -->
                           <li class="nav-item">
                              <a class="nav-link text-dark" href="/HealthCare/achievement/" aria-expanded="false">
-                              <i class="material-symbols-rounded">Chart_Data</i>
+                              <i class="fas fa-chart-line fs-5 font-icon"></i>
                               Achievement
                             </a>
                           </li>
                           <!-- Rejection -->
                           <li class="nav-item">
                             <a class="nav-link text-dark" href="/HealthCare/rejection/" aria-expanded="false">
-                              <i class="material-symbols-rounded">Contract_Delete</i>
+                              <i class="fas fa-file-circle-xmark fs-5 font-icon"></i>
                               Rejection
                             </a>
                           </li>
                           <!-- Prod Cheecksheet -->
                           <li class="nav-item">
                             <a class="nav-link text-dark" href="/HealthCare/production/checksheet/" aria-expanded="false">
-                              <i class="material-symbols-rounded">Docs</i>
+                              <i class="fas fa-file fs-5 font-icon"></i>
                               Prod Checksheet
                             </a>
                           </li>
@@ -180,7 +187,7 @@
                     <!-- Delivery -->
                      <li class="nav-item">
                     <a class="nav-link text-dark" data-bs-toggle="collapse" href="#MenuDeliveryplastic" role="button" aria-expanded="false" aria-controls="MenuDeliveryplastic">
-                        <i class="material-symbols-rounded sidenav-icon">Delivery_Truck_Speed</i>
+                        <i class="fas fa-truck-fast fs-5 font-icon sidenav-icon"></i>
                         <span class="nav-link-text ms-1">Delivery</span>
                     </a>
                     <div class="floating-submenu collapse sidenav-submenu" id="MenuDeliveryplastic">
@@ -189,14 +196,14 @@
                           <!-- Monitoring Delivery -->
                           <li class="nav-item">
                             <a class="nav-link text-dark" href="/PlasticInjection/Delivery/" aria-expanded="false">
-                              <i class="material-symbols-rounded">Trolley</i>
+                              <i class="fas fa-truck-loading fs-5 font-icon"></i>
                               Monitoring Delivery
                             </a>
                           </li>
                           <!-- Order AHM -->
                           <li class="nav-item">
                             <a class="nav-link text-dark" href="/PlasticInjection/OrdervsDN/" aria-expanded="false">
-                              <i class="material-symbols-rounded">Computer</i>
+                              <i class="fas fa-laptop fs-5 font-icon"></i>
                               Order AHM vs OD SAP
                             </a>
                           </li>
@@ -206,7 +213,7 @@
                       <!-- Warehouse Finish Good -->
                        <li class="nav-item">
                     <a class="nav-link text-dark" data-bs-toggle="collapse" href="#MenuWarehousefinish" role="button" aria-expanded="false" aria-controls="MenuWarehousefinish">
-                        <i class="material-symbols-rounded sidenav-icon">Thumb_up</i>
+                        <i class="fas fa-thumbs-up font-icon sidenav-icon" style="font-size: 27px;"></i>
                         <span class="nav-link-text ms-1">Warehouse Finish Good</span>
                     </a>
                     <div class="floating-submenu collapse sidenav-submenu" id="MenuWarehousefinish">
@@ -215,14 +222,14 @@
                           <!-- GR on Progress -->
                           <li class="nav-item">
                             <a class="nav-link text-dark" href="/PlasticInjection/GRFG/" aria-expanded="false">
-                              <i class="material-symbols-rounded spin-continuous">Settings</i>
+                              <i class="fa fa-cog fs-5 font-icon spin-continuous"></i>
                               GR on Progress
                             </a>
                           </li>
                           <!-- Realtime Stock FG -->
                           <li class="nav-item">
                             <a class="nav-link text-dark" href="/PlasticInjection/Stock/FG/" aria-expanded="false">
-                              <i class="material-symbols-rounded spin-continuous">Settings</i>
+                              <i class="fa fa-cog fs-5 font-icon spin-continuous"></i>
                               Realtime Stock FG
                             </a>
                           </li>
@@ -232,7 +239,7 @@
                       <!-- PI Production -->
                        <li class="nav-item">
                     <a class="nav-link text-dark" data-bs-toggle="collapse" href="#menuPIProduction" role="button" aria-expanded="false" aria-controls="menuPIProduction">
-                        <i class="material-symbols-rounded sidenav-icon">speed</i>
+                        <i class="fas fa-tachometer-alt font-icon sidenav-icon" style="font-size: 27px;"></i>
                         <span class="nav-link-text ms-1">PI Production</span>
                     </a>
                     <div class="floating-submenu collapse sidenav-submenu" id="menuPIProduction">
@@ -241,42 +248,42 @@
                           <!-- Realtime OEE -->
                           <li class="nav-item">
                              <a class="nav-link text-dark" href="/PlasticInjection/OEE/Realtime/"  aria-expanded="false">
-                              <i class="material-symbols-rounded">Pie_Chart</i>
+                              <i class="fas fa-chart-pie fs-5 font-icon"></i>
                               Realtime OEE
                             </a>
                           </li>
                           <!-- History OEE -->
                           <li class="nav-item">
                             <a class="nav-link text-dark" href="/PlasticInjection/OEE/" aria-expanded="false">
-                              <i class="material-symbols-rounded">History</i>
+                              <i class="fas fa-calendar-check fs-5 font-icon"></i>
                               History OEE
                             </a>
                           </li>
                           <!-- Production Plan -->
                           <li class="nav-item">
                             <a class="nav-link text-dark" href="/PlasticInjection/Planning/" aria-expanded="false">
-                              <i class="material-symbols-rounded">Date_Range</i>
+                              <i class="fas fa-calendar-days fs-5 font-icon"></i>
                               Production Plan
                             </a>
                           </li>
                           <!-- Henkaten History -->
                           <li class="nav-item">
                             <a class="nav-link text-dark" href="/PlasticInjection/HistoryHenkaten/" aria-expanded="false">
-                              <i class="material-symbols-rounded">Overview</i>
+                              <i class="fas fa-user-lock fs-5 font-icon"></i>
                               Henkaten History
                             </a>
                           </li>
                           <!-- Achievment -->
                           <li class="nav-item">
                              <a class="nav-link text-dark" href="/PlasticInjection/Achievement/" aria-expanded="false">
-                              <i class="material-symbols-rounded">Chart_Data</i>
+                              <i class="fas fa-chart-line fs-5 font-icon"></i>
                               Achievement
                             </a>
                           </li>
                           <!-- Linestop -->
                           <li class="nav-item">
                             <a class="nav-link text-dark" data-bs-toggle="collapse" href="#MenuLinestop" role="button" aria-expanded="false" aria-controls="MenuLinestop">
-                              <i class="material-symbols-rounded">Conversion_Path_Off</i>
+                              <i class="fa fa-xmarks-lines fs-5 font-icon"></i>
                               Linestop
                             </a>
                             <div class="collapse" id="MenuLinestop">
@@ -284,14 +291,14 @@
                                 <!-- Linestop by Andon -->
                                 <li class="nav-item">
                                   <a class="nav-link text-dark" href="/PlasticInjection/Linestop/Andon/" aria-expanded="false">
-                                    <i class="material-symbols-rounded">Conversion_Path_Off</i>
+                                    <i class="fas fa-chart-bar fs-5 font-icon"></i>
                                     Linestop by Andon
                                   </a>
                                 </li>
                                 <!-- Linestop by Inject -->
                                 <li class="nav-item">
                                   <a class="nav-link text-dark" href="/PlasticInjection/Linestop/Machine/" aria-expanded="false">
-                                    <i class="material-symbols-rounded">Conversion_Path_Off</i>
+                                    <i class="fas fa-chart-area fs-5 font-icon"></i>
                                     Linestop by Inject
                                   </a>
                                 </li>
@@ -301,7 +308,7 @@
                           <!-- Rejection -->
                           <li class="nav-item">
                             <a class="nav-link text-dark" data-bs-toggle="collapse" href="#MenuRejection" role="button" aria-expanded="false" aria-controls="MenuRejection">
-                              <i class="material-symbols-rounded">Computer_cancel</i>
+                              <i class="fa fa-sack-xmark fs-5 font-icon"></i>
                               Rejection
                             </a>
                             <div class="collapse" id="MenuRejection">
@@ -309,14 +316,14 @@
                                 <!-- Rejection Range -->
                                 <li class="nav-item">
                                   <a class="nav-link text-dark" href="/PlasticInjection/Rejection/Range/" aria-expanded="false">
-                                    <i class="material-symbols-rounded">Table_Chart_View</i>
+                                    <i class="fas fa-chart-line fs-5 font-icon"></i>
                                     Rejection Range
                                   </a>
                                 </li>
                                 <!-- Rejection Monthly -->
                                 <li class="nav-item">
                                   <a class="nav-link text-dark" href="/PlasticInjection/Rejection/Monthly/" aria-expanded="false">
-                                    <i class="material-symbols-rounded">Table_Chart_View</i>
+                                    <i class="fas fa-chart-line fs-5 font-icon"></i>
                                     Rejection Monthly
                                   </a>
                                 </li>
@@ -326,7 +333,7 @@
                           <!-- Traceability-->
                           <li class="nav-item">
                             <a class="nav-link text-dark" href="/PlasticInjection/Traceability/" aria-expanded="false">
-                              <i class="material-symbols-rounded">News</i>
+                              <i class="fas fa-qrcode fs-5 font-icon"></i>
                               Traceability
                             </a>
                           </li>
@@ -336,7 +343,7 @@
                     <!-- Assy Production -->
                      <li class="nav-item">
                     <a class="nav-link text-dark" data-bs-toggle="collapse" href="#MenuAssyproduction" role="button" aria-expanded="false" aria-controls="MenuAssyproduction">
-                        <i class="material-symbols-rounded sidenav-icon">Extension</i>
+                        <i class="fas fa-puzzle-piece font-icon sidenav-icon" style="font-size: 27px;"></i>
                         <span class="nav-link-text ms-1">Assy Production</span>
                     </a>
                     <div class="floating-submenu collapse sidenav-submenu" id="MenuAssyproduction">
@@ -345,7 +352,7 @@
                           <!-- Assy CCH -->
                           <li class="nav-item">
                             <a class="nav-link text-dark" href="/PlasticInjection/Assy/CCH/" aria-expanded="false">
-                              <i class="material-symbols-rounded">AC_Unit</i>
+                              <i class="fas fa-snowflake fs-5 font-icon"></i>
                               Assy CCH
                             </a>
                           </li>
@@ -354,7 +361,7 @@
                         <!-- Warehouse Mat & Comp -->
                 <li class="nav-item">
                     <a class="nav-link text-dark" data-bs-toggle="collapse" href="#MenuWarehousemat" role="button" aria-expanded="false" aria-controls="MenuWarehousemat">
-                        <i class="material-symbols-rounded sidenav-icon">Swap_Horiz</i>
+                        <i class="fas fa-exchange-alt fs-4 font-icon sidenav-icon" style="padding-right: 12px"></i>
                         <span class="nav-link-text ms-1">Warehouse Mat & Comp</span>
                     </a>
                     <div class="floating-submenu collapse sidenav-submenu" id="MenuWarehousemat">
@@ -363,28 +370,28 @@
                           <!-- Material Supply -->
                           <li class="nav-item">
                             <a class="nav-link text-dark" href="/Supply/Material/" aria-expanded="false">
-                              <i class="material-symbols-rounded">Polymer</i>
+                              <i class="fas fa-haykal fs-5 font-icon"></i>
                               Material Supply
                             </a>
                           </li>
                           <!-- Component Supply -->
                           <li class="nav-item">
                             <a class="nav-link text-dark" href="/Supply/Komponen/" aria-expanded="false">
-                              <i class="material-symbols-rounded">Experiment</i>
+                              <i class="fas fa-flask fs-5 font-icon"></i>
                               Component Supply
                             </a>
                           </li>
                           <!-- Supply Report -->
                           <li class="nav-item">
                             <a class="nav-link text-dark" href="/Supply/Report/" aria-expanded="false">
-                              <i class="material-symbols-rounded">Clinical_Notes</i>
+                              <i class="fas fa-file-powerpoint fs-5 font-icon"></i>
                               Supply Report
                             </a>
                           </li>
                           <!-- Stock Material -->
                           <li class="nav-item">
                             <a class="nav-link text-dark" href="/PlasticInjection/Stock/Material/" aria-expanded="false">
-                              <i class="material-symbols-rounded">Pallet</i>
+                              <i class="fas fa-file-excel fs-5 font-icon"></i>
                               Stock Material
                             </a>
                           </li>
@@ -394,7 +401,7 @@
                       <!-- Incoming -->
                     <li class="nav-item">
                       <a class="nav-link text-dark" data-bs-toggle="collapse" href="#MenuIncoming" role="button" aria-expanded="false" aria-controls="MenuIncoming">
-                        <i class="material-symbols-rounded sidenav-icon">Shelves</i>
+                        <i class="fas fa-boxes  font-icon sidenav-icon" style="font-size: 25px;"></i>
                         <span class="nav-link-text ms-1">Incoming</span>
                       </a>
                       <div class="floating-submenu collapse sidenav-submenu" id="MenuIncoming">
@@ -403,21 +410,21 @@
                           <!-- QC Incoming -->
                           <li class="nav-item">
                             <a class="nav-link text-dark" href="/PlasticInjection/QC/Incoming/" aria-expanded="false">
-                              <i class="material-symbols-rounded">Checkbook</i>
+                              <i class="fas fa-theater-masks fs-5 font-icon"></i>
                               QC Incoming
                             </a>
                           </li>
                           <!-- Order Sheet -->
                           <li class="nav-item">
                             <a class="nav-link text-dark" href="/Incoming/OrderSheet" aria-expanded="false">
-                              <i class="material-symbols-rounded">data_Table</i>
+                              <i class="fas fa-passport fs-5 font-icon"></i>
                               Order Sheet
                             </a>
                           </li>
                           <!-- Resume Scan OS -->
                           <li class="nav-item">
                             <a class="nav-link text-dark" href="/Incoming/OrderSheet/Range/" aria-expanded="false">
-                              <i class="material-symbols-rounded">Scan</i>
+                              <i class="fas fa-file-excel fs-5 font-icon"></i>
                               Resume Scan OS
                             </a>
                           </li>
@@ -427,7 +434,7 @@
                       <!-- Recycle Material -->
                     <li class="nav-item">
                       <a class="nav-link text-dark" data-bs-toggle="collapse" href="#MenuRecycleMaterial" role="button" aria-expanded="false" aria-controls="MenuRecycleMaterial">
-                        <i class="material-symbols-rounded sidenav-icon">Recycling</i>
+                        <i class="fas fa-recycle font-icon sidenav-icon" style="font-size: 28px;"></i>
                         <span class="nav-link-text ms-1">Recycle Material</span>
                       </a>
                       <div class="floating-submenu collapse sidenav-submenu" id="MenuRecycleMaterial">
@@ -436,21 +443,21 @@
                           <!-- Collection NG -->
                           <li class="nav-item">
                             <a class="nav-link text-dark" href="/PlasticInjection/collection-ng/" aria-expanded="false">
-                              <i class="material-symbols-rounded">Note_stack</i>
+                              <i class="fas fa-box-open fs-5 font-icon"></i>
                               Collection NG
                             </a>
                           </li>
                           <!-- Collection NG Confirm -->
                           <li class="nav-item">
                             <a class="nav-link text-dark" href="/PlasticInjection/collection-ng/confirmation/" aria-expanded="false">
-                              <i class="material-symbols-rounded">Library_add_check</i>
+                              <i class="fas fa-clipboard-check font-icon"></i>
                               Collection NG Confirm
                             </a>
                           </li>
                           <!-- Collection NG Report -->
                           <li class="nav-item">
                             <a class="nav-link text-dark" href="/PlasticInjection/collection-ng/report/" aria-expanded="false">
-                              <i class="material-symbols-rounded">Library_Books</i>
+                              <i class="fas fa-file-excel font-icon"></i>
                               Collection NG Report
                             </a>
                           </li>
@@ -466,7 +473,7 @@
                     <hr class="horizontal dark mb-3 d-none my-0" id="category-line">
                     <!-- Upload PRO -->
                     <a class="nav-link text-dark" href="/PRO/Upload/" aria-expanded="false">
-                        <i class="material-symbols-rounded sidenav-icon">Upload_File</i>
+                        <i class="fas fa-file-excel font-icon sidenav-icon"></i>
                         <span class="nav-link-text ms-1">Upload PRO</span>
                     </a>
                   </li>
@@ -482,7 +489,7 @@
                   <button id="hamburgerToggle" class="hamburger-toggle" aria-label="Toggle sidenav">
                     <span class="sidenav-toggler-inner justify-content-center">
                     <!-- Hamburger icon -->
-                    <i class="material-symbols-rounded text-dark fs-3">menu</i>
+                    <i class="fa fa-bars font-icon text-dark fs-4"></i>
                     </span>
                   </button>
               </div>
@@ -493,22 +500,19 @@
                   <ul class="navbar-nav  justify-content-end">
                     <li class="nav-item px-3 mt-3">
                           <a class="nav-link text-body p-0" data-widget="fullscreen" href="#" role="button">
-                            <i class="material-symbols-rounded cursor-pointer">
-                                fullscreen
-                            </i>
+                            <i class="fa-solid fa-up-right-and-down-left-from-center font-icon fs-5 cursor-pointer"></i>
                           </a>
                     </li>
                     <li class="nav-item px-3">
                       <div class="dropdown">
                           <a class="nav-link text-body p-0 d-flex gap-2 dropdown-toggle p-3 rounded-3" data-bs-toggle="dropdown" id="dropdownLogout">
-                            <i class="material-symbols-rounded cursor-pointer">
-                                account_circle
+                            <i class="fa fa-user font-icon cursor-pointer">
                             </i>
                             <span>Hi, <strong>Viewer!</strong></span>
                           </a>
                           <ul class="dropdown-menu p-3" aria-labelledby="navbarDropdownMenuLink2" style="height: 70px;">
                             <li>
-                                <button type="button" class="btn btn-danger w-100">Log out</button>                            
+                                <button type="button" class="logout-button btn btn-outline-danger w-100">Log out</button>                            
                             </li>
                         </ul>
                       </div>
