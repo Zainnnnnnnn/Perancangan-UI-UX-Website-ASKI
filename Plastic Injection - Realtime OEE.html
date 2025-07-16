@@ -1,13 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <style>
-    .category-line-thick {
-      border-top: 3px solid #343a40 !important;
-      margin-top: 16px;
-      margin-bottom: 16px;
-    }
-  </style>
+
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
@@ -38,7 +32,7 @@
 </head>
     <body class="bg-gray-100">
     <div class="d-flex">
-    <aside class="sidenav navbar navbar-vertical navbar-expand-xs min-vh-100 border-radius-lg fixed-start  bg-white"
+    <aside class="sidenav navbar navbar-vertical navbar-expand-xs min-vh-100 border-radius-lg fixed-start  bg-white sidenav-collapsed"
         id="sidenav-main">
     <!-- Tombol hamburger dan teks header ditempatkan berdampingan sebagai elemen sibling di dalam satu elemen pembungkus (wrapper)-->
     <div class="sidenav-header-wrapper">
@@ -46,7 +40,8 @@
               <img src="./node_modules/material-dashboard/assets/img/logos/aski.png" alt="aski" class="w-50 mt-4 logo">
       </div>
     </div>
-        <hr class="horizontal dark mt-4 mb-2">
+        <hr class="horizontal dark mt-4 my-0">
+        <hr class="horizontal dark mb-2 my-0">
         <div class="collapse navbar-collapse  w-auto" id="sidenav-collapse-main" style="height: 80vh;">
             <ul class="navbar-nav">
                 <li class="nav-item mt-1 sidenav-category">
@@ -183,8 +178,8 @@
                     <li class="nav-item mt-3 sidenav-category">
                         <h6 class="ps-4 ms-2 text-dark font-weight-bolder">Plastic Injection</h6>
                     </li>
-                    <hr class="horizontal dark my-3 d-none my-0" id="category-line">
-                    <!-- <hr class="horizontal dark mb-3 d-none my-0" id="category-line"> -->
+                    <hr class="horizontal dark mt-3 my-0 category-line">
+                    <hr class="horizontal dark mb-3 my-0 category-line">
                     <!-- Delivery -->
                      <li class="nav-item">
                     <a class="nav-link text-dark" data-bs-toggle="collapse" href="#MenuDeliveryplastic" role="button" aria-expanded="false" aria-controls="MenuDeliveryplastic">
@@ -470,8 +465,8 @@
                         <!-- PRO SAP Category -->
                         <h6 class="ps-4 ms-2 text-dark font-weight-bolder">PRO SAP</h6>
                     </li>
-                    <hr class="horizontal dark my-3 d-none my-0" id="category-line">
-                    <!-- <hr class="horizontal dark mb-3 d-none my-0" id="category-line"> -->
+                    <hr class="horizontal dark mt-3 my-0 category-line">
+                    <hr class="horizontal dark mb-3 my-0 category-line">
                     <!-- Upload PRO -->
                     <a class="nav-link text-dark" href="/PRO/Upload/" aria-expanded="false">
                         <i class="fas fa-file-excel font-icon sidenav-icon" style="padding-left: 13px; padding-right: 13px;"></i>
@@ -674,46 +669,68 @@
         </script>
             <!-- Fungsi waktu -->
 
-            <!-- SIDENAV COLLAPSED -->
-                  <script>
-                    document.addEventListener("DOMContentLoaded", () => {
-                      const hamburgerToggle = document.getElementById("hamburgerToggle");
-                      const sidenav = document.getElementById("sidenav-main");
-                      const mainContent = document.querySelector(".main-content");
+                    <!-- SIDENAV COLLAPSED -->
+                    <script>
+                      document.addEventListener("DOMContentLoaded", () => {
+                        const hamburgerToggle = document.getElementById("hamburgerToggle");
+                        const sidenav = document.getElementById("sidenav-main");
+                        const mainContent = document.querySelector(".main-content");
+                        const submenuTitles = document.querySelectorAll(".floatingSubmenuTitle");
+                        const categoryLines = document.querySelectorAll(".category-line");
 
-                      const toggleClasses = [
-                        { selector: ".nav-link-text", className: "hidden-text" },
-                        { selector: ".sidenav-header", className: "hidden-sidenav-header" },
-                        { selector: ".sidenav-category", className: "hidden-sidenav-category" },
-                        { selector: ".sidenav-submenu", className: "hidden-sidenav-submenu" },
-                        { selector: ".navbar-brand-img", className: "navbar-brand-img-collapsed" },
-                        { selector: ".navbar-profile", className: "navbar-profile-collapsed" },
-                        { selector: ".nav-link", className: "nav-link-collapsed" },
-                        { selector: ".sidenav-icon", className: "sidenav-icon-collapsed" },
-                        { selector: ".material-symbols-rounded", className: "material-symbols-rounded-collapsed" },
-                        { selector: "#category-line", className: "d-none" }
-                      ];
+                        const toggleClasses = [
+                          { selector: ".nav-link-text", className: "hidden-text" },
+                          { selector: ".sidenav-header", className: "hidden-sidenav-header" },
+                          { selector: ".sidenav-category", className: "hidden-sidenav-category" },
+                          { selector: ".sidenav-submenu", className: "hidden-sidenav-submenu" },
+                          { selector: ".navbar-brand-img", className: "navbar-brand-img-collapsed" },
+                          { selector: ".navbar-profile", className: "navbar-profile-collapsed" },
+                          { selector: ".nav-link", className: "nav-link-collapsed" },
+                          { selector: ".sidenav-icon", className: "sidenav-icon-collapsed" },
+                          { selector: ".material-symbols-rounded", className: "material-symbols-rounded-collapsed" },
+                        ];
 
-                      hamburgerToggle?.addEventListener("click", () => {
-                        sidenav.classList.toggle("sidenav-collapsed");
-                        mainContent?.classList.toggle("main-content-collapsed");
+                        // ✅ Jalankan toggleClass agar layout langsung sesuai (collapsed) saat page load
+                        if (sidenav.classList.contains("sidenav-collapsed")) {
+                          mainContent?.classList.add("main-content-collapsed");
 
-                        toggleClasses.forEach(({ selector, className }) => {
-                          document.querySelectorAll(selector).forEach(el => el.classList.toggle(className));
+                          toggleClasses.forEach(({ selector, className }) => {
+                            document.querySelectorAll(selector).forEach(el => el.classList.add(className));
+                          });
+
+                          submenuTitles.forEach(title => {
+                            title.classList.remove("d-none");
+                          });
+
+                          categoryLines.forEach(line => {
+                            line.classList.remove("d-none");
+                          });
+                          
+                        }
+                        
+
+                        // 🔄 Toggle saat tombol diklik
+                        hamburgerToggle?.addEventListener("click", () => {
+                          sidenav.classList.toggle("sidenav-collapsed");
+                          mainContent?.classList.toggle("main-content-collapsed");
+
+                          toggleClasses.forEach(({ selector, className }) => {
+                            document.querySelectorAll(selector).forEach(el => el.classList.toggle(className));
+                          });
+
+                          const isCollapsed = sidenav.classList.contains("sidenav-collapsed");
+
+                          submenuTitles.forEach(title => {
+                            title.classList.toggle("d-none", !isCollapsed);
+                          });
+
+                          categoryLines.forEach(line => {
+                            line.classList.toggle("d-none", !isCollapsed);
+                          });
                         });
-
-                        // Tampilkan atau sembunyikan floatingSubmenuTitle
-                        const submenuTitle = document.querySelectorAll(".floatingSubmenuTitle");
-                        const isCollapsed = sidenav.classList.contains("sidenav-collapsed");
-
-
-                        submenuTitle.forEach(title => {
-                          title.classList.toggle("d-none", !isCollapsed);
-                        });                      
                       });
-                    });
-                  </script>
-              <!-- SIDENAV COLLAPSED -->
+                    </script>
+                    <!-- SIDENAV COLLAPSED -->
 
 
               <!-- FLOATING SUBMENU KLIK STAY -->
