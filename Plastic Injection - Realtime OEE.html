@@ -234,6 +234,32 @@
                         </ul>
                       </div>
                       </li>
+                      <!-- Quality System -->
+                      <li class="nav-item">
+                    <a class="nav-link text-dark" data-bs-toggle="collapse" href="#MenuQualitySystem" role="button" aria-expanded="false" aria-controls="MenuQualitySystem">
+                        <i class="fas fa-compass font-icon sidenav-icon" style="font-size: 27px;"></i>
+                        <span class="nav-link-text ms-1">Quality System</span>
+                    </a>
+                    <div class="floating-submenu collapse sidenav-submenu" id="MenuQualitySystem">
+                        <ul class="nav ms-4 ps-3">
+                  
+                          <!-- Monitoring Delivery -->
+                          <li class="nav-item">
+                            <a class="nav-link text-dark" href="/PlasticInjection/QC/DailyCheckSheet/" aria-expanded="false">
+                              <i class="fas fa-check-square fs-5 font-icon"></i>
+                              Daily IRD QC
+                            </a>
+                          </li>
+                          <!-- Order AHM -->
+                          <li class="nav-item">
+                            <a class="nav-link text-dark" href="/PlasticInjection/QC/UpdateCheckSheet" aria-expanded="false">
+                              <i class="fas fa-edit fs-5 font-icon"></i>
+                              Update IRD Form
+                            </a>
+                          </li>
+                        </ul>
+                      </div>
+                      </li>
                       <!-- PI Production -->
                       <li class="nav-item">
                     <a class="nav-link text-dark" data-bs-toggle="collapse" href="#menuPIProduction" role="button" aria-expanded="false" aria-controls="menuPIProduction">
@@ -509,14 +535,17 @@
                     </li>
                     <li class="nav-item px-2">
                       <div class="dropdown">
-                          <a class="nav-link text-body p-0 d-flex gap-2 dropdown-toggle p-3 rounded-3" data-bs-toggle="dropdown" id="dropdownLogout">
+                          <a class="nav-link text-body p-0 d-flex gap-2 dropdown-toggle p-3 rounded-3" style="padding-right: 1px;" data-bs-toggle="dropdown" id="dropdownLogout">
                             <i class="fa fa-user font-icon cursor-pointer text-dark-theme">
                             </i>
-                            <span class="text-dark-theme">Hi, <strong>Viewer!</strong></span>
+                            <span class="text-dark-theme ">Hi, <strong>Viewer!</strong></span>
                           </a>
                           <ul class="dropdown-menu p-3" aria-labelledby="navbarDropdownMenuLink2" style="height: 70px;">
-                            <li>
-                                <button type="button" class="logout-button btn btn-outline-danger w-100" id="logoutButton">Log out</button>                            
+                            <li class="logout-button">
+                                <button type="button" class="btn btn-outline-danger w-100 logout-button"
+                                onclick="window.location.href='/accounts/logout/?next=/PlasticInjection/OEE/Realtime/'">
+                                Log out
+                                </button>                            
                             </li>
                         </ul>
                       </div>

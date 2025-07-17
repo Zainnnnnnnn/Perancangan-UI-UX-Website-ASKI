@@ -1,0 +1,2261 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+
+  <title>Assy CCH</title>
+
+  <link rel="stylesheet" href="/static/vendor/datatables/buttons.dataTables.min.css">
+  <link rel="stylesheet" href="/static/vendor/datatables/buttonsStyle.css">
+
+  <link rel="stylesheet" href="/static/vendor/timetable/css/timetablejs.css">
+  <link rel="stylesheet" href="/static/vendor/timetable/css/demo.css">
+
+  <!-- Font Awesome Icons -->
+  <!-- https://fontawesome.com/ -->
+  <link rel="stylesheet" href="/static/vendor/fontawesome-free/css/all.min.css">
+  <!-- overlayScrollbars -->
+  <link rel="stylesheet" href="/static/vendor/overlayScrollbars/css/OverlayScrollbars.min.css">
+  <!-- Theme style -->
+  <link rel="stylesheet" href="/static/vendor/AdminLTE/css/adminlte.min.css">
+  <!-- Google Font: Source Sans Pro -->
+  <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+
+  
+  <!-- DataTables CSS -->
+  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.css">
+  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/1.7.0/css/buttons.dataTables.min.css">
+  <link rel="stylesheet" type="text/css" href="/static/vendor/daterangepicker/daterangepicker.css">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+  
+  
+
+  <!-- jam -->
+  <!-- <script>
+    function startTime() {
+      var today = new Date();
+      var h = today.getHours();
+      var m = today.getMinutes();
+      var s = today.getSeconds();
+      const options = { year: 'numeric', month: 'long', day: 'numeric' };
+      h = checkTime(h);
+      m = checkTime(m);
+      s = checkTime(s);
+      document.getElementById('jam').innerHTML = h + " : " + m + " : " + s;
+      document.getElementById("datetime").innerHTML = today.toLocaleDateString("id-ID", options);
+      var t = setTimeout(startTime, 500);
+    }
+    function checkTime(i) {
+      if (i < 10) { i = "0" + i };  // add zero in front of numbers < 10
+      return i;
+    }
+  </script> -->
+
+
+</head>
+
+<body class="hold-transition sidebar-collapse  layout-fixed layout-navbar-fixed layout-footer-fixed">
+  <div class="wrapper">
+    <!-- Navbar -->
+    <nav class="main-header navbar navbar-expand navbar-white navbar-light">
+
+      <!-- Left navbar links -->
+
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link" data-widget="pushmenu" href="#"><i class="fas fa-bars"></i></a>
+        </li>
+        
+        
+        <!--
+      <li class="nav-item d-none d-sm-inline-block">
+        <a href="" class="nav-link">Home</a>
+      </li>
+      <li class="nav-item d-none d-sm-inline-block">
+        <a href="#" class="nav-link">Contact</a>
+      </li>-->
+      </ul>
+
+      <!-- SEARCH FORM -->
+      <!--  <form class="form-inline ml-3">
+      <div class="input-group input-group-sm">
+        <input class="form-control form-control-navbar" type="search" placeholder="Search" aria-label="Search">
+        <div class="input-group-append">
+          <button class="btn btn-navbar" type="submit">
+            <i class="fas fa-search"></i>
+          </button>
+        </div>
+      </div>
+    </form>
+-->
+
+      <!-- <li class="nav-item d-none d-sm-inline-block" style = "color: blue;margin-bottom: 0px;font-size: 16px;" id="datetime"></li>
+    <li class="nav-item d-none d-sm-inline-block" style = "color: red;margin-bottom: 10px;font-size: 16px;" id="jam"></li> -->
+      <!-- Right navbar links -->
+      
+      <ul class="navbar-nav ml-auto">
+
+
+      </ul>
+      
+
+      <ul class="navbar-nav ml-auto">
+        <div class="row">
+          
+<div id="load" class="spinner-border text-primary spinner-border-sm"
+    style="float: right;margin-top: 10px;margin-right: 10px;" role="status">
+    <span class="sr-only">Loading...</span>
+</div>
+
+<div class="d-flex justify-content-between">
+    <input id="dateinput" style="text-align: center;margin-right: 10px;" type="text" class="form-control datepicker">
+    <button type="submit" class="btn btn-primary" onclick="create_post()">Refresh</button>
+</div>
+</div>
+
+
+<style>
+    .cards-list {
+    z-index: 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    }
+
+    .card1 {
+    margin: 30px auto;
+    width: 400px;
+    height: 200px;
+    border-radius: 40px;
+    box-shadow: 5px 5px 30px 7px rgba(116, 116, 116, 0.25), -5px -5px 30px 7px rgba(126, 126, 126, 0.22);
+    cursor: pointer;
+    transition: 0.4s;
+    }
+
+    .card1:hover {
+    transform: scale(0.9, 0.9);
+    box-shadow: 5px 5px 30px 15px rgba(122, 122, 122, 0.25), 
+        -5px -5px 30px 15px rgba(106, 106, 106, 0.22);
+    }
+
+    .title-white {
+    color: white;
+    }
+
+    .title-black {
+    color: black;
+    }
+
+    @media all and (max-width: 500px) {
+    .card-list {
+        /* On small screens, we are no longer using row direction but column */
+        flex-direction: column;
+    }
+    }
+    .judgement {
+        font-size: 15pt;
+        color: #5C5C5C;
+        /* font-weight: bold; */
+        text-align: center;
+    }
+    .value {
+        font-size: 15pt;
+        /* font-weight: bold; */
+        text-align: center;
+    }
+</style>
+
+
+          <!-- Messages Dropdown Menu -->
+          <!--  <li class="nav-item dropdown">
+        <a class="nav-link" data-toggle="dropdown" href="#">
+          <i class="far fa-comments"></i>
+          <span class="badge badge-danger navbar-badge">3</span>
+        </a>
+        <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+          <a href="#" class="dropdown-item">
+           
+            <div class="media">
+              <img src="dist/img/user1-128x128.jpg" alt="User Avatar" class="img-size-50 mr-3 img-circle">
+              <div class="media-body">
+                <h3 class="dropdown-item-title">
+                  Brad Diesel
+                  <span class="float-right text-sm text-danger"><i class="fas fa-star"></i></span>
+                </h3>
+                <p class="text-sm">Call me whenever you can...</p>
+                <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> 4 Hours Ago</p>
+              </div>
+            </div>
+           
+          </a>
+          <div class="dropdown-divider"></div>
+          <a href="#" class="dropdown-item">
+           
+            <div class="media">
+              <img src="dist/img/user8-128x128.jpg" alt="User Avatar" class="img-size-50 img-circle mr-3">
+              <div class="media-body">
+                <h3 class="dropdown-item-title">
+                  John Pierce
+                  <span class="float-right text-sm text-muted"><i class="fas fa-star"></i></span>
+                </h3>
+                <p class="text-sm">I got your message bro</p>
+                <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> 4 Hours Ago</p>
+              </div>
+            </div>
+           
+          </a>
+          <div class="dropdown-divider"></div>
+          <a href="#" class="dropdown-item">
+           
+            <div class="media">
+              <img src="dist/img/user3-128x128.jpg" alt="User Avatar" class="img-size-50 img-circle mr-3">
+              <div class="media-body">
+                <h3 class="dropdown-item-title">
+                  Nora Silvester
+                  <span class="float-right text-sm text-warning"><i class="fas fa-star"></i></span>
+                </h3>
+                <p class="text-sm">The subject goes here</p>
+                <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> 4 Hours Ago</p>
+              </div>
+            </div>
+           
+          </a>
+          <div class="dropdown-divider"></div>
+          <a href="#" class="dropdown-item dropdown-footer">See All Messages</a>
+        </div>
+      </li> -->
+          <!-- Notifications Dropdown Menu -->
+          <!--  <li class="nav-item dropdown">
+        <a class="nav-link" data-toggle="dropdown" href="#">
+          <i class="far fa-bell"></i>
+          <span class="badge badge-warning navbar-badge">15</span>
+        </a>
+        <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+          <span class="dropdown-item dropdown-header">15 Notifications</span>
+          <div class="dropdown-divider"></div>
+          <a href="#" class="dropdown-item">
+            <i class="fas fa-envelope mr-2"></i> 4 new messages
+            <span class="float-right text-muted text-sm">3 mins</span>
+          </a>
+          <div class="dropdown-divider"></div>
+          <a href="#" class="dropdown-item">
+            <i class="fas fa-users mr-2"></i> 8 friend requests
+            <span class="float-right text-muted text-sm">12 hours</span>
+          </a>
+          <div class="dropdown-divider"></div>
+          <a href="#" class="dropdown-item">
+            <i class="fas fa-file mr-2"></i> 3 new reports
+            <span class="float-right text-muted text-sm">2 days</span>
+          </a>
+          <div class="dropdown-divider"></div>
+          <a href="#" class="dropdown-item dropdown-footer">See All Notifications</a>
+        </div>
+      </li>-->
+
+          
+
+          <li class="nav-item">
+            <a class="nav-link" data-widget="fullscreen" href="#" role="button">
+              <i class="fas fa-expand-arrows-alt"></i>
+            </a>
+          </li>
+
+          <li class="nav-item">
+
+            <a class="nav-link" data-widget="control-sidebar" data-slide="true" href="#"><i
+                class="fas fa-th-large"></i></a>
+
+          </li>
+          
+        </div>
+      </ul>
+    </nav>
+    <!-- /.navbar -->
+
+    <!-- Main Sidebar Container -->
+    <aside class="main-sidebar sidebar-light-primary elevation-4">
+      <!-- Brand Logo -->
+      <a href="/" class="brand-link">
+        <!-- <img src="/static/img/logoASKI.png"  
+           style="margin-left: 10px; opacity: 1; width: 50px;height: 50px;">  -->
+        <span class="brand-text font-weight-bold" style="font-size: 16px;">PT Astra Komponen Indonesia</span>
+      </a>
+
+      <!-- Sidebar -->
+      <div class="sidebar">
+        <!-- Sidebar user panel (optional) -->
+
+
+        
+        <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+          <div class="image">
+            <img src="/static/vendor/AdminLTE/img/laptop-user.png" class="img-circle elevation-2"
+              alt="User Image">
+            <!-- <i class="fa fa-user" aria-hidden="true"></i> -->
+          </div>
+          <div class="info">
+            <a href="#" class="d-block">hi viewer !</a>
+            <span style="display:none;" id="user">viewer</span>
+          </div>
+          <div><a
+              style="height:fit-content;width: fit-content;font-size: small;padding: 10%;margin-left: 20px;margin-top: 2px;margin-right: 0px;"
+              type="button" class="btn btn-outline-warning" href="/accounts/logout/?next=/PlasticInjection/Assy/CCH/">Log Out</a>
+          </div>
+        </div>
+
+        
+
+        <!-- Sidebar Menu -->
+        <nav class="mt-2">
+          <ul class="nav nav-pills nav-sidebar flex-column nav-child-indent" data-widget="treeview" role="menu"
+            data-accordion="true">
+            <!-- Add icons to the links using the .nav-icon class
+               with font-awesome or any other icon font library -->
+            
+
+
+            <li class="nav-item has-treeview menu-open">
+              <a href="#" class="nav-link" style="background-color: rgba(33, 255, 33, 0.3) !important;">
+                <p>Health Care / Medical Devices</p>
+              </a>
+            </li>
+
+            <li class="nav-item has-treeview menu-closed">
+              <a href="#" class="nav-link">
+                <i class="nav-icon fas fa-tachometer-alt"></i>
+                <p>
+                  Delivery
+                  <i class="right fas fa-angle-left"></i>
+                </p>
+              </a>
+              <ul class="nav nav-treeview ">
+                <!-- <li class="nav-item">
+                    <a href="/HealthCare/PO/" class="nav-link">
+                      <i class="fa fa-file  nav-icon"></i>
+                      <p>Input PO</p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="/HealthCare/packing/" class="nav-link">
+                      <i class="fa fa-tag  nav-icon"></i>
+                      <p>Packing List</p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="/HealthCare/history/" class="nav-link">
+                      <i class="fa fa-clock  nav-icon"></i>
+                      <p>Packing History</p>
+                    </a>
+                  </li> -->
+                <li class="nav-item has-treeview">
+                  <a href="#" class="nav-link">
+                    <i class="nav-icon fas fa-stamp"></i>
+                    <p>
+                      Packing Individual
+                      <i class="right fas fa-angle-left"></i>
+                    </p>
+                  </a>
+
+                  <ul class="nav nav-treeview ">
+                    <li class="nav-item">
+                      <a href="/HealthCare/packingsatuan/" class="nav-link">
+                        <i class="fa fa-tag  nav-icon"></i>
+                        <p>Preparation</p>
+                      </a>
+                    </li>
+                    <li class="nav-item">
+                      <a href="/HealthCare/packinglistsatuan/" class="nav-link">
+                        <i class="fa fa-clock  nav-icon"></i>
+                        <p>Packing List</p>
+                      </a>
+                    </li>
+                  </ul>
+                </li>
+                <li class="nav-item has-treeview">
+                  <a href="#" class="nav-link">
+                    <i class="nav-icon fas fa-box"></i>
+                    <p>
+                      Packing in Set
+                      <i class="right fas fa-angle-left"></i>
+                    </p>
+                  </a>
+
+                  <ul class="nav nav-treeview ">
+                    <li class="nav-item">
+                      <a href="/HealthCare/packingset/" class="nav-link">
+                        <i class="fa fa-tag  nav-icon"></i>
+                        <p>Preparation</p>
+                      </a>
+                    </li>
+                    <li class="nav-item">
+                      <a href="/HealthCare/packinglist/" class="nav-link">
+                        <i class="fa fa-clock  nav-icon"></i>
+                        <p>Packing List</p>
+                      </a>
+                    </li>
+                  </ul>
+                </li>
+
+
+
+                <!-- <li class="nav-item">
+                    <a href="/assymirror/weekly/" class="nav-link">
+                      <i class="far fa-calendar-alt  nav-icon"></i>
+                      <p>Range Resume</p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="/assymirror/achievement/" class="nav-link">
+                      <i class="fas fa-fw fa-chart-line nav-icon"></i>
+                      <p>Achievement</p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="/assymirror/rejection/" class="nav-link">
+                      <i class="fas fa-fw fa-chart-pie nav-icon"></i>
+                      <p>Rejection</p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="/assymirror/linestop/" class="nav-link">
+                      <i class="fas fa-fw fa-chart-area nav-icon"></i>
+                      <p>Line Stop</p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="/assymirror/henkaten/" class="nav-link">
+                      <i class="fa fa-user-circle  nav-icon"></i>
+                      <p>Henkaten</p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="/assymirror/matrix-skill/" class="nav-link">
+                      <i class="fa fa-address-book  nav-icon"></i>
+                      <p>Matrix Skill</p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="/assymirror/startstop/" class="nav-link">
+                      <i class="fa fa-clock  nav-icon"></i>
+                      <p>StartStop</p>
+                    </a>
+                  </li> -->
+              </ul>
+            </li>
+
+
+            <li class="nav-item has-treeview ">
+              <a href="#" class="nav-link">
+                <i class="nav-icon fas fa-tachometer-alt"></i>
+                <p>
+                  HCU Production
+                  <i class="right fas fa-angle-left"></i>
+                </p>
+              </a>
+              <ul class="nav nav-treeview ">
+                <li class="nav-item">
+                  <a href="/HealthCare/inspection/" class="nav-link">
+                    <i class="far fa-registered  nav-icon"></i>
+                    <p>Inspection Result Data</p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="/HealthCare/planning/" class="nav-link">
+                    <i class="far fa-calendar-check  nav-icon"></i>
+                    <p>Production Planning</p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="/HealthCare/realtimeall/" class="nav-link">
+                    <i class="fa fa-cog fa-spin fa-fw nav-icon"></i>
+                    <p>Realtime Dashboard</p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="/HealthCare/realtime/" class="nav-link">
+                    <i class="fas fa-fw fa-chart-pie  nav-icon"></i>
+                    <p>Realtime OEE</p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="/HealthCare/achievement/" class="nav-link">
+                    <i class="fas fa-fw fa-chart-line nav-icon"></i>
+                    <p>Achievement</p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="/HealthCare/rejection/" class="nav-link">
+                    <i class="fas fa-fw fa-chart-pie nav-icon"></i>
+                    <p>Rejection</p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="/HealthCare/production/checksheet/" class="nav-link">
+                    <i class="fas fa-fw fa-file nav-icon"></i>
+                    <p>Prod Checksheet</p>
+                  </a>
+                </li>
+
+
+                <!-- <li class="nav-item">
+                    <a href="/assymirror/weekly/" class="nav-link">
+                      <i class="far fa-calendar-alt  nav-icon"></i>
+                      <p>Range Resume</p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="/assymirror/achievement/" class="nav-link">
+                      <i class="fas fa-fw fa-chart-line nav-icon"></i>
+                      <p>Achievement</p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="/assymirror/rejection/" class="nav-link">
+                      <i class="fas fa-fw fa-chart-pie nav-icon"></i>
+                      <p>Rejection</p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="/assymirror/linestop/" class="nav-link">
+                      <i class="fas fa-fw fa-chart-area nav-icon"></i>
+                      <p>Line Stop</p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="/assymirror/henkaten/" class="nav-link">
+                      <i class="fa fa-user-circle  nav-icon"></i>
+                      <p>Henkaten</p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="/assymirror/matrix-skill/" class="nav-link">
+                      <i class="fa fa-address-book  nav-icon"></i>
+                      <p>Matrix Skill</p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="/assymirror/startstop/" class="nav-link">
+                      <i class="fa fa-clock  nav-icon"></i>
+                      <p>StartStop</p>
+                    </a>
+                  </li> -->
+              </ul>
+            </li>
+
+            <li class="nav-item has-treeview menu-open">
+              <a href="#" class="nav-link" style="background-color: rgba(33, 33, 255, 0.3) !important;">
+                <p>Plastic Injection</p>
+              </a>
+            </li>
+            <li class="nav-item has-treeview menu-closed">
+              <a href="#" class="nav-link">
+                <i class="nav-icon fas fa-truck"></i>
+                <p>
+                  Delivery
+                  <i class="right fas fa-angle-left"></i>
+                </p>
+              </a>
+              <ul class="nav nav-treeview ">
+                <li class="nav-item ">
+                  <a href="/PlasticInjection/Delivery/" class="nav-link">
+                    <i class="fas fa-truck-loading fa-fw"></i>
+                    <p>Monitoring Delivery</p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="/PlasticInjection/OrdervsDN/" class="nav-link">
+                    <i class="fas fa-laptop fa-fw"></i>
+                    <p>Order AHM vs OD SAP</p>
+                  </a>
+                </li>
+              </ul>
+            </li>
+            <li class="nav-item has-treeview menu-closed">
+              <a href="#" class="nav-link">
+                <i class="nav-icon fas fa-thumbs-up"></i>
+                <p>
+                  Warehouse Finish Good
+                  <i class="right fas fa-angle-left"></i>
+                </p>
+              </a>
+              <ul class="nav nav-treeview ">
+                <li class="nav-item">
+                  <a href="/PlasticInjection/GRFG/" class="nav-link">
+                    <i class="fa fa-cog fa-spin fa-fw"></i>
+                    <p>GR On Progress</p>
+                  </a>
+                </li>
+                <li class="nav-item">
+              </ul>
+              <ul class="nav nav-treeview ">
+                <li class="nav-item">
+                  <a href="/PlasticInjection/Stock/FG/" class="nav-link">
+                    <i class="fa fa-cog fa-spin fa-fw"></i>
+                    <p>Realtime Stock FG</p>
+                  </a>
+                </li>
+                <li class="nav-item">
+              </ul>
+              <!-- <ul class="nav nav-treeview ">
+                <li class="nav-item">
+                  <a href="/assyseat/goodreceipt/" class="nav-link">
+                    <i class="fa fa-cog fa-spin fa-fw"></i>
+                    <p>GR FG Seat 2W</p>
+                  </a>
+                </li>
+                <li class="nav-item">
+              </ul> -->
+            </li>
+            <li class="nav-item has-treeview menu-closed">
+              <a href="#" class="nav-link">
+                <i class="nav-icon fas fa-compass"></i>
+                <p>
+                  Quality System
+                  <i class="right fas fa-angle-left"></i>
+                </p>
+              </a>
+              <ul class="nav nav-treeview ">
+                <li class="nav-item ">
+                  <a href="/PlasticInjection/QC/DailyCheckSheet/" class="nav-link">
+                    <i class="fas fa-check-square  nav-icon"></i>
+                    <p>Daily IRD QC</p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="/PlasticInjection/QC/UpdateCheckSheet" class="nav-link">
+                    <i class="fas fa-edit nav-icon"></i>
+                    <p>Update IRD Form</p>
+                  </a>
+                </li>
+              </ul>
+            </li>
+            <li class="nav-item has-treeview menu-closed">
+              <a href="#" class="nav-link">
+                <i class="nav-icon fas fa-tachometer-alt"></i>
+                <p>
+                  PI Production
+                  <i class="right fas fa-angle-left"></i>
+                </p>
+              </a>
+              <ul class="nav nav-treeview ">
+                <li class="nav-item ">
+                  <a href="/PlasticInjection/OEE/Realtime/" class="nav-link">
+                    <i class="fas fa-calendar-week  nav-icon"></i>
+                    <p>Realtime OEE</p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="/PlasticInjection/OEE/" class="nav-link">
+                    <i class="fas fa-calendar-check  nav-icon"></i>
+                    <p>History OEE</p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="/PlasticInjection/Planning/" class="nav-link">
+                    <i class="fas fa-fw fa-calendar-alt nav-icon"></i>
+                    <p>Production Plan</p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="/PlasticInjection/HistoryHenkaten/" class="nav-link">
+                    <i class="fas fa-fw fa-user-lock nav-icon"></i>
+                    <p>Henkaten History</p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="/PlasticInjection/Achievement/" class="nav-link">
+                    <i class="fas fa-fw fa-snowflake nav-icon"></i>
+                    <p>Achievement</p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="/PlasticInjection/Linestop/Andon/" class="nav-link">
+                    <i class="fas fa-fw fa-chart-bar nav-icon"></i>
+                    <p>Linestop by Andon</p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="/PlasticInjection/Linestop/Machine/" class="nav-link">
+                    <i class="fas fa-fw fa-chart-area nav-icon"></i>
+                    <p>Linestop by Inject</p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="/PlasticInjection/Rejection/Range/" class="nav-link">
+                    <i class="fas fa-fw fa-chart-line nav-icon"></i>
+                    <p>Rejection Range</p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="/PlasticInjection/Rejection/Monthly/" class="nav-link">
+                    <i class="fas fa-fw fa-chart-line nav-icon"></i>
+                    <p>Rejection Monthly</p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="/PlasticInjection/Traceability/" class="nav-link">
+                    <i class="fas fa-fw fa-qrcode nav-icon"></i>
+                    <p>Traceability</p> 
+                  </a>
+                </li>
+
+
+
+
+              </ul>
+            </li>
+
+            <li class="nav-item has-treeview menu-closed">
+              <a href="#" class="nav-link">
+                <i class="nav-icon fas fa-puzzle-piece"></i>
+                <p>
+                  Assy Production
+                  <i class="right fas fa-angle-left"></i>
+                </p>
+              </a>
+              <ul class="nav nav-treeview ">
+                <li class="nav-item ">
+                  <a href="/PlasticInjection/Assy/CCH/" class="nav-link">
+                    <i class="fas fa-snowflake  nav-icon"></i>
+                    <p>Assy CCH</p>
+                  </a>
+                </li>
+              </ul>
+            </li>
+
+            <li class="nav-item has-treeview menu-closed">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-exchange-alt"></i>
+              <p>
+                Warehouse Mat&Comp
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview ">
+              <li class="nav-item ">
+                <a href="/Supply/Material/" class="nav-link">
+                  <i class="fas fa-haykal nav-icon"></i>
+                  <p>Material Supply</p>
+                </a>
+              </li>
+              <li class="nav-item ">
+                <a href="/Supply/Komponen/" class="nav-link">
+                  <i class="fas fa-flask  nav-icon"></i>
+                  <p>Component Supply</p>
+                </a>
+              </li>
+              <li class="nav-item ">
+                <a href="/Supply/Report/" class="nav-link">
+                  <i class="fas fa-file-powerpoint  nav-icon"></i>
+                  <p>Supply Report</p>
+                </a>
+              </li>
+              <li class="nav-item ">
+                <a href="/PlasticInjection/Stock/Material/" class="nav-link">
+                  <i class="fas fa-file-excel  nav-icon"></i>
+                  <p>Stock Material</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+            <li class="nav-item has-treeview menu-closed">
+              <a href="#" class="nav-link">
+                <i class="nav-icon fas fa-boxes"></i>
+                <p>
+                  Incoming
+                  <i class="right fas fa-angle-left"></i>
+                </p>
+              </a>
+              <ul class="nav nav-treeview ">
+                <li class="nav-item ">
+                  <a href="/PlasticInjection/QC/Incoming/" class="nav-link">
+                    <i class="fas fa-theater-masks nav-icon"></i>
+                    <p>QC Incoming</p>
+                  </a>
+                </li>
+                <li class="nav-item ">
+                  <a href="/Incoming/OrderSheet" class="nav-link">
+                    <i class="fas fa-passport nav-icon"></i>
+                    <p>Order Sheet</p>
+                  </a>
+                </li>
+                <li class="nav-item ">
+                  <a href="/Incoming/OrderSheet/Range/" class="nav-link">
+                    <i class="fas fa-file-excel nav-icon"></i>
+                    <p>Resume Scan OS</p>
+                  </a>
+                </li>
+              </ul>
+            </li>
+            <li class="nav-item has-treeview menu-closed">
+              <a href="#" class="nav-link">
+                <i class="nav-icon fas fa-recycle"></i>
+                <p>
+                  Recycle Material
+                  <i class="right fas fa-angle-left"></i>
+                </p>
+              </a>
+              <ul class="nav nav-treeview ">
+                <li class="nav-item ">
+                  <a href="/PlasticInjection/collection-ng/" class="nav-link">
+                    <i class="fas fa-box-open nav-icon"></i>
+                    <p>Collection NG</p>
+                  </a>
+                </li>
+              </ul>
+              <ul class="nav nav-treeview ">
+                <li class="nav-item ">
+                  <a href="/PlasticInjection/collection-ng/confirmation/" class="nav-link">
+                    <i class="fas fa-check-circle nav-icon"></i>
+                    <p>Collection NG Confirm</p>
+                  </a>
+                </li>
+              </ul>
+              <ul class="nav nav-treeview ">
+                <li class="nav-item ">
+                  <a href="/PlasticInjection/collection-ng/report/" class="nav-link">
+                    <i class="fas fa-file-excel nav-icon"></i>
+                    <p>Collection NG Report</p>
+                  </a>
+                </li>
+              </ul>
+            </li>
+            <li class="nav-item has-treeview menu-open">
+              <a href="#" class="nav-link" style="background-color: rgba(255, 181, 33, 0.3) !important;">
+                <p>PRO SAP</p>
+              </a>
+            </li>
+
+            <!-- <li class="nav-item">
+              <a href="/PRO/Print/" class="nav-link">
+                <i class="fa fa-print"></i>
+                <p>Print PRO</p>
+              </a>
+            </li> -->
+            <li class="nav-item">
+              <a href="/PRO/Upload/" class="nav-link">
+                <i class="fa fa-file-excel"></i>
+                <p>Upload PRO</p>
+              </a>
+            </li>
+
+        </nav>
+        <!-- /.sidebar-menu -->
+      </div>
+      <!-- /.sidebar -->
+    </aside>
+
+
+
+
+
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+      <!-- Content Header (Page header) -->
+
+
+
+
+
+
+
+
+
+
+      <!-- 
+    <div class="content-header" style="margin-top: 0px;">
+      <div class="container-fluid">
+         <div class="row mb-2">
+         <div class="col-sm-6">
+            <h1 class="m-0 text-dark">Dashboard v2</h1>
+          </div>
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a href="#">Home</a></li>
+              <li class="breadcrumb-item active">Dashboard v2</li>
+            </ol>
+          </div>
+        </div> 
+      </div> 
+    </div> -->
+
+      <!-- <br style=" line-height: 150%;"> -->
+      <hr style="margin-top: 10px;">
+      <div class="container-fluid">
+        <!-- /.content-header -->
+        
+
+<br>
+<br>
+<center>
+    <h3 style="font-family: poppins;"><b>Assy CCH</b></h3>
+</center>
+
+
+<br>
+<div class="card shadow mb-4">
+    <div class="card-header " style="background-color:rgba(54, 162, 235, 0.2);">
+      <h6 class="card-title">Detail Cycle Leak Tester CCH</h6>
+      <div class="card-tools">
+        <button type="button" class="btn btn-tool" data-card-widget="collapse">
+          <i class="fas fa-minus"></i>
+        </button>
+        <button type="button" class="btn btn-tool" data-card-widget="remove">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="table-responsive" style="font-size:12px;border-radius: 6px;">
+        <div id="chartdiv" style="height: 400px;"></div>
+      </div>
+    </div>
+  </div>
+<br>
+
+
+<div class="card shadow mb-4">
+  <div class="card-header " style="background-color:rgba(54, 162, 235, 0.2);">
+    <h6 class="card-title">Detail OEE Assy CCH</h6>
+    <div class="card-tools">
+      <button type="button" class="btn btn-tool" data-card-widget="collapse">
+        <i class="fas fa-minus"></i>
+      </button>
+      <button type="button" class="btn btn-tool" data-card-widget="remove">
+        <i class="fas fa-times"></i>
+      </button>
+    </div>
+  </div>
+  <div class="card-body">
+    <div class="row">
+      <div class="col-sm-4">
+        <h6>Shift 1</h6>
+        <table class="table table-bordered text-center">
+          <tbody><tr>
+            <td style="width: 25%">
+              <label class="text-italic">OEE</label>
+    
+              <h6 class="text-chart">
+                <span id="oee1" style="color: blue">00.00</span>
+                <sub>%</sub>
+              </h6>
+            </td>
+            <td style="width: 25%">
+              <label class="text-italic">Availability</label>
+       
+              <h6 class="text-chart">
+                <span id="avail1" style="color: blue">00.00</span>
+                <sub>%</sub>
+              </h6>
+            </td>
+            <td style="width: 25%">
+              <label class="text-italic">Performance</label>
+             
+              <h6 class="text-chart">
+                <span id="perf1" style="color: blue">00.00</span>
+                <sub>%</sub>
+              </h6>
+            </td>
+            <td style="width: 25%">
+              <label class="text-italic">Quality Rate</label>
+         
+              <h6 class="text-chart">
+                <span id="quality1" style="color: blue">00.00</span>
+                <sub>%</sub>
+              </h6>
+            </td>
+          </tr>
+          <tr>
+            <td style="width: 25%">
+              <label class="text-italic">Running Time</label>
+              <h6 style="margin: 0.25rem 0 0.1rem 0">
+                <span id="runtime1" style="color: blue">00.00</span>
+                <sub>min</sub>
+              </h6>
+            </td>
+            <td style="width: 25%">
+              <label class="text-italic">Line Stop</label>
+              <h6 style="margin: 0.25rem 0 0.1rem 0">
+                <span id="ls1" style="color: blue">0.00</span>
+                <sub>min</sub>
+              </h6>
+            </td>
+            <td style="width: 25%">
+              <label class="text-italic">Achievement</label>
+              <h6 style="margin: 0.25rem 0 0.75rem 0">
+                <span id="ach1" style="color: blue">0 / 0</span>
+                <sub>pcs</sub>
+              </h6>
+            </td>
+            <td style="width: 25%">
+              <label class="text-italic">Rejection</label>
+              <h6 style="margin: 0.25rem 0 0.1rem 0">
+                <span id="reject1" style="color: blue">0</span>
+                <sub>pcs</sub>
+              </h6>
+            </td>
+          </tr>
+        </tbody>
+      
+        </table>
+      </div>
+      <div class="col-sm-4">
+        <h6>Shift 2</h6>
+        <table class="table table-bordered text-center">
+          <tbody><tr>
+            <td style="width: 25%">
+              <label class="text-italic">OEE</label>
+    
+              <h6 class="text-chart">
+                <span id="oee2" style="color: blue">00.00</span>
+                <sub>%</sub>
+              </h6>
+            </td>
+            <td style="width: 25%">
+              <label class="text-italic">Availability</label>
+       
+              <h6 class="text-chart">
+                <span id="avail2" style="color: blue">00.00</span>
+                <sub>%</sub>
+              </h6>
+            </td>
+            <td style="width: 25%">
+              <label class="text-italic">Performance</label>
+             
+              <h6 class="text-chart">
+                <span id="perf2" style="color: blue">00.00</span>
+                <sub>%</sub>
+              </h6>
+            </td>
+            <td style="width: 25%">
+              <label class="text-italic">Quality Rate</label>
+         
+              <h6 class="text-chart">
+                <span id="quality2" style="color: blue">00.00</span>
+                <sub>%</sub>
+              </h6>
+            </td>
+          </tr>
+          <tr>
+            <td style="width: 25%">
+              <label class="text-italic">Running Time</label>
+              <h6 style="margin: 0.25rem 0 0.1rem 0">
+                <span id="runtime2" style="color: blue">00.00</span>
+                <sub>min</sub>
+              </h6>
+            </td>
+            <td style="width: 25%">
+              <label class="text-italic">Line Stop</label>
+              <h6 style="margin: 0.25rem 0 0.1rem 0">
+                <span id="ls2" style="color: blue">0.00</span>
+                <sub>min</sub>
+              </h6>
+            </td>
+            <td style="width: 25%">
+              <label class="text-italic">Achievement</label>
+              <h6 style="margin: 0.25rem 0 0.75rem 0">
+                <span id="ach2" style="color: blue">0 / 0</span>
+                <sub>pcs</sub>
+              </h6>
+            </td>
+            <td style="width: 25%">
+              <label class="text-italic">Rejection</label>
+              <h6 style="margin: 0.25rem 0 0.1rem 0">
+                <span id="reject2" style="color: blue">0</span>
+                <sub>pcs</sub>
+              </h6>
+            </td>
+          </tr>
+        </tbody>
+      
+        </table>
+      </div>
+      <div class="col-sm-4">
+        <h6>Shift 3</h6>
+        <table class="table table-bordered text-center">
+          <tbody><tr>
+            <td style="width: 25%">
+              <label class="text-italic">OEE</label>
+    
+              <h6 class="text-chart">
+                <span id="oee3" style="color: blue">00.00</span>
+                <sub>%</sub>
+              </h6>
+            </td>
+            <td style="width: 25%">
+              <label class="text-italic">Availability</label>
+       
+              <h6 class="text-chart">
+                <span id="avail3" style="color: blue">00.00</span>
+                <sub>%</sub>
+              </h6>
+            </td>
+            <td style="width: 25%">
+              <label class="text-italic">Performance</label>
+             
+              <h6 class="text-chart">
+                <span id="perf3" style="color: blue">00.00</span>
+                <sub>%</sub>
+              </h6>
+            </td>
+            <td style="width: 25%">
+              <label class="text-italic">Quality Rate</label>
+         
+              <h6 class="text-chart">
+                <span id="quality3" style="color: blue">00.00</span>
+                <sub>%</sub>
+              </h6>
+            </td>
+          </tr>
+          <tr>
+            <td style="width: 25%">
+              <label class="text-italic">Running Time</label>
+              <h6 style="margin: 0.25rem 0 0.1rem 0">
+                <span id="runtime3" style="color: blue">00.00</span>
+                <sub>min</sub>
+              </h6>
+            </td>
+            <td style="width: 25%">
+              <label class="text-italic">Line Stop</label>
+              <h6 style="margin: 0.25rem 0 0.1rem 0">
+                <span id="ls3" style="color: blue">0.00</span>
+                <sub>min</sub>
+              </h6>
+            </td>
+            <td style="width: 25%">
+              <label class="text-italic">Achievement</label>
+              <h6 style="margin: 0.25rem 0 0.75rem 0">
+                <span id="ach3" style="color: blue">0 / 0</span>
+                <sub>pcs</sub>
+              </h6>
+            </td>
+            <td style="width: 25%">
+              <label class="text-italic">Rejection</label>
+              <h6 style="margin: 0.25rem 0 0.1rem 0">
+                <span id="reject3" style="color: blue">0</span>
+                <sub>pcs</sub>
+              </h6>
+            </td>
+          </tr>
+        </tbody>
+      
+        </table>
+      </div>
+    </div>
+ 
+  </div>
+</div>
+
+
+
+<div class="card shadow mb-4">
+    <div class="card-header " style = "background-color:rgba(54, 162, 235, 0.2);">
+      <h6 class="card-title">Detail Linestop Andon</h6>
+      <div class="card-tools">
+        <button type="button" class="btn btn-tool" data-card-widget="collapse">
+          <i class="fas fa-minus"></i>
+        </button>
+        <button type="button" class="btn btn-tool" data-card-widget="remove">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+    </div>
+    <div class="card-body" >
+      <h6>Line Stop Andon</h6>
+      <div class="table-responsive" style="font-size:12px;border-radius: 6px;" >
+          <table class="table " id ="table_id" style="width:100%" >
+            <thead style="background-color: rgba(54, 162, 235, 0.2)">
+              <tr>
+                <th scope="col" class="text-center" style="color: black;width: 1px;">No</th>
+                <th scope="col" class="text-center" style="color: black;width: 1px;">No Mesin</th>  
+                <th scope="col" class="text-center" style="color: black;">Problem</th>  
+                <th scope="col" class="text-center" style="color: black;">Issued By</th>  
+                <th scope="col" class="text-center" style="color: black;">Dept</th>  
+                <th scope="col" class="text-center" style="color: black;">Corrective Action</th>  
+                <th scope="col" class="text-center" style="color: black;">Action By</th>   
+                <th scope="col" class="text-center" style="color: black;">Start Andon</th>        
+                <th scope="col" class="text-center" style="color: black;">Start Repair</th>        
+                <th scope="col" class="text-center" style="color: black;">Finish Repair</th>
+                <th scope="col" class="text-center" style="color: black;">Start Leader</th>        
+                <th scope="col" class="text-center" style="color: black;">Finish Leader</th>  
+                <th scope="col" class="text-center" style="color: black;">Close Andon</th> 
+                <th scope="col" class="text-center" style="color: black;">Duration (minutes)</th> 
+                <th scope="col" class="text-center" style="color: black;">Downtime (minutes)</th> 
+                <th scope="col" class="text-center" style="color: black;">Leader</th> 
+              </tr>
+            </thead>
+            <tbody class="text-center">
+            </tbody>
+          </table>
+          <br>
+          
+      </div>
+    </div>
+  </div>
+
+<div class="content">
+    <div class="row">
+        <div class="col-12">
+            <div class="card shadow mb-4">
+                <div class="card-header" style="background-color: #C8E9EB;">
+                    <div class="row">
+                        <div class="col-sm-6 text-left">
+                            <h6 class="card-title" style="font-size: 15pt; font-family: poppins; font-weight: bold;"> Assy CCH Achievement Shift 1</h6>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body text-center">
+                    <label class="btn btn-sm btn-simple" style="background-color: #C8E9EB;">
+                        <span class="d-none d-sm-block d-md-block d-lg-block d-xl-block" style="font-family: poppins">Shift 1</span>
+                    </label>
+                    <div id="planShift1"></div>
+                    <div id="Shift1" style="width: 100%;max-height: 400px;height: 100vh;"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="content">
+    <div class="row">
+        <div class="col-12">
+            <div class="card shadow mb-4">
+                <div class="card-header" style="background-color: #C0F3A6;">
+                    <div class="row">
+                        <div class="col-sm-6 text-left">
+                            <h6 class="card-title" style="font-size: 15pt; font-family: poppins; font-weight: bold;"> Assy CCH Achievement Shift 2</h6>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body text-center">
+                    <label class="btn btn-sm btn-simple" style="background-color: #C0F3A6;">
+                        <span class="d-none d-sm-block d-md-block d-lg-block d-xl-block" style="font-family: poppins">Shift 2</span>
+                    </label>
+                    <div id="planShift2"></div>
+                    <div id="Shift2" style="width: 100%;max-height: 400px;height: 100vh;"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="content">
+    <div class="row">
+        <div class="col-12">
+            <div class="card shadow mb-4">
+                <div class="card-header" style="background-color: #FFE99A;">
+                    <div class="row">
+                        <div class="col-sm-6 text-left">
+                            <h6 class="card-title" style="font-size: 15pt; font-family: poppins; font-weight: bold;"> Assy CCH Achievement Shift 3</h6>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body text-center">
+                    <label class="btn btn-sm btn-simple" style="background-color: #FFE99A;">
+                        <span class="d-none d-sm-block d-md-block d-lg-block d-xl-block" style="font-family: poppins">Shift 3</span>
+                    </label>
+                    <div id="planShift3"></div>
+                    <div id="Shift3" style="width: 100%;max-height: 400px;height: 100vh;"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+<link rel="stylesheet" type="text/css" href="/static/jquery.dataTables.css">
+<link rel="stylesheet" href="/static/vendor/datepicker/bootstrap-datepicker3.min.css">
+<link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>
+<link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
+
+<script src="/static/vendor/jquery/jquery.min.js"></script>
+<script src="/static/vendor/jquery-knob/jquery.knob.min.js"></script>
+<script src="/static/js/jquery.cookie.js"></script>
+<script type="text/javascript" charset="utf8" src="/static/jquery.dataTables.js"></script>
+<script type="text/javascript" charset="utf8" src="/static/moment-with-locales.min.js"></script>
+<script src="/static/vendor/datepicker/bootstrap-datepicker.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
+
+<script src="/static/amcharts4/core.js"></script>
+<script src="/static/amcharts4/charts.js"></script>
+<script src="/static/amcharts4/plugins/forceDirected.js"></script>
+<script src="/static/amcharts4/themes/animated.js"></script>
+
+<script src="/static/vendor/timetable/js/timetable.min.js"></script>
+
+
+
+<script>
+
+    var today = new Date();
+
+    // today.setDate(date.getDate());
+
+    $(document).ready(function () {
+        $.noConflict();
+        // $('#myTab li:last-child button').tab('show')
+        $('.datepicker').datepicker({ setDate: today, format: 'yyyy-mm-dd', autoclose: true, toggleActive: true, todayHighlight: true, });
+        $('.datepicker').datepicker('update', today);
+        create_post();
+    });
+
+
+    function create_post() {
+
+        $('#load').show();
+
+        var csrftoken = $.cookie('csrftoken');
+
+        function csrfSafeMethod(method) {
+            // these HTTP methods do not require CSRF protection
+            return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
+        }
+
+
+
+        $.ajaxSetup({
+            beforeSend: function (xhr, settings) {
+                if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
+                    xhr.setRequestHeader("X-CSRFToken", csrftoken);
+                }
+            }
+        });
+
+        $.ajax({
+            url: 'chartdata/',
+            type: "POST",
+            data: {
+
+                dateinput: document.getElementById("dateinput").value,
+
+
+            },
+
+            success: function (datatable) {
+                console.log(datatable);
+
+
+
+
+               // try {
+                    document.getElementById("avail1").innerHTML = datatable.OEE[22];
+                    document.getElementById("avail2").innerHTML = datatable.OEE[27];
+                    document.getElementById("avail3").innerHTML = datatable.OEE[32];
+
+                    document.getElementById("perf1").innerHTML = datatable.OEE[23];
+                    document.getElementById("perf2").innerHTML = datatable.OEE[28];
+                    document.getElementById("perf3").innerHTML = datatable.OEE[33];
+
+                    document.getElementById("quality1").innerHTML = datatable.OEE[24];
+                    document.getElementById("quality2").innerHTML = datatable.OEE[29];
+                    document.getElementById("quality3").innerHTML = datatable.OEE[34];
+
+                    document.getElementById("oee1").innerHTML = datatable.OEE[25];
+                    document.getElementById("oee2").innerHTML = datatable.OEE[30];
+                    document.getElementById("oee3").innerHTML = datatable.OEE[35];
+
+                    document.getElementById("runtime1").innerHTML = datatable.OEE[18].toFixed(0);
+                    document.getElementById("runtime2").innerHTML = datatable.OEE[19].toFixed(0);
+                    document.getElementById("runtime3").innerHTML = datatable.OEE[20].toFixed(0);
+
+                    document.getElementById("ach1").innerHTML = datatable.OEE[12] +"/"+datatable.OEE[7];
+                    document.getElementById("ach2").innerHTML = datatable.OEE[13] +"/"+datatable.OEE[8];
+                    document.getElementById("ach3").innerHTML = datatable.OEE[14] +"/"+datatable.OEE[9];
+
+
+                    document.getElementById("reject1").innerHTML = datatable.OEE[15];
+                    document.getElementById("reject2").innerHTML = datatable.OEE[16];
+                    document.getElementById("reject3").innerHTML = datatable.OEE[17];
+
+                    document.getElementById("ls1").innerHTML = datatable.OEE[36];
+                    document.getElementById("ls2").innerHTML = datatable.OEE[37];
+                    document.getElementById("ls3").innerHTML = datatable.OEE[38];
+                // }
+                // catch(err) {
+                //     document.getElementById("avail1").innerHTML = "0";
+                //     document.getElementById("avail2").innerHTML = "0";
+                //     document.getElementById("avail3").innerHTML = "0";
+
+                //     document.getElementById("perf1").innerHTML = "0";
+                //     document.getElementById("perf2").innerHTML = "0";
+                //     document.getElementById("perf3").innerHTML = "0";
+
+                //     document.getElementById("quality1").innerHTML = "0";
+                //     document.getElementById("quality2").innerHTML = "0";
+                //     document.getElementById("quality3").innerHTML = "0";
+
+                //     document.getElementById("oee1").innerHTML = "0";
+                //     document.getElementById("oee2").innerHTML = "0";
+                //     document.getElementById("oee3").innerHTML = "0";
+
+                //     document.getElementById("runtime1").innerHTML = "0";
+                //     document.getElementById("runtime2").innerHTML = "0";
+                //     document.getElementById("runtime3").innerHTML = "0";
+
+                //     document.getElementById("ach1").innerHTML = "0" +"/"+"0";
+                //     document.getElementById("ach2").innerHTML = "0" +"/"+"0";
+                //     document.getElementById("ach3").innerHTML = "0" +"/"+"0";
+
+
+                //     document.getElementById("reject1").innerHTML = "0";
+                //     document.getElementById("reject2").innerHTML = "0";
+                //     document.getElementById("reject3").innerHTML = "0";
+                // }
+
+
+
+                am4core.disposeAllCharts();
+
+                // LINE CHART SHIFT 1
+                var chartShift1 = am4core.create("Shift1", am4charts.XYChart);
+                chartShift1.data = datatable.Shift1;
+                
+                var categoryAxisShift1 = chartShift1.xAxes.push(new am4charts.CategoryAxis());
+                categoryAxisShift1.renderer.grid.template.location = 0;
+                categoryAxisShift1.renderer.ticks.template.disabled = true;
+
+                categoryAxisShift1.renderer.line.opacity = 0;
+                categoryAxisShift1.renderer.grid.template.disabled = true;
+                categoryAxisShift1.renderer.minGridDistance = 100;
+                categoryAxisShift1.dataFields.category = "DateTimeCheck";
+                categoryAxisShift1.startLocation = 0.0;
+                categoryAxisShift1.endLocation = 1.5;
+                categoryAxisShift1.title.text = 'Waktu';
+
+                categoryAxisShift1.renderer.labels.template.location = 0.45;
+                categoryAxisShift1.renderer.labels.template.rotation = -60;
+                
+                var valueAxisShift1 = chartShift1.yAxes.push(new am4charts.ValueAxis());
+                //valueAxisweek.tooltip.disabled = true;
+                valueAxisShift1.renderer.line.opacity = 0;
+                valueAxisShift1.renderer.ticks.template.disabled = true;
+                valueAxisShift1.title.text = 'Value Leak';
+                valueAxisShift1.max = 2;
+
+                    // ADD RANGE LINE
+                    var range = valueAxisShift1.axisRanges.create();
+                    range.value = 0.7;
+                    range.grid.stroke = am4core.color("#e63946");
+                    range.grid.strokeOpacity = 1;
+                    range.label.inside = true;
+                    range.label.text = "UL NG";
+
+                    var negativeRange = valueAxisShift1.axisRanges.create();
+                    negativeRange.value = -0.7; 
+                    negativeRange.grid.stroke = am4core.color("#e63946");
+                    negativeRange.grid.strokeOpacity = 1;
+                    negativeRange.label.inside = true;
+                    negativeRange.label.text = "LL NG";
+
+                var lineSeriesShift1 = chartShift1.series.push(new am4charts.LineSeries());
+                lineSeriesShift1.dataFields.categoryX = "DateTimeCheck";
+                lineSeriesShift1.dataFields.valueY = "ValueLeak00";
+                lineSeriesShift1.tooltipText = "{waktu}" + "\n\n{MPIDCheck}\n\nValue Position 00 \nValue Leak : {ValueLeak00} \n\nResult : {Result00}";
+                lineSeriesShift1.tooltip.background.fillOpacity = 0.7;
+                lineSeriesShift1.tooltip.getFillFromObject = false;
+                lineSeriesShift1.tooltip.background.fill = am4core.color("#C37CE4");
+                lineSeriesShift1.strokeWidth = 1;
+                lineSeriesShift1.stroke = am4core.color("#C37CE4");
+                lineSeriesShift1.propertyFields.stroke = "lineColor";
+                lineSeriesShift1.legendSettings.labelText = "Value Position (00)";
+
+                var lineSeriesShift11 = chartShift1.series.push(new am4charts.LineSeries());
+                lineSeriesShift11.dataFields.categoryX = "DateTimeCheck"; //manggil data tanggal
+                lineSeriesShift11.dataFields.valueY = "ValueLeak01";
+                lineSeriesShift11.tooltipText = "{waktu}" + "\n\n{MPIDCheck}\n\nValue Position 01 \nValue Leak : {ValueLeak01}\n\nResult : {Result01}";
+                lineSeriesShift11.tooltip.background.fillOpacity = 0.7;
+                lineSeriesShift11.tooltip.getFillFromObject = false;
+                lineSeriesShift11.tooltip.background.fill = am4core.color("#827548");
+                // lineSeriesweek1.fillOpacity = 0.5;
+                lineSeriesShift11.stroke = am4core.color("#827548");
+                lineSeriesShift11.strokeWidth = 1;
+                lineSeriesShift11.propertyFields.stroke = "lineColor";
+
+                lineSeriesShift11.legendSettings.labelText = "Value Position (01)";
+
+                var bulletShift1 = lineSeriesShift1.bullets.push(new am4charts.CircleBullet());
+                bulletShift1.circle.radius = 0.7;
+                bulletShift1.circle.fill = am4core.color("#fff");
+                bulletShift1.circle.stroke = am4core.color("#C37CE4");
+                bulletShift1.circle.strokeWidth = 0.3;
+
+                    // SCROLL X
+                    chartShift1.scrollbarX = new am4core.Scrollbar();
+                    chartShift1.scrollbarX.parent = chartShift1.bottomAxesContainer;
+                    chartShift1.scrollbarX.minHeight = 15;
+                    chartShift1.scrollbarX.background.fill = am4core.color("#888888");
+                    chartShift1.scrollbarX.background.fillOpacity = 0.2;
+                    chartShift1.scrollbarX.thumb.background.fill = am4core.color("#36A2EB");
+                    chartShift1.scrollbarX.thumb.background.fillOpacity = 0.4;
+                    chartShift1.scrollbarX.start = 0.1; 
+                    chartShift1.scrollbarX.end = 0.
+
+                var bulletShift11 = lineSeriesShift11.bullets.push(new am4charts.CircleBullet());
+                bulletShift11.circle.radius = 0.7;
+                bulletShift11.circle.fill = am4core.color("#fff");
+                bulletShift11.circle.stroke = am4core.color("#827548");
+                bulletShift11.circle.strokeWidth = 0.3;
+
+                chartShift1.cursor = new am4charts.XYCursor();
+                chartShift1.cursor.behavior = "panX";
+                chartShift1.cursor.lineX.opacity = 0;
+                chartShift1.cursor.lineY.opacity = 0;
+
+                chartShift1.legend = new am4charts.Legend();
+                chartShift1.legend.position = "top";
+
+                // LINE CHART SHIFT 2
+                var chartShift2 = am4core.create("Shift2", am4charts.XYChart);
+                chartShift2.data = datatable.Shift2;
+
+                var categoryAxisShift2 = chartShift2.xAxes.push(new am4charts.CategoryAxis());
+                categoryAxisShift2.renderer.grid.template.location = 0;
+                categoryAxisShift2.renderer.ticks.template.disabled = true;
+
+                categoryAxisShift2.renderer.line.opacity = 0;
+                categoryAxisShift2.renderer.grid.template.disabled = true;
+                categoryAxisShift2.renderer.minGridDistance = 100;
+                categoryAxisShift2.dataFields.category = "DateTimeCheck";
+                categoryAxisShift2.startLocation = 0.0;
+                categoryAxisShift2.endLocation = 1.5;
+                categoryAxisShift2.title.text = 'Waktu';
+
+                categoryAxisShift2.renderer.labels.template.location = 0.45;
+                categoryAxisShift2.renderer.labels.template.rotation = -60;
+                
+                var valueAxisShift2 = chartShift2.yAxes.push(new am4charts.ValueAxis());
+                valueAxisShift2.renderer.line.opacity = 0;
+                valueAxisShift2.renderer.ticks.template.disabled = true;
+                valueAxisShift2.title.text = 'Value Leak';
+                valueAxisShift2.max = 2;
+                    
+                    // ADD RANGE LINE
+                    var range = valueAxisShift2.axisRanges.create();
+                    range.value = 0.7;
+                    range.grid.stroke = am4core.color("#e63946");
+                    range.grid.strokeOpacity = 1;
+                    range.label.inside = true;
+                    range.label.text = "UL NG";
+
+                    var negativeRange = valueAxisShift2.axisRanges.create();
+                    negativeRange.value = -0.7;
+                    negativeRange.grid.stroke = am4core.color("#e63946");
+                    negativeRange.grid.strokeOpacity = 1;
+                    negativeRange.label.inside = true;
+                    negativeRange.label.text = "LL NG";
+                    
+                var lineSeriesShift2 = chartShift2.series.push(new am4charts.LineSeries());
+                lineSeriesShift2.dataFields.categoryX = "DateTimeCheck";
+                lineSeriesShift2.dataFields.valueY = "ValueLeak00";
+                lineSeriesShift2.tooltipText = "{waktu}" + "\n\n{MPIDCheck}\n\nValue Position 00 \n Value Leak : {ValueLeak00} \n\nResult : {Result00}";
+                lineSeriesShift2.tooltip.background.fillOpacity = 0.7;
+                lineSeriesShift2.tooltip.getFillFromObject = false;
+                lineSeriesShift2.tooltip.background.fill = am4core.color("#C37CE4");
+                lineSeriesShift2.strokeWidth = 1;
+                lineSeriesShift2.stroke = am4core.color("#C37CE4");
+                lineSeriesShift2.propertyFields.stroke = "lineColor";
+                lineSeriesShift2.legendSettings.labelText = "Value Position (00)";
+
+                var lineSeriesShift21 = chartShift2.series.push(new am4charts.LineSeries());
+                lineSeriesShift21.dataFields.categoryX = "DateTimeCheck";
+                lineSeriesShift21.dataFields.valueY = "ValueLeak01";
+                lineSeriesShift21.tooltipText = "{waktu}" + "\n\n{MPIDCheck}\n\nValue Position 01 \n Value Leak : {ValueLeak01} \n\nResult : {Result01}";
+                lineSeriesShift21.tooltip.background.fillOpacity = 0.7;
+                lineSeriesShift21.tooltip.getFillFromObject = false;
+                lineSeriesShift21.tooltip.background.fill = am4core.color("#827548");
+                lineSeriesShift21.stroke = am4core.color("#827548");
+                lineSeriesShift21.strokeWidth = 1;
+                lineSeriesShift21.propertyFields.stroke = "lineColor";
+
+                lineSeriesShift21.legendSettings.labelText = "Value Position (01)";
+
+                var bulletShift2 = lineSeriesShift2.bullets.push(new am4charts.CircleBullet());
+                bulletShift2.circle.radius = 0.7;
+                bulletShift2.circle.fill = am4core.color("#fff");
+                bulletShift2.circle.stroke = am4core.color("#C37CE4");
+                bulletShift2.circle.strokeWidth = 0.3;
+                
+                    // SCROLL X
+                    chartShift2.scrollbarX = new am4core.Scrollbar();
+                    chartShift2.scrollbarX.parent = chartShift2.bottomAxesContainer;
+                    chartShift2.scrollbarX.minHeight = 15;
+                    chartShift2.scrollbarX.background.fill = am4core.color("#888888");
+                    chartShift2.scrollbarX.background.fillOpacity = 0.2;
+                    chartShift2.scrollbarX.thumb.background.fill = am4core.color("#36A2EB");
+                    chartShift2.scrollbarX.thumb.background.fillOpacity = 0.4;
+                    chartShift2.scrollbarX.start = 0.1; 
+                    chartShift2.scrollbarX.end = 0.
+
+                var bulletShift21 = lineSeriesShift21.bullets.push(new am4charts.CircleBullet());
+                bulletShift21.circle.radius = 0.7;
+                bulletShift21.circle.fill = am4core.color("#fff");
+                bulletShift21.circle.stroke = am4core.color("#827548");
+                bulletShift21.circle.strokeWidth = 0.3;
+
+                chartShift2.cursor = new am4charts.XYCursor();
+                chartShift2.cursor.behavior = "panX";
+                chartShift2.cursor.lineX.opacity = 0;
+                chartShift2.cursor.lineY.opacity = 0;
+
+                chartShift2.legend = new am4charts.Legend();
+                chartShift2.legend.position = "top";
+
+                // LINE CHART SHIFT 3
+                var chartShift3 = am4core.create("Shift3", am4charts.XYChart);
+                chartShift3.data = datatable.Shift3;
+
+                var categoryAxisShift3 = chartShift3.xAxes.push(new am4charts.CategoryAxis());
+                categoryAxisShift3.renderer.grid.template.location = 0;
+                categoryAxisShift3.renderer.ticks.template.disabled = true;
+
+                categoryAxisShift3.renderer.line.opacity = 0;
+                categoryAxisShift3.renderer.grid.template.disabled = true;
+                categoryAxisShift3.renderer.minGridDistance = 100;
+                categoryAxisShift3.dataFields.category = "DateTimeCheck";
+                categoryAxisShift3.startLocation = 0.0;
+                categoryAxisShift3.endLocation = 1.5;
+                categoryAxisShift3.title.text = 'Waktu';
+
+                categoryAxisShift3.renderer.labels.template.location = 0.45;
+                categoryAxisShift3.renderer.labels.template.rotation = -60;
+                
+                var valueAxisShift3 = chartShift3.yAxes.push(new am4charts.ValueAxis());
+                valueAxisShift3.renderer.line.opacity = 0;
+                valueAxisShift3.renderer.ticks.template.disabled = true;
+                valueAxisShift3.title.text = 'Value Leak';
+                valueAxisShift3.max = 2;
+
+                    // ADD RANGE LINE
+                    var range = valueAxisShift3.axisRanges.create();
+                    range.value = 0.7;
+                    range.grid.stroke = am4core.color("#e63946");
+                    range.grid.strokeOpacity = 1;
+                    range.label.inside = true;
+                    range.label.text = "UL NG";
+
+                    var negativeRange = valueAxisShift3.axisRanges.create();
+                    negativeRange.value = -0.7; 
+                    negativeRange.grid.stroke = am4core.color("#e63946");
+                    negativeRange.grid.strokeOpacity = 1;
+                    negativeRange.label.inside = true;
+                    negativeRange.label.text = "LL NG";
+
+                var lineSeriesShift3 = chartShift3.series.push(new am4charts.LineSeries());
+                lineSeriesShift3.dataFields.categoryX = "DateTimeCheck";
+                lineSeriesShift3.dataFields.valueY = "ValueLeak00";
+                lineSeriesShift3.tooltipText = "{waktu}" + "\n\n{MPIDCheck}\n\nValue Position 00 \nValue Leak : {ValueLeak00} \n\nResult : {Result00}";
+                lineSeriesShift3.tooltip.background.fillOpacity = 0.7;
+                lineSeriesShift3.tooltip.getFillFromObject = false;
+                lineSeriesShift3.tooltip.background.fill = am4core.color("#C37CE4");
+                lineSeriesShift3.strokeWidth = 1;
+                lineSeriesShift3.stroke = am4core.color("#C37CE4");
+                lineSeriesShift3.propertyFields.stroke = "lineColor";
+                lineSeriesShift3.legendSettings.labelText = "Value Position (00)";
+
+                var lineSeriesShift31 = chartShift3.series.push(new am4charts.LineSeries());
+                lineSeriesShift31.dataFields.categoryX = "DateTimeCheck"; 
+                lineSeriesShift31.dataFields.valueY = "ValueLeak01";
+                lineSeriesShift31.tooltipText = "{waktu}" + "\n\n{MPIDCheck}\n\nValue Position 01 \nValue Leak 01      : {ValueLeak01} \n\nResult 01       : {Result01}";
+                lineSeriesShift31.tooltip.background.fillOpacity = 0.7;
+                lineSeriesShift31.tooltip.getFillFromObject = false;
+                lineSeriesShift31.tooltip.background.fill = am4core.color("#827548");
+                lineSeriesShift31.stroke = am4core.color("#827548");
+                lineSeriesShift31.strokeWidth = 1;
+                lineSeriesShift31.propertyFields.stroke = "lineColor";
+                lineSeriesShift31.legendSettings.labelText = "Value Position (01)";
+
+                var bulletShift3 = lineSeriesShift3.bullets.push(new am4charts.CircleBullet());
+                bulletShift3.circle.radius = 0.7;
+                bulletShift3.circle.fill = am4core.color("#fff");
+                bulletShift3.circle.stroke = am4core.color("#C37CE4");
+                bulletShift3.circle.strokeWidth = 0.3;
+
+                    // SCROLL X
+                    chartShift3.scrollbarX = new am4core.Scrollbar();
+                    chartShift3.scrollbarX.parent = chartShift3.bottomAxesContainer;
+                    chartShift3.scrollbarX.minHeight = 15;
+                    chartShift3.scrollbarX.background.fill = am4core.color("#888888");
+                    chartShift3.scrollbarX.background.fillOpacity = 0.2;
+                    chartShift3.scrollbarX.thumb.background.fill = am4core.color("#36A2EB");
+                    chartShift3.scrollbarX.thumb.background.fillOpacity = 0.4;
+                    chartShift3.scrollbarX.start = 0.1; 
+                    chartShift3.scrollbarX.end = 0.
+
+                var bulletShift31 = lineSeriesShift31.bullets.push(new am4charts.CircleBullet());
+                bulletShift31.circle.radius = 0.7;
+                bulletShift31.circle.fill = am4core.color("#fff");
+                bulletShift31.circle.stroke = am4core.color("#827548");
+                bulletShift31.circle.strokeWidth = 0.3;
+
+                chartShift3.cursor = new am4charts.XYCursor();
+                chartShift3.cursor.behavior = "panX";
+                chartShift3.cursor.lineX.opacity = 0;
+                chartShift3.cursor.lineY.opacity = 0;
+
+                chartShift3.legend = new am4charts.Legend();
+                chartShift3.legend.position = "top";
+                
+
+                
+                let planShift1 = document.getElementById('planShift1');
+                const Datapart1 = datatable.Judgement1.Datapart;
+                const PIC1 = datatable.Judgement1.PIC;
+                const OK1 = datatable.Judgement1.OK;
+                const NG1 = datatable.Judgement1.NG;
+                
+                // if (PIC1 !== '==' && !PIC1.includes('==')){
+                if (datatable.Planing.length > 0) {
+                    if((OK1 / datatable.Planing[0][12] * 100 >= 100)){
+                        planShift1.innerHTML = "<div class='card-body'>" +
+                        "<div class='row'>" +
+                        "<div class='col-sm-3'> <button class='btn' style='height: 80px; width: 70%; background-color: #e8dab2;font-weight: bold'>" +
+                            datatable.Planing[0][5] +
+                        "</button></div>\n" +
+                        "<div class='col-sm-3'> <button class='btn' style='height: 80px; width: 70%; background-color: #dedbd2;'>" +
+                            PIC1 +
+                        "</button></div>\n" +
+                        "<div class='col-sm-3'> <button class='btn btn-warning' style='height: 80px; width: 35%;'> <span style='font-weight: bold;'> Planning: " +
+                        datatable.Planing[0][12] +  " </span></button> \n <button class='btn btn-success' style='height: 80px; width: 30%;'>OK: <br> " + OK1 + " </button> \n <button class='btn btn-danger' style='height: 80px; width: 30%;'> NG: <br>"  + NG1+
+                        "</button></div>\n" +
+                        "<div class='col-sm-3'> <button class='btn' style='height: 80px; width: 70%; background-color: #a7c957;'> <span style='font-weight: bold;'> Achievement : </span>" +
+                            parseFloat((OK1 / datatable.Planing[0][12] * 100).toFixed(2)) + " %" +
+                        "</button></div>\n" +
+                        "</div>\n" +
+                        "</div>";
+                    } else if (OK1 / datatable.Planing[0][12] * 100 >= 90 && OK1 / datatable.Planing[0][12] * 100 < 100) {
+                        planShift1.innerHTML = "<div class='card-body'>" +
+                        "<div class='row'>" +
+                        "<div class='col-sm-3'> <button class='btn' style='height: 80px; width: 70%; background-color: #e8dab2;font-weight: bold'>" +
+                            datatable.Planing[0][5] +
+                        "</button></div>\n" +
+                        "<div class='col-sm-3'> <button class='btn' style='height: 80px; width: 70%; background-color: #dedbd2;'>" +
+                            PIC1 +
+                        "</button></div>\n" +
+                        "<div class='col-sm-3'> <button class='btn btn-warning' style='height: 80px; width: 35%;'> <span style='font-weight: bold;'> Planning: " +
+                        datatable.Planing[0][12] +  " </span></button> \n <button class='btn btn-success' style='height: 80px; width: 30%;'>OK: <br>" + OK1 + " </button> \n <button class='btn btn-danger' style='height: 80px; width: 30%;'> NG: <br>"  + NG1+
+                        "</button></div>\n" +
+                        "<div class='col-sm-3'> <button class='btn' style='height: 80px; width: 70%; background-color: #ffee32;'> <span style='font-weight: bold;'> Achievement : </span>" +
+                            parseFloat((OK1 / datatable.Planing[0][12] * 100).toFixed(2)) + " %" +
+                        "</button></div>\n" +
+                        "</div>\n" +
+                        "</div>";
+                    } else if ((OK1 / datatable.Planing[0][12] * 100 < 90)) {
+                        planShift1.innerHTML = "<div class='card-body'>" +
+                        "<div class='row'>" +
+                        "<div class='col-sm-3'> <button class='btn' style='height: 80px; width: 70%; background-color: #e8dab2;font-weight: bold'>" +
+                            datatable.Planing[0][5] +
+                        "</button></div>\n" +
+                        "<div class='col-sm-3'> <button class='btn' style='height: 80px; width: 70%; background-color: #dedbd2;'>" +
+                            PIC1 +
+                        "</button></div>\n" +
+                        "<div class='col-sm-3'> <button class='btn btn-warning' style='height: 80px; width: 35%;'> <span style='font-weight: bold;'> Planning: " +
+                        datatable.Planing[0][12] +  " </span></button> \n <button class='btn btn-success' style='height: 80px; width: 30%;'>OK: <br> " + OK1 + " </button> \n <button class='btn btn-danger' style='height: 80px; width: 30%;'> NG: <br>"  + NG1+
+                        "</button></div>\n" +
+                        "<div class='col-sm-3'> <button class='btn' style='height: 80px; width: 70%; background-color: #fb8b24;'> <span style='font-weight: bold;'> Achievement : </span>" +
+                            parseFloat((OK1 / datatable.Planing[0][12] * 100).toFixed(2)) + " %" +
+                        "</button></div>\n" +
+                        "</div>\n" +
+                        "</div>";
+                    }
+                } else if (datatable.Planing.length == 0) {
+                    planShift1.innerHTML = "<div class='card-body'>" +
+                        "<div class='row'>" +
+                        "<div class='col-sm-3'> <button class='btn' style='height: 80px; width: 70%; background-color: #e8dab2;font-weight: bold'>" +
+                            'tidak ada data' +
+                        "</button></div>\n" +
+                        "<div class='col-sm-3'> <button class='btn' style='height: 80px; width: 70%; background-color: #dedbd2;'>" +
+                            PIC1 +
+                        "</button></div>\n" +
+                        "<div class='col-sm-3'> <button class='btn btn-warning' style='height: 80px; width: 35%;'> <span style='font-weight: bold;'> Planning: " +
+                            '0' +  " </span></button> \n <button class='btn btn-success' style='height: 80px; width: 30%;'>OK: <br>" + OK1 + " </button> \n <button class='btn btn-danger' style='height: 80px; width: 30%;'> NG: <br>"  + NG1+
+                        "</button></div>\n" +
+                        "<div class='col-sm-3'> <button class='btn btn-secondary' style='height: 80px; width: 70%;'> <span style='font-weight: bold;'> Achievement : </span>" +
+                            parseFloat((OK1 / datatable.Planing[12] * 100).toFixed(2)) + " %" +
+                        "</button></div>\n" +
+                        "</div>\n" +
+                        "</div>";
+                } else {
+                    planShift1.innerHTML = "<div class='card-body'>" +
+                        "<div class='row'>" +
+                        "<div class='col-sm-3'> <button class='btn' style='height: 80px; width: 70%; background-color: #e8dab2;font-weight: bold'>" +
+                            'tidak ada data' +
+                        "</button></div>\n" +
+                        "<div class='col-sm-3'> <button class='btn' style='height: 80px; width: 70%; background-color: #dedbd2;'>" +
+                            PIC1 +
+                        "</button></div>\n" +
+                        "<div class='col-sm-3'> <button class='btn btn-warning' style='height: 80px; width: 35%;'> <span style='font-weight: bold;'> Planning: " +
+                            'tidak ada data' +  " </span></button> \n <button class='btn btn-success' style='height: 80px; width: 30%;'>OK: <br>" + OK1 + " </button> \n <button class='btn btn-danger' style='height: 80px; width: 30%;'> NG: <br>"  + NG1+
+                        "</button></div>\n" +
+                        "<div class='col-sm-3'> <button class='btn btn-secondary' style='height: 80px; width: 70%;'> <span style='font-weight: bold;'> Achievement : </span>" +
+                            parseFloat((OK1 / datatable.Planing[12] * 100).toFixed(2)) + " %" +
+                        "</button></div>\n" +
+                        "</div>\n" +
+                        "</div>";
+                }
+                // }
+              
+                let planShift2 = document.getElementById('planShift2');
+                const Datapart2 = datatable.Judgement2.Datapart;
+                const PIC2 = datatable.Judgement2.PIC;
+                const OK2 = datatable.Judgement2.OK;
+                const NG2 = datatable.Judgement2.NG;
+                if (datatable.Planing.length > 0) {
+                    if((OK2 / datatable.Planing[0][13] * 100 >= 100)){
+                        planShift2.innerHTML = "<div class='card-body'>" +
+                        "<div class='row'>" +
+                        "<div class='col-sm-3'> <button class='btn' style='height: 80px; width: 70%; background-color: #e8dab2;font-weight: bold'>" +
+                            datatable.Planing[0][5] +
+                        "</button></div>\n" +
+                        "<div class='col-sm-3'> <button class='btn' style='height: 80px; width: 70%; background-color: #dedbd2;'>" +
+                            PIC2 +
+                        "</button></div>\n" +
+                        "<div class='col-sm-3'> <button class='btn btn-warning' style='height: 80px; width: 35%;'> <span style='font-weight: bold;'> Planning: " +
+                        datatable.Planing[0][13] +  " </span></button> \n <button class='btn btn-success' style='height: 80px; width: 30%;'>OK: <br>" + OK2 + " </button> \n <button class='btn btn-danger' style='height: 80px; width: 30%;'> NG: <br>"  + NG2+
+                        "</button></div>\n" +
+                        "<div class='col-sm-3'> <button class='btn' style='height: 80px; width: 70%; background-color: #a7c957;'> <span style='font-weight: bold;'> Achievement : </span>" +
+                            parseFloat((OK2 / datatable.Planing[0][13] * 100).toFixed(2)) + " %" +
+                        "</button></div>\n" +
+                        "</div>\n" +
+                        "</div>";
+                    } else if (OK2 / datatable.Planing[0][13] * 100 >= 90 && OK2 / datatable.Planing[0][13] * 100 < 100) {
+                        planShift2.innerHTML = "<div class='card-body'>" +
+                        "<div class='row'>" +
+                        "<div class='col-sm-3'> <button class='btn' style='height: 80px; width: 70%; background-color: #e8dab2;font-weight: bold'>" +
+                            datatable.Planing[0][5] +
+                        "</button></div>\n" +
+                        "<div class='col-sm-3'> <button class='btn' style='height: 80px; width: 70%; background-color: #dedbd2;'>" +
+                            PIC2 +
+                        "</button></div>\n" +
+                        "<div class='col-sm-3'> <button class='btn btn-warning' style='height: 80px; width: 35%;'> <span style='font-weight: bold;'> Planning: " +
+                        datatable.Planing[0][13] +  " </span></button> \n <button class='btn btn-success' style='height: 80px; width: 30%;'>OK: <br>" + OK2 + " </button> \n <button class='btn btn-danger' style='height: 80px; width: 30%;'> NG: <br>"  + NG2+
+                        "</button></div>\n" +
+                        "<div class='col-sm-3'> <button class='btn' style='height: 80px; width: 70%; background-color: #ffee32;'> <span style='font-weight: bold;'> Achievement : </span>" +
+                            parseFloat((OK2 / datatable.Planing[0][13] * 100).toFixed(2)) + " %" +
+                        "</button></div>\n" +
+                        "</div>\n" +
+                        "</div>";
+                    } else if ((OK2 / datatable.Planing[0][13] * 100 < 90)) {
+                        planShift2.innerHTML = "<div class='card-body'>" +
+                        "<div class='row'>" +
+                        "<div class='col-sm-3'> <button class='btn' style='height: 80px; width: 70%; background-color: #e8dab2;font-weight: bold'>" +
+                            datatable.Planing[0][5] +
+                        "</button></div>\n" +
+                        "<div class='col-sm-3'> <button class='btn' style='height: 80px; width: 70%; background-color: #dedbd2;'>" +
+                            PIC2 +
+                        "</button></div>\n" +
+                        "<div class='col-sm-3'> <button class='btn btn-warning' style='height: 80px; width: 35%;'> <span style='font-weight: bold;'> Planning: " +
+                        datatable.Planing[0][13] +  " </span></button> \n <button class='btn btn-success' style='height: 80px; width: 30%;'>OK: <br>" + OK2 + " </button> \n <button class='btn btn-danger' style='height: 80px; width: 30%;'> NG: <br>"  + NG2+
+                        "</button></div>\n" +
+                        "<div class='col-sm-3'> <button class='btn' style='height: 80px; width: 70%; background-color: #fb8b24;'> <span style='font-weight: bold;'> Achievement : </span>" +
+                            parseFloat((OK2 / datatable.Planing[0][13] * 100).toFixed(2)) + " %" +
+                        "</button></div>\n" +
+                        "</div>\n" +
+                        "</div>";
+                    }
+                } else if (datatable.Planing.length == 0) {
+                    planShift2.innerHTML = "<div class='card-body'>" +
+                        "<div class='row'>" +
+                        "<div class='col-sm-3'> <button class='btn' style='height: 80px; width: 70%; background-color: #e8dab2;font-weight: bold'>" +
+                            'tidak ada data' +
+                        "</button></div>\n" +
+                        "<div class='col-sm-3'> <button class='btn' style='height: 80px; width: 70%; background-color: #dedbd2;'>" +
+                            PIC2 +
+                        "</button></div>\n" +
+                        "<div class='col-sm-3'> <button class='btn btn-warning' style='height: 80px; width: 35%;'> <span style='font-weight: bold;'> Planning: " +
+                            '0' +  " </span></button> \n <button class='btn btn-success' style='height: 80px; width: 30%;'>OK: <br>" + OK2 + " </button> \n <button class='btn btn-danger' style='height: 80px; width: 30%;'> NG: <br>"  + NG2+
+                        "</button></div>\n" +
+                        "<div class='col-sm-3'> <button class='btn btn-secondary' style='height: 80px; width: 70%;'> <span style='font-weight: bold;'> Achievement : </span>" +
+                            parseFloat((OK2 / datatable.Planing[13] * 100).toFixed(2)) + " %" +
+                        "</button></div>\n" +
+                        "</div>\n" +
+                        "</div>";
+                } else {
+                    planShift2.innerHTML = "<div class='card-body'>" +
+                        "<div class='row'>" +
+                        "<div class='col-sm-3'> <button class='btn' style='height: 80px; width: 70%; background-color: #e8dab2;font-weight: bold'>" +
+                            'tidak ada data' +
+                        "</button></div>\n" +
+                        "<div class='col-sm-3'> <button class='btn' style='height: 80px; width: 70%; background-color: #dedbd2;'>" +
+                            PIC2 +
+                        "</button></div>\n" +
+                        "<div class='col-sm-3'> <button class='btn btn-warning' style='height: 80px; width: 35%;'> <span style='font-weight: bold;'> Planning: " +
+                            'tidak ada data' +  " </span></button> \n <button class='btn btn-success' style='height: 80px; width: 30%;'>OK: <br>" + OK2 + " </button> \n <button class='btn btn-danger' style='height: 80px; width: 30%;'> NG: <br>"  + NG2+
+                        "</button></div>\n" +
+                        "<div class='col-sm-3'> <button class='btn btn-secondary' style='height: 80px; width: 70%;'> <span style='font-weight: bold;'> Achievement : </span>" +
+                            parseFloat((OK2 / datatable.Planing[13] * 100).toFixed(2)) + " %" +
+                        "</button></div>\n" +
+                        "</div>\n" +
+                        "</div>";
+                }
+
+                let planShift3 = document.getElementById('planShift3');
+                const Datapart3 = datatable.Judgement3.Datapart;
+                const PIC3 = datatable.Judgement3.PIC;
+                const OK3 = datatable.Judgement3.OK;
+                const NG3 = datatable.Judgement3.NG;
+                if (datatable.Planing.length > 0) {
+                    
+                    if((OK3 / datatable.Planing[0][14] * 100 >= 100)){
+                        planShift3.innerHTML = "<div class='card-body'>" +
+                        "<div class='row'>" +
+                        "<div class='col-sm-3'> <button class='btn' style='height: 80px; width: 70%; background-color: #e8dab2;font-weight: bold'>" +
+                            datatable.Planing[0][5] +
+                        "</button></div>\n" +
+                        "<div class='col-sm-3'> <button class='btn' style='height: 80px; width: 70%; background-color: #dedbd2;'>" +
+                            PIC3 +
+                        "</button></div>\n" +
+                        "<div class='col-sm-3'> <button class='btn btn-warning' style='height: 80px; width: 35%;'> <span style='font-weight: bold;'> Planning: " +
+                        datatable.Planing[0][14] +  " </span></button> \n <button class='btn btn-success' style='height: 80px; width: 30%;'>OK: <br>" + OK3 + " </button> \n <button class='btn btn-danger' style='height: 80px; width: 30%;'> NG: <br>"  + NG3+
+                        "</button></div>\n" +
+                        "<div class='col-sm-3'> <button class='btn' style='height: 80px; width: 70%; background-color: #a7c957;'> <span style='font-weight: bold;'> Achievement : </span>" +
+                            parseFloat((OK3 / datatable.Planing[0][14] * 100).toFixed(2)) + " %" +
+                        "</button></div>\n" +
+                        "</div>\n" +
+                        "</div>";
+                    } else if (OK3 / datatable.Planing[0][14] * 100 >= 90 && OK3 / datatable.Planing[0][14] * 100 < 100) {
+                       // alert('here!');
+                        planShift3.innerHTML = "<div class='card-body'>" +
+                        "<div class='row'>" +
+                        "<div class='col-sm-3'> <button class='btn' style='height: 80px; width: 70%; background-color: #e8dab2;font-weight: bold'>" +
+                            datatable.Planing[0][5] +
+                        "</button></div>\n" +
+                        "<div class='col-sm-3'> <button class='btn' style='height: 80px; width: 70%; background-color: #dedbd2;'>" +
+                            PIC3 +
+                        "</button></div>\n" +
+                        "<div class='col-sm-3'> <button class='btn btn-warning' style='height: 80px; width: 35%;'> <span style='font-weight: bold;'> Planning: " +
+                        datatable.Planing[0][14] +  " </span></button> \n <button class='btn btn-success' style='height: 80px; width: 30%;'>OK: <br>" + OK3 + " </button> \n <button class='btn btn-danger' style='height: 80px; width: 30%;'> NG: <br>"  + NG3+
+                        "</button></div>\n" +
+                        "<div class='col-sm-3'> <button class='btn' style='height: 80px; width: 70%; background-color: #ffee32;'> <span style='font-weight: bold;'> Achievement : </span>" +
+                            parseFloat((OK3 / datatable.Planing[0][14] * 100).toFixed(2)) + " %" +
+                        "</button></div>\n" +
+                        "</div>\n" +
+                        "</div>";
+                    } else if ((OK3 / datatable.Planing[0][14] * 100 < 90)) {
+                        planShift3.innerHTML = "<div class='card-body'>" +
+                        "<div class='row'>" +
+                        "<div class='col-sm-3'> <button class='btn' style='height: 80px; width: 70%; background-color: #e8dab2;font-weight: bold'>" +
+                            datatable.Planing[0][5] +
+                        "</button></div>\n" +
+                        "<div class='col-sm-3'> <button class='btn' style='height: 80px; width: 70%; background-color: #dedbd2;'>" +
+                            PIC3 +
+                        "</button></div>\n" +
+                        "<div class='col-sm-3'> <button class='btn btn-warning' style='height: 80px; width: 35%;'> <span style='font-weight: bold;'> Planning: " +
+                        datatable.Planing[0][14] +  " </span></button> \n <button class='btn btn-success' style='height: 80px; width: 30%;'>OK: <br>" + OK3 + " </button> \n <button class='btn btn-danger' style='height: 80px; width: 30%;'> NG: <br>"  + NG3+
+                        "</button></div>\n" +
+                        "<div class='col-sm-3'> <button class='btn' style='height: 80px; width: 70%; background-color: #fb8b24;'> <span style='font-weight: bold;'> Achievement : </span>" +
+                            parseFloat((OK3 / datatable.Planing[0][14] * 100).toFixed(2)) + " %" +
+                        "</button></div>\n" +
+                        "</div>\n" +
+                        "</div>";
+                    }
+                } else if (datatable.Planing.length == 0) {
+                    planShift3.innerHTML = "<div class='card-body'>" +
+                        "<div class='row'>" +
+                        "<div class='col-sm-3'> <button class='btn' style='height: 80px; width: 70%; background-color: #e8dab2;font-weight: bold'>" +
+                            'tidak ada data' +
+                        "</button></div>\n" +
+                        "<div class='col-sm-3'> <button class='btn' style='height: 80px; width: 70%; background-color: #dedbd2;'>" +
+                            PIC3 +
+                        "</button></div>\n" +
+                        "<div class='col-sm-3'> <button class='btn btn-warning' style='height: 80px; width: 35%;'> <span style='font-weight: bold;'> Planning: " +
+                            '0' +  " </span></button> \n <button class='btn btn-success' style='height: 80px; width: 30%;'>OK: <br>" + OK3 + " </button> \n <button class='btn btn-danger' style='height: 80px; width: 30%;'> NG: <br>"  + NG3+
+                        "</button></div>\n" +
+                        "<div class='col-sm-3'> <button class='btn btn-secondary' style='height: 80px; width: 70%;'> <span style='font-weight: bold;'> Achievement : </span>" +
+                            parseFloat((OK3 / datatable.Planing[14] * 100).toFixed(2)) + " %" +
+                        "</button></div>\n" +
+                        "</div>\n" +
+                        "</div>";
+                } else {
+                    planShift3.innerHTML = "<div class='card-body'>" +
+                        "<div class='row'>" +
+                        "<div class='col-sm-3'> <button class='btn' style='height: 80px; width: 70%; background-color: #e8dab2;font-weight: bold'>" +
+                            'tidak ada data' +
+                        "</button></div>\n" +
+                        "<div class='col-sm-3'> <button class='btn' style='height: 80px; width: 70%; background-color: #dedbd2;'>" +
+                            PIC3 +
+                        "</button></div>\n" +
+                        "<div class='col-sm-3'> <button class='btn btn-warning' style='height: 80px; width: 35%;'> <span style='font-weight: bold;'> Planning: " +
+                        'tidak ada data' +  " </span></button> \n <button class='btn btn-success' style='height: 80px; width: 30%;'>OK: <br>" + OK3 + " </button> \n <button class='btn btn-danger' style='height: 80px; width: 30%;'> NG: <br>"  + NG3+
+                        "</button></div>\n" +
+                        "<div class='col-sm-3'> <button class='btn btn-secondary' style='height: 80px; width: 70%;'> <span style='font-weight: bold;'> Achievement : </span>" +
+                            parseFloat((OK3 / datatable.Planing[14] * 100).toFixed(2)) + " %" +
+                        "</button></div>\n" +
+                        "</div>\n" +
+                        "</div>";
+                }
+
+
+
+                // Themes begin
+           
+              
+              //  am4core.useTheme(am4themes_kelly);
+                am4core.useTheme(am4themes_animated);
+  
+                var chartdiv = am4core.create("chartdiv", am4charts.XYChart);
+                //chart.dispose();
+                // Add data
+                chartdiv.data = datatable.DataInject;
+            
+                // Set input format for the dates
+                chartdiv.dateFormatter.inputDateFormat = "yyyy-MM-dd HH:mm:ss";
+                // Create axes
+                var dateAxisdiv = chartdiv.xAxes.push(new am4charts.DateAxis());
+                var valueAxisdiv = chartdiv.yAxes.push(new am4charts.ValueAxis());
+                valueAxisdiv.min = 0;
+                // Create series
+                var seriesdiv = chartdiv.series.push(new am4charts.LineSeries());
+                seriesdiv.dataFields.valueY = "CycleTime";
+                seriesdiv.dataFields.dateX = "ProdDate";
+                seriesdiv.tooltipText = "{ProdDate}\nPart Name : {PartName}\nCycle Time : {CycleTime}\nLinestop : {Linestop}\nCT Standard : {SPH}"
+                seriesdiv.strokeWidth = 1;
+                // seriesdiv.minBulletDistance = 15;
+                // Drop-shaped tooltips
+                seriesdiv.tooltip.background.cornerRadius = 20;
+                seriesdiv.tooltip.background.strokeOpacity = 0;
+                seriesdiv.tooltip.pointerOrientation = "vertical";
+                seriesdiv.tooltip.label.minWidth = 40;
+                seriesdiv.tooltip.label.minHeight = 40;
+                seriesdiv.fillOpacity = 0.3;
+                seriesdiv.name = "Leak Test Cycle";
+                // seriesyear.tooltip.label.textAlign = "middle";
+                // seriesyear.tooltip.label.textValign = "middle";
+              
+                // Make bullets grow on hover
+                // var bulletdiv = seriesdiv.bullets.push(new am4charts.CircleBullet());
+                // bulletdiv.circle.strokeWidth = 2;
+                // bulletdiv.circle.radius = 4;
+                // bulletdiv.circle.fill = am4core.color("#fff");
+                // var labelBulletdiv = seriesdiv.bullets.push(new am4charts.LabelBullet());
+                // labelBulletdiv.label.text = "{CycleTime}%";
+                // labelBulletdiv.label.rotation = -45
+                // labelBulletdiv.label.dy = -25;
+                // labelBulletdiv.label.dx = 25;
+                // var bullethoverdiv = bulletdiv.states.create("hover");
+                // bullethoverdiv.properties.scale = 1.3;
+                // Make a panning cursor
+                chartdiv.cursor = new am4charts.XYCursor();
+                chartdiv.cursor.behavior = "panXY";
+                chartdiv.cursor.xAxis = dateAxisdiv;
+                chartdiv.cursor.snapToSeries = seriesdiv;
+                
+                // Create vertical scrollbar and place it before the value axis
+                chartdiv.scrollbarY = new am4core.Scrollbar();
+                chartdiv.scrollbarY.parent = chartdiv.leftAxesContainer;
+                chartdiv.scrollbarY.toBack();
+                // Create a horizontal scrollbar with previe and place it underneath the date axis
+                chartdiv.scrollbarX = new am4core.Scrollbar();
+                //chartyear.scrollbarX.series.push(series);
+                chartdiv.scrollbarX.parent = chartdiv.bottomAxesContainer;
+  
+  
+                var seriesdiv1 = chartdiv.series.push(new am4charts.LineSeries());
+                seriesdiv1.dataFields.valueY = "Istirahat";
+                seriesdiv1.dataFields.dateX = "ProdDate";
+                seriesdiv1.fill = am4core.color("grey");
+                seriesdiv1.strokeWidth = 1;
+                seriesdiv1.fillOpacity = 0.3;
+                seriesdiv1.name = "Istirahat";
+  
+                var seriesdiv3 = chartdiv.series.push(new am4charts.LineSeries());
+                seriesdiv3.dataFields.valueY = "Linestop";
+                seriesdiv3.dataFields.dateX = "ProdDate";
+                seriesdiv3.fill = am4core.color("red");
+                seriesdiv3.strokeWidth = 1;
+                seriesdiv3.fillOpacity = 0.3;
+                seriesdiv3.name = "Line Stop";
+  
+                var seriesdiv2 = chartdiv.series.push(new am4charts.LineSeries());
+                seriesdiv2.dataFields.valueY = "SPH";
+                seriesdiv2.dataFields.dateX = "ProdDate";
+                seriesdiv2.stroke = am4core.color("green");
+                seriesdiv2.strokeWidth = 2;
+                seriesdiv2.name = "CT Standard";
+
+                var seriesdiv4 = chartdiv.series.push(new am4charts.LineSeries());
+                seriesdiv4.dataFields.valueY = "NG";
+                seriesdiv4.dataFields.dateX = "ProdDate";
+                seriesdiv4.stroke = am4core.color("orange");
+                seriesdiv4.fill = am4core.color("orange");
+                seriesdiv4.strokeWidth = 1;
+                seriesdiv4.fillOpacity = 0.3;
+                seriesdiv4.name = "NG Leak";
+  
+                chartdiv.legend = new am4charts.Legend();
+
+
+                var table = $('#table_id').DataTable({
+                destroy:true,
+                data:datatable.Andon,
+                columns: [
+                    { data: 25 },
+                    { data: 5 },
+                    { data: 8 },
+                    { data: 11 },
+                    { data: 4 },
+                    { data: 10 },
+                    { data: 12 },
+                    { data: 26 ,
+                      render: function(data, type, row){
+                      if(type === "sort" || type === "type"){
+                            return data;
+                        }
+                      // return moment(data).format("YYYY-MM-DD HH:mm:ss");
+                          return data == null ? '-' : moment(data).format("YYYY-MM-DD HH:mm:ss");
+                        }
+                    },
+                    { data: 28,
+                      render: function(data, type, row){
+                      if(type === "sort" || type === "type"){
+                            return data;
+                        }
+                      // return moment(data).format("YYYY-MM-DD HH:mm:ss");
+                          return data == null ? '-' : moment(data).format("YYYY-MM-DD HH:mm:ss");
+                        }
+                    },
+                    { data: 29,
+                      render: function(data, type, row){
+                        if(type === "sort" || type === "type"){
+                            return data;
+                        }
+                        // return moment(data).format("YYYY-MM-DD HH:mm:ss");
+                          return data == null ? '-' : moment(data).format("YYYY-MM-DD HH:mm:ss");
+                        }
+                    },
+                    { data: 30,
+                      render: function(data, type, row){
+                      if(type === "sort" || type === "type"){
+                            return data;
+                        }
+                      // return moment(data).format("YYYY-MM-DD HH:mm:ss");
+                          return data == null ? '-' : moment(data).format("YYYY-MM-DD HH:mm:ss");
+                        }
+                    },
+                    { data: 31,
+                      render: function(data, type, row){
+                        if(type === "sort" || type === "type"){
+                            return data;
+                        }
+                        // return moment(data).format("YYYY-MM-DD HH:mm:ss");
+                          return data == null ? '-' : moment(data).format("YYYY-MM-DD HH:mm:ss");
+                        }
+                    },
+                    { data: 27,
+                      render: function(data, type, row){
+                        if(type === "sort" || type === "type"){
+                            return data;
+                        }
+                        // return moment(data).format("YYYY-MM-DD HH:mm:ss");
+                          return data == null ? '-' : moment(data).format("YYYY-MM-DD HH:mm:ss");
+                        }
+                    },
+                    { data: 32,
+                      render: function(data, type, row){
+                        if(type === "sort" || type === "type"){
+                            return data;
+                        }
+                        // return moment(data).format("YYYY-MM-DD HH:mm:ss");
+                          return data == 0 ? '<span style="color: red;"><b>OPEN</b></span>' : data;
+                        }
+                    },
+                    { data: 33,
+
+                    },
+                    { data: 23,
+
+                    },
+                ],
+                pageLength: 10,
+                lengthMenu: [10, 25, 50, 100, 200, 500, 1000,],
+              
+              });
+                
+               
+                // Loading stop
+                $('#load').hide();
+                // am4core.disposeAllCharts();
+
+            },
+
+            error: function (errordata) {
+                console.log("error")
+                console.log(errordata)
+            },
+        });
+    };
+</script>
+
+
+
+      </div>
+    </div>
+    <!-- /.content-wrapper -->
+
+    <!-- Control Sidebar -->
+    <aside class="control-sidebar control-sidebar-dark">
+      <!-- Control sidebar content goes here -->
+    </aside>
+    <!-- /.control-sidebar -->
+
+    <!-- Main Footer -->
+    <!-- <footer class="main-footer">
+    <strong>Copyright &copy; 2019-2020 <a href="">PT Astra Komponen Indonesia</a>.</strong>
+    All rights reserved.
+    <div class="float-right d-none d-sm-inline-block">
+      <b>Version</b> 3.0.3-pre
+    </div>
+  </footer> -->
+  </div>
+
+  <!-- ./wrapper -->
+
+  <!-- EXCEL BUTTONS DATATABLES SCRIPTS -->
+  <script src="/static/vendor/datatables/dataTables.buttons.min.js"></script>
+  <script src="/static/vendor/datatables/jszip.min.js"></script>
+  <script src="/static/vendor/datatables/buttons.html5.min.js"></script>
+
+  <!-- REQUIRED SCRIPTS -->
+  <!-- jQuery -->
+  <script src="/static/vendor/jquery/jquery.min.js"></script>
+  <!-- Bootstrap -->
+  <script src="/static/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <!-- overlayScrollbars -->
+  <script src="/static/vendor/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
+  <!-- AdminLTE App -->
+  <script src="/static/vendor/AdminLTE/js/adminlte.js?v=3.2"></script>
+
+  <!-- OPTIONAL SCRIPTS -->
+  <script src="/static/vendor/AdminLTE/js/demo.js"></script>
+
+  <!-- PAGE PLUGINS -->
+  <!-- jQuery Mapael -->
+  <script src="/static/vendor/jquery-mousewheel/jquery.mousewheel.js"></script>
+  <script src="/static/vendor/raphael/raphael.min.js"></script>
+  <script src="/static/vendor/jquery-mapael/jquery.mapael.min.js"></script>
+  <script src="/static/vendor/jquery-mapael/maps/usa_states.min.js"></script>
+  <!-- ChartJS -->
+  <!-- <script src="/static/vendor/chart.js/Chart.min.js"></script> -->
+
+  <!-- PAGE SCRIPTS -->
+  <!-- <script src="/static/vendor/AdminLTE/js/pages/dashboard2.js"></script> -->
+
+  <!-- DataTables JS -->
+  <script type="text/javascript" src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
+  <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.7.0/js/dataTables.buttons.min.js"></script>
+  <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.7.0/js/buttons.html5.min.js"></script>
+  
+  
+</body>
+
+</html>

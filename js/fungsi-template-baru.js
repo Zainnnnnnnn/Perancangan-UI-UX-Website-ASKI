@@ -1,18 +1,40 @@
 // FUNGSI TOMBOL FULLSCREEN
-                  document.addEventListener('DOMContentLoaded', function () {
-                  const fullscreenBtn = document.querySelector('[data-widget="fullscreen"]');
-                  fullscreenBtn?.addEventListener('click', function (e) {
-                    e.preventDefault();
+  document.addEventListener('DOMContentLoaded', function () {
+    const fullscreenBtn = document.querySelector('[data-widget="fullscreen"]');
+    const fullscreenIcon = fullscreenBtn?.querySelector('i');
 
-                    if (!document.fullscreenElement) {
-                      document.documentElement.requestFullscreen().catch((err) => {
-                        console.error(`Error attempting to enable full-screen mode: ${err.message}`);
-                      });
-                    } else {
-                      document.exitFullscreen();
-                    }
-                  });
-                });
+    function setIcon(isFullscreen) {
+      if (fullscreenIcon) {
+        if (isFullscreen) {
+          fullscreenIcon.classList.remove('fa-up-right-and-down-left-from-center');
+          fullscreenIcon.classList.add('fa-down-left-and-up-right-to-center');
+        } else {
+          fullscreenIcon.classList.remove('fa-down-left-and-up-right-to-center');
+          fullscreenIcon.classList.add('fa-up-right-and-down-left-from-center');
+        }
+      }
+    }
+
+    fullscreenBtn?.addEventListener('click', function (e) {
+      e.preventDefault();
+
+      if (!document.fullscreenElement) {
+        document.documentElement.requestFullscreen().then(() => {
+          setIcon(true);
+        }).catch((err) => {
+          console.error(`Error attempting to enable full-screen mode: ${err.message}`);
+        });
+      } else {
+        document.exitFullscreen();
+        setIcon(false);
+      }
+    });
+
+    // Listen for fullscreen change (user presses ESC or F11)
+    document.addEventListener('fullscreenchange', function () {
+      setIcon(!!document.fullscreenElement);
+    });
+  });
 // FUNGSI TOMBOL FULLSCREEN
 
 // FUNGSI FLOATING SUBMENU
@@ -93,7 +115,6 @@
                           { selector: ".sidenav-category", className: "hidden-sidenav-category" },
                           { selector: ".sidenav-submenu", className: "hidden-sidenav-submenu" },
                           { selector: ".navbar-brand-img", className: "navbar-brand-img-collapsed" },
-                          { selector: ".navbar-profile", className: "navbar-profile-collapsed" },
                           { selector: ".nav-link", className: "nav-link-collapsed" },
                           { selector: ".sidenav-icon", className: "sidenav-icon-collapsed" },
                           { selector: ".material-symbols-rounded", className: "material-symbols-rounded-collapsed" },
