@@ -225,6 +225,53 @@
 
 
 
-// FLOATING SUBMENU ARROW
+// DARK MODE TOGGLE
+function toggleDarkMode() {
+  const body = document.body;
+  const icon = document.getElementById("themeSwitch").querySelector("i");
+  const sidenav = document.querySelector('.sidenav');
+  const sidenavClasses = ["bg-white", "bg-default", "bg-gradient-primary", "bg-gradient-dark"];
 
-// FLOATING SUBMENU ARROW
+  const isDarkMode = !body.classList.contains("dark-version");
+
+  // Toggle dark-version pada body
+  body.classList.toggle("dark-version", isDarkMode);
+
+  // Ganti icon
+  icon.classList.toggle("fa-moon", !isDarkMode);
+  icon.classList.toggle("fa-sun", isDarkMode);
+
+  // Ganti background sidenav
+  if (sidenav) {
+    // Hapus semua kelas background terkait
+    sidenav.classList.remove(...sidenavClasses);
+
+    // Tambahkan bg-gradient-dark jika darkMode, selain itu bg-white (default)
+    sidenav.classList.add(isDarkMode ? "bg-gradient-dark" : "bg-white");
+  }
+
+  // Simpan preferensi
+  localStorage.setItem("darkMode", isDarkMode);
+}
+
+// Apply saat load awal
+document.addEventListener("DOMContentLoaded", function () {
+  const savedDarkMode = localStorage.getItem("darkMode") === "true";
+  const icon = document.getElementById("themeSwitch")?.querySelector("i");
+  const sidenav = document.querySelector('.sidenav');
+  const sidenavClasses = ["bg-white", "bg-default", "bg-gradient-primary", "bg-gradient-dark"];
+
+  if (savedDarkMode) {
+    document.body.classList.add("dark-version");
+    if (icon) {
+      icon.classList.remove("fa-moon");
+      icon.classList.add("fa-sun");
+    }
+
+    if (sidenav) {
+      sidenav.classList.remove(...sidenavClasses);
+      sidenav.classList.add("bg-gradient-dark");
+    }
+  }
+});
+// DARK MODE TOGGLE

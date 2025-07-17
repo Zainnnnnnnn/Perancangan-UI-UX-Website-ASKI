@@ -25,6 +25,8 @@
   <link rel="stylesheet"href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20,400,0,0" />
   <!-- CSS Files -->
   <link id="pagestyle" href="./node_modules/material-dashboard/assets/css/material-dashboard.css?v=3.2.0" rel="stylesheet" />
+<style>
+</style>
 
 
 </head>
@@ -47,7 +49,7 @@
                         <h6 class="ps-4 ms-2 text-dark font-weight-bolder">Healthcare & Medical Devices</h6>
                     </li>
                     <!-- Delivery -->
-                     <li class="nav-item">
+                <li class="nav-item">
                     <a class="nav-link sidenav-submenu-title text-dark" data-bs-toggle="collapse" href="#MenuDeliverycare" role="button" aria-expanded="false" aria-controls="MenuDeliverycare">
                         <i class="fas fa-truck-fast fs-5 font-icon sidenav-icon"></i>
                         <span class="nav-link-text ms-1">Delivery</span>
@@ -119,7 +121,7 @@
                       </a>
                       <div class="floating-submenu collapse sidenav-submenu" id="MenuHCUProduction">
                         <h6 class="ps-4 ms-2 text-dark font-weight-bolder py-2 d-none floatingSubmenuTitle">HCU Production</h6>
-                        <ul class="nav dropdown-menu ms-4 ps-3">
+                        <ul class="nav dropdown-menu ms-4 ps-3 bg-transparent">
                           <!-- Inspection Result Data -->
                           <li class="nav-item">
                             <a class="nav-link text-dark" href="/HealthCare/inspection/" aria-expanded="false">
@@ -476,18 +478,22 @@
                     </a>
                   </li>
             </ul>   
+            
         </div>
+            <!-- <button id="themeSwitch" class="text-center mx-5 my-3" onclick="toggleDarkMode()">
+              <i class="fa-solid fa-moon"></i>
+            </button> -->
     </aside>
 
-  <main class="main-content border-radius-lg flex-grow-1">
-      <nav class="navbar navbar-main navbar-expand-lg position-sticky mt-4 top-1 py-4 mx-3 shadow-none border-radius-xl z-index-sticky"
+  <main class="main-content border-radius-lg flex-grow-1" >
+      <nav class="navbar navbar-main navbar-expand-lg position-sticky mt-4 top-0  py-4 mx-3 shadow-none border-radius-xl z-index-sticky"
           id="navbarBlur" data-scroll="true" >
-          <div class="container-fluid py-1 px-3">
+          <div class="container-fluid py-1 px-3" >
               <div>
                   <button id="hamburgerToggle" class="hamburger-toggle" aria-label="Toggle sidenav">
                     <span class="sidenav-toggler-inner justify-content-center">
                     <!-- Hamburger icon -->
-                    <i class="fa fa-bars font-icon fs-4" style="color: #7b809a;"></i>
+                    <i class="fa fa-bars font-icon fs-4 text-dark-theme" style="color: #7b809a;"></i>
                     </span>
                   </button>
               </div>
@@ -496,17 +502,17 @@
                     <div class="fw-bold fs-6" id="datetime-display" style="white-space: nowrap; color: inherit;"></div>
                   </div>
                   <ul class="navbar-nav  justify-content-end">
-                    <li class="nav-item px-3 mt-3">
+                    <li class="nav-item px-1 mt-3">
                           <a class="nav-link text-body p-0" data-widget="fullscreen" href="#" role="button">
-                            <i class="fa-solid fa-up-right-and-down-left-from-center font-icon fs-5 cursor-pointer"></i>
+                            <i class="fa-solid fa-up-right-and-down-left-from-center font-icon fs-5 cursor-pointer text-dark-theme"></i>
                           </a>
                     </li>
-                    <li class="nav-item px-3">
+                    <li class="nav-item px-2">
                       <div class="dropdown">
                           <a class="nav-link text-body p-0 d-flex gap-2 dropdown-toggle p-3 rounded-3" data-bs-toggle="dropdown" id="dropdownLogout">
-                            <i class="fa fa-user font-icon cursor-pointer">
+                            <i class="fa fa-user font-icon cursor-pointer text-dark-theme">
                             </i>
-                            <span>Hi, <strong>Viewer!</strong></span>
+                            <span class="text-dark-theme">Hi, <strong>Viewer!</strong></span>
                           </a>
                           <ul class="dropdown-menu p-3" aria-labelledby="navbarDropdownMenuLink2" style="height: 70px;">
                             <li>
@@ -515,6 +521,9 @@
                         </ul>
                       </div>
                     </li>
+                    <button id="themeSwitch" class="mx-4" onclick="toggleDarkMode()">
+                      <i class="fa fa-moon text-dark-theme"></i>
+                    </button>
                   </ul>
               </div>
           </div>
@@ -522,12 +531,12 @@
 
       <div class="my-3">
               <!-- KONTEN KONTEN AKAN DI ISI DI DIV INI -->
-          <h1 class="display-1 text-center">PT ASTRA KOMPONEN INDONESIA</h1>
+          <h1 class="display-1 text-center text-dark-theme">PT ASTRA KOMPONEN INDONESIA</h1>
       </div>
       <!-- <div id="floating-submenus-container"></div> -->
   </main>
   </div>
-  <div class="fixed-plugin">
+  <!-- <div class="fixed-plugin">
       <a class="fixed-plugin-button text-dark position-fixed px-3 py-2">
           <i class="material-symbols-rounded py-2">settings</i>
       </a>
@@ -542,12 +551,9 @@
                       <i class="material-symbols-rounded">clear</i>
                   </button>
               </div>
-              <!-- End Toggle Button -->
           </div>
           <hr class="horizontal dark my-1">
           <div class="card-body pt-sm-3 pt-0">
-              <!-- Sidebar Backgrounds -->
-              <!-- Sidenav Type -->
               <div class="mt-3">
                   <h6 class="mb-0">Sidenav Type</h6>
                   <p class="text-sm">Choose between different sidenav types.</p>
@@ -561,14 +567,6 @@
                       onclick="sidebarType(this)">White</button>
               </div>
               <p class="text-sm d-xl-none d-block mt-2">You can change the sidenav type just on desktop view.</p>
-              <!-- Navbar Fixed -->
-              <div class="mt-3 d-flex">
-                  <h6 class="mb-0">Navbar Fixed</h6>
-                  <div class="form-check form-switch ps-0 ms-auto my-auto">
-                      <input class="form-check-input mt-1 ms-auto" type="checkbox" id="navbarFixed"
-                          onclick="navbarFixed(this)">
-                  </div>
-              </div>
               <hr class="horizontal dark my-3">
               <div class="mt-2 d-flex">
                   <h6 class="mb-0">Light / Dark</h6>
@@ -580,7 +578,7 @@
               <hr class="horizontal dark my-sm-4">
           </div>
       </div>
-  </div>
+  </div> -->
   </div>
             <script src="./node_modules/material-dashboard/assets/js/core/popper.min.js"></script>
             <script src="./node_modules/material-dashboard/assets/js/core/bootstrap.min.js"></script>
