@@ -103,7 +103,7 @@
 
 // SIDENAV COLLAPSED
                       document.addEventListener("DOMContentLoaded", () => {
-                        const hamburgerToggle = document.getElementById("hamburgerToggle");
+                        const logoToggle = document.getElementById("logoToggle");
                         const sidenav = document.getElementById("sidenav-main");
                         const mainContent = document.querySelector(".main-content");
                         const submenuTitles = document.querySelectorAll(".floatingSubmenuTitle");
@@ -147,7 +147,7 @@
                         
 
                         // 🔄 Toggle saat tombol diklik
-                        hamburgerToggle?.addEventListener("click", () => {
+                          logoToggle?.addEventListener("click", () => {
                           sidenav.classList.toggle("sidenav-collapsed");
                           mainContent?.classList.toggle("main-content-collapsed");
 

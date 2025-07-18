@@ -37,7 +37,8 @@
     <!-- Tombol hamburger dan teks header ditempatkan berdampingan sebagai elemen sibling di dalam satu elemen pembungkus (wrapper)-->
     <div class="sidenav-header-wrapper">
       <div class="text-center">
-              <img src="./node_modules/material-dashboard/assets/img/logos/aski.png" alt="aski" class="w-50 mt-4 logo">
+        <img src="./node_modules/material-dashboard/assets/img/logos/aski.png" 
+          alt="aski" class="w-50 mt-4 logo" id="logoToggle" style="cursor:pointer;">
       </div>
     </div>
         <hr class="horizontal dark mt-4 my-0" id="sidenav-header-line">
@@ -139,7 +140,7 @@
                           <!-- Realtime Dashboard -->
                           <li class="nav-item">
                             <a class="nav-link text-dark" href="/HealthCare/realtimeall/" aria-expanded="false">
-                              <i class="fa fa-cog fs-5 font-icon spin-continuous"></i>
+                              <i class="fa fa-cog fs-5 font-icon"></i>
                               Realtime Dashboard
                             </a>
                           </li>
@@ -241,16 +242,16 @@
                         <span class="nav-link-text ms-1">Quality System</span>
                     </a>
                     <div class="floating-submenu collapse sidenav-submenu" id="MenuQualitySystem">
+                        <h6 class="ps-4 ms-2 text-dark font-weight-bolder py-2 d-none floatingSubmenuTitle">Quality System</h6>
                         <ul class="nav ms-4 ps-3">
-                  
-                          <!-- Monitoring Delivery -->
+                          <!-- Daily IRD QC -->
                           <li class="nav-item">
                             <a class="nav-link text-dark" href="/PlasticInjection/QC/DailyCheckSheet/" aria-expanded="false">
                               <i class="fas fa-check-square fs-5 font-icon"></i>
                               Daily IRD QC
                             </a>
                           </li>
-                          <!-- Order AHM -->
+                          <!-- Update IRD Form -->
                           <li class="nav-item">
                             <a class="nav-link text-dark" href="/PlasticInjection/QC/UpdateCheckSheet" aria-expanded="false">
                               <i class="fas fa-edit fs-5 font-icon"></i>
@@ -512,17 +513,17 @@
     </aside>
 
   <main class="main-content border-radius-lg flex-grow-1" >
-      <nav class="navbar navbar-main navbar-expand-lg position-sticky mt-4 top-0  py-4 mx-3 shadow-none border-radius-xl z-index-sticky"
+      <nav class="navbar navbar-main navbar-expand-lg  mt-4 top-0  py-4 mx-3 shadow-none border-radius-xl z-index-sticky"
           id="navbarBlur" data-scroll="true" >
           <div class="container-fluid py-1 px-3" >
-              <div>
+              <!-- <div>
                   <button id="hamburgerToggle" class="hamburger-toggle" aria-label="Toggle sidenav">
                     <span class="sidenav-toggler-inner justify-content-center">
-                    <!-- Hamburger icon -->
+                    
                     <i class="fa fa-bars font-icon fs-4 text-dark-theme" style="color: #7b809a;"></i>
                     </span>
                   </button>
-              </div>
+              </div> -->
               <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
                   <div class="ms-md-auto pe-md-3 d-flex align-items-center">
                     <div class="fw-bold fs-6" id="datetime-display" style="white-space: nowrap; color: inherit;"></div>
