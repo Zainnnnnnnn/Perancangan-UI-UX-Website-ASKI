@@ -30,10 +30,10 @@
 
 
 </head>
-    <body class="bg-gray-100">
-    <div class="d-flex">
-    <aside class="sidenav navbar navbar-vertical navbar-expand-xs min-vh-100 border-radius-lg fixed-start  bg-white sidenav-collapsed"
-        id="sidenav-main">
+    <body>
+    <div class="d-flex" id="sidenav-container">
+    <aside class="sidenav navbar navbar-vertical navbar-expand-xs min-vh-100 border-radius-lg fixed-start sidenav-collapsed"
+        id="sidenav-main" style="z-index: 1050;">
     <!-- Tombol hamburger dan teks header ditempatkan berdampingan sebagai elemen sibling di dalam satu elemen pembungkus (wrapper)-->
     <div class="sidenav-header-wrapper">
       <div class="text-center">
@@ -512,9 +512,8 @@
             </button> -->
     </aside>
 
-  <main class="main-content border-radius-lg flex-grow-1" >
-      <nav class="navbar navbar-main navbar-expand-lg  mt-4 top-0  py-4 mx-3 shadow-none border-radius-xl z-index-sticky"
-          id="navbarBlur" data-scroll="true" >
+  <main class="main-content border-radius-lg flex-grow-1" style="z-index: 900;">
+      <nav class="navbar navbar-main navbar-expand-lg top-0 " data-scroll="true" >
           <div class="container-fluid py-1 px-3" >
               <!-- <div>
                   <button id="hamburgerToggle" class="hamburger-toggle" aria-label="Toggle sidenav">
