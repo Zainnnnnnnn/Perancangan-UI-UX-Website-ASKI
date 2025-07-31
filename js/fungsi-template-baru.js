@@ -68,37 +68,100 @@
                       });
                     });
                   });
-// FUNGSI FLOATING SUBMENU
+
+
+document.addEventListener('DOMContentLoaded', () => {
+  const sidenav = document.getElementById('sidenav-main');
+  const navLinks = document.querySelectorAll('.nav-link-main');
+  const toggleBtn = document.getElementById('logoToggle');
+
+  // Fungsi untuk reset semua submenu
+  const resetFloatingSubmenus = () => {
+    document.querySelectorAll('.floating-submenu').forEach(submenu => {
+      submenu.style = null;
+    });
+  };
+
+  // Hover submenu (hanya aktif kalau sidebar collapsed)
+  navLinks.forEach(link => {
+    const submenu = link.nextElementSibling;
+
+    link.addEventListener('mouseenter', () => {
+      if (!sidenav.classList.contains('sidenav-collapsed')) return;
+
+      if (submenu && submenu.classList.contains('floating-submenu')) {
+        const linkRect = link.getBoundingClientRect();
+        const sidenavRect = sidenav.getBoundingClientRect();
+
+        submenu.style.position = 'fixed';
+        submenu.style.top = linkRect.top + 'px';
+        submenu.style.left = sidenavRect.right + 'px';
+        submenu.style.zIndex = 9999;
+        submenu.style.display = 'block';
+      }
+    });
+
+    link.addEventListener('mouseleave', () => {
+      if (!sidenav.classList.contains('sidenav-collapsed')) return;
+
+      if (submenu && submenu.classList.contains('floating-submenu')) {
+        submenu.style.display = 'none';
+      }
+    });
+  });
+
+  // Reset submenu saat sidebar di-expand
+  if (toggleBtn) {
+    toggleBtn.addEventListener('click', () => {
+      // Delay agar class toggle selesai diterapkan
+      setTimeout(() => {
+        if (!sidenav.classList.contains('sidenav-collapsed')) {
+          // Saat expand, reset floating submenu
+          resetFloatingSubmenus();
+          // Hilangkan semua submenu-open
+          document.querySelectorAll('#sidenav-main .nav-item').forEach(item => item.classList.remove('submenu-open'));
+        } else {
+          // Saat collapse, pastikan semua floating submenu dihilangkan
+          resetFloatingSubmenus();
+          // Hilangkan semua submenu-open
+          document.querySelectorAll('#sidenav-main .nav-item').forEach(item => item.classList.remove('submenu-open'));
+        }
+      }, 100); // kecilkan delay kalau transisi-nya cepat
+    });
+  }
+});
+
+
+
+  // FUNGSI FLOATING SUBMENU
 
 // FUNGSI DISPLAY WAKTU
-              function updateDateTime() {
-                const now = new Date();
+        function updateDateTime() {
+          const now = new Date();
 
-                const options = {
-                  weekday: 'long',
-                  year: 'numeric',
-                  month: 'long',
-                  day: 'numeric',
-                  hour: '2-digit',
-                  minute: '2-digit',
-                  second: '2-digit'
-                };
+          const year = now.getFullYear();
+          const month = String(now.getMonth() + 1).padStart(2, '0'); // bulan dari 0-11
+          const day = String(now.getDate()).padStart(2, '0');
+          const hours = String(now.getHours()).padStart(2, '0');
+          const minutes = String(now.getMinutes()).padStart(2, '0');
+          const seconds = String(now.getSeconds()).padStart(2, '0');
 
-                const formattedDate = now.toLocaleDateString('id-ID', options);
-                const display = document.getElementById('datetime-display');
-                display.textContent = formattedDate + " WIB";
+          const formattedDate = `${year}-${month}-${day}   ${hours}:${minutes}:${seconds}`;
 
-                // Ambil warna teks dari main-content
-                const mainContent = document.querySelector('.main-content');
-                if (mainContent) {
-                  const computedStyle = window.getComputedStyle(mainContent);
-                  const textColor = computedStyle.color;
-                  display.style.color = textColor;
-                }
-              }
+          const display = document.getElementById('datetime-display');
+          display.textContent = formattedDate;
 
-              setInterval(updateDateTime, 1000);
-              updateDateTime();
+          // Ambil warna teks dari main-content
+          const mainContent = document.querySelector('.main-content');
+          if (mainContent) {
+            const computedStyle = window.getComputedStyle(mainContent);
+            const textColor = computedStyle.color;
+            display.style.color = textColor;
+          }
+        }
+
+        setInterval(updateDateTime);
+        updateDateTime();
 // FUNGSI DISPLAY WAKTU
 
 // SIDENAV COLLAPSED
@@ -108,6 +171,8 @@
                         const mainContent = document.querySelector(".main-content");
                         const submenuTitles = document.querySelectorAll(".floatingSubmenuTitle");
                         const categoryLines = document.querySelectorAll(".category-line");
+                        const submenuTitleCollapsed = document.querySelectorAll(".submenu-title-collapsed");
+                        const navLinkMain = document.querySelectorAll(".nav-link-main");
 
                         const toggleClasses = [
                           { selector: ".nav-link-text", className: "hidden-text" },
@@ -164,6 +229,16 @@
                           categoryLines.forEach(line => {
                             line.classList.toggle("d-none", !isCollapsed);
                           });
+
+                          submenuTitleCollapsed.forEach(line => {
+                            line.classList.toggle("d-none");
+                          });
+
+                          navLinkMain.forEach(line => {
+                            line.classList.toggle("d-flex");
+                            line.classList.toggle("flex-column");
+                          });
+
 
                           toggleFloatingArrows(isCollapsed);
                         });
@@ -296,3 +371,21 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 });
 // DARK MODE TOGGLE
+
+
+// PROFILE DROPDOWN
+const profileBtn = document.getElementById("profileButton");
+const dropdown = document.getElementById("profileDropdown");
+
+profileBtn.addEventListener("click", () => {
+  dropdown.classList.toggle("active");
+});
+
+// Tutup dropdown kalau klik di luar
+document.addEventListener("click", function (e) {
+  if (!profileBtn.contains(e.target) && !dropdown.contains(e.target)) {
+    dropdown.classList.remove("active");
+  }
+});
+// PROFILE DROPDOWN
+
