@@ -146,7 +146,7 @@ document.addEventListener('DOMContentLoaded', () => {
           const minutes = String(now.getMinutes()).padStart(2, '0');
           const seconds = String(now.getSeconds()).padStart(2, '0');
 
-          const formattedDate = `${year}-${month}-${day}   ${hours}:${minutes}:${seconds}`;
+          const formattedDate = `${year}-${month}-${day} \n  ${hours}:${minutes}:${seconds}`;
 
           const display = document.getElementById('datetime-display');
           display.textContent = formattedDate;
